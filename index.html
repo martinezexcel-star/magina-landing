@@ -2,113 +2,203 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Magina FocusOS — Personalized Productivity System</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Magina — Structured Microsoft 365 operations</title>
 
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    body { background:#0b1220; color:#eaeaf0; }
-    .nav { border-bottom:1px solid rgba(255,255,255,.08); padding:16px 0; }
-    .hero { padding:90px 0; }
-    .cardx {
-      background:#121a2f;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:14px;
-      padding:28px;
-      height:100%;
+    :root{
+      --bg:#0b1220;
+      --panel:#0f1930;
+      --panel2:#0c1427;
+      --text:#eaf0ff;
+      --muted:#b9c2d6;
+      --line:rgba(255,255,255,.10);
+      --accent:#5eead4;
+      --accent2:#60a5fa;
+      --shadow:0 14px 46px rgba(0,0,0,.38);
     }
-    .accent { color:#6ee7b7; }
-    .muted { color:#b6b9c6; }
-    .btn-primary { background:#6ee7b7; border:none; color:#0b1220; font-weight:700; }
-    .btn-outline { border:1px solid rgba(255,255,255,.2); color:#eaeaf0; }
-    .section { padding:80px 0; }
-    a { text-decoration:none; }
-    footer { border-top:1px solid rgba(255,255,255,.08); padding:40px 0; margin-top:80px; }
 
-    /* Language switch */
-    .lang-pill {
+    body{
+      background:
+        radial-gradient(1100px 520px at 18% 8%, rgba(96,165,250,.18), transparent 55%),
+        radial-gradient(900px 480px at 85% 12%, rgba(94,234,212,.14), transparent 60%),
+        radial-gradient(800px 420px at 45% 92%, rgba(96,165,250,.10), transparent 65%),
+        var(--bg);
+      color:var(--text);
+      letter-spacing:.1px;
+    }
+
+    a{color:inherit; text-decoration:none;}
+    .muted{color:var(--muted);}
+
+    /* sticky nav */
+    .navwrap{
+      position:sticky; top:0; z-index:50;
+      background:rgba(11,18,32,.78);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+    }
+    .brand{
+      font-weight:900;
+      letter-spacing:.2px;
+      font-size:22px;
+      line-height:1;
+    }
+    .motto{
+      font-size:12.5px;
+      color:var(--muted);
+      margin-top:3px;
+      max-width: 520px;
+    }
+    .navlink{
+      color:var(--muted);
+      font-weight:800;
+      font-size:14px;
+      padding:.4rem .55rem;
+      border-radius:10px;
+    }
+    .navlink:hover{color:var(--text); background:rgba(255,255,255,.06);}
+
+    .btn-accent{
+      background:linear-gradient(90deg,var(--accent),var(--accent2));
+      border:none;
+      color:#07101f;
+      font-weight:900;
+      box-shadow:0 10px 22px rgba(94,234,212,.16);
+    }
+    .btn-accent:hover{filter:brightness(1.03); color:#07101f;}
+    .btn-outline-soft{
       border:1px solid rgba(255,255,255,.18);
-      border-radius:999px;
-      padding:6px 10px;
-      display:flex;
-      gap:6px;
+      color:var(--text);
+      font-weight:900;
+    }
+    .btn-outline-soft:hover{
+      border-color: rgba(94,234,212,.55);
+      background: rgba(94,234,212,.10);
+      color: var(--text);
+    }
+
+    /* sections */
+    .hero{padding:84px 0 48px;}
+    .section{padding:86px 0;}
+    .hr-soft{border-color:rgba(255,255,255,.10); margin:0;}
+    [id]{scroll-margin-top: 92px;}
+
+    .kicker{
+      display:inline-block;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--accent);
+      opacity:.9;
+    }
+    .headline{
+      font-weight:900;
+      letter-spacing:-.6px;
+      line-height:1.05;
+    }
+    .subhead{
+      color:var(--muted);
+      font-size:18px;
+      line-height:1.55;
+      max-width: 920px;
+      margin:0 auto;
+    }
+
+    .chip{
+      display:inline-flex;
       align-items:center;
-      background: rgba(18,26,47,.65);
-    }
-    .lang-btn {
-      border: none;
-      background: transparent;
-      color: #b6b9c6;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 13px;
-    }
-    .lang-btn.active {
-      background: rgba(110,231,183,.18);
-      color: #eaeaf0;
-      border: 1px solid rgba(110,231,183,.35);
+      gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(15,25,48,.55);
+      color:var(--muted);
+      font-weight:900;
+      font-size:12.5px;
+      margin-right:8px;
+      margin-bottom:8px;
+      white-space:nowrap;
     }
 
-    /* FAQ styling */
-    .accordion-button {
-      background:#121a2f !important;
-      color:#eaeaf0 !important;
-      border:1px solid rgba(255,255,255,.08) !important;
-      border-radius:12px !important;
-      box-shadow:none !important;
-    }
-    .accordion-button:not(.collapsed){
-      background: rgba(110,231,183,.10) !important;
-      border-color: rgba(110,231,183,.35) !important;
-    }
-    .accordion-item { background:transparent; border:none; margin-bottom:12px; }
-    .accordion-body {
-      background: rgba(18,26,47,.65);
-      border:1px solid rgba(255,255,255,.08);
-      border-top:none;
-      border-radius:0 0 12px 12px;
-      color:#b6b9c6;
+    .cardx{
+      background: rgba(15,25,48,.72);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 26px;
+      height: 100%;
+      box-shadow: var(--shadow);
     }
 
-    .badge-soft {
+    .badge-soft{
       display:inline-block;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(18,26,47,.65);
-      color:#b6b9c6;
-      font-size: 12px;
-      margin-right: 8px;
-      margin-bottom: 8px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(15,25,48,.55);
+      color:var(--muted);
+      font-weight:900;
+      font-size:12px;
+      margin-right:8px;
+      margin-bottom:8px;
     }
-    .small-note { font-size: 13px; }
 
-    .price {
-      font-size: 40px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1;
-      margin: 10px 0 14px;
+    .list-check{
+      margin:0;
+      padding-left: 18px;
+      color: var(--muted);
     }
-    .pill {
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(18,26,47,.65);
-      color:#b6b9c6;
-      font-weight: 700;
-      font-size: 13px;
+    .list-check li{margin-bottom:10px;}
+
+    .pricehint{
+      font-weight:900;
+      letter-spacing:-.2px;
+      font-size:20px;
     }
-    .list-clean { margin: 0; padding-left: 18px; color:#b6b9c6; }
-    .list-clean li { margin-bottom: 10px; }
-    .highlight {
-      border:1px solid rgba(110,231,183,.35);
-      box-shadow: 0 0 0 1px rgba(110,231,183,.12) inset;
+    .smallnote{font-size:13px; color:var(--muted);}
+
+    /* accordion */
+    .accordion-item{background:transparent; border:none;}
+    .accordion-button{
+      background: rgba(15,25,48,.72) !important;
+      color: var(--text) !important;
+      border: 1px solid var(--line) !important;
+      border-radius: 14px !important;
+      font-weight:900;
+      box-shadow:none !important;
+    }
+    .accordion-button:not(.collapsed){
+      border-color: rgba(94,234,212,.50) !important;
+      background: rgba(94,234,212,.08) !important;
+    }
+    .accordion-body{
+      background: rgba(12,20,39,.55);
+      border: 1px solid var(--line);
+      border-top:none;
+      border-radius: 0 0 14px 14px;
+      color: var(--muted);
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      padding:44px 0;
+      background: rgba(11,18,32,.55);
+    }
+
+    /* language */
+    .lang-btn{font-size:13px; font-weight:900; border-radius:12px; padding:.35rem .55rem;}
+    .lang-btn.active{border-color: rgba(94,234,212,.75) !important; color: var(--text) !important; background: rgba(94,234,212,.10) !important;}
+
+    /* responsive tweaks */
+    @media (max-width: 575px){
+      .hero{padding:70px 0 36px;}
+      .section{padding:70px 0;}
+      .headline{letter-spacing:-.3px;}
+      .motto{max-width: 220px;}
     }
   </style>
 </head>
@@ -118,38 +208,40 @@
 <!-- CONFIG (edit these) -->
 <script>
   const CONFIG = {
-    stripePro: "YOUR_STRIPE_LINK_PRO",
-    formUrl: "YOUR_FORM_URL",
-    supportEmail: "YOUR_SUPPORT_EMAIL"
+    calendarUrl: "YOUR_CALENDAR_LINK", // Calendly / Microsoft Bookings
+    email: "YOUR_EMAIL",              // hello@magina.io
+    linkedinUrl: "YOUR_LINKEDIN_URL", // optional
+    defaultLang: "en"                 // en | es | pt
   };
 </script>
 
-<!-- HEADER -->
-<div class="nav">
-  <div class="container d-flex justify-content-between align-items-center">
-
+<!-- NAV -->
+<div class="navwrap">
+  <div class="container py-3 d-flex align-items-center justify-content-between gap-3">
     <div class="d-flex flex-column">
-      <span style="font-size:30px; font-weight:800; line-height:1.1;">Magina Studio</span>
-      <span class="muted" style="font-size:16px; letter-spacing:.2px;" data-i18n="nav_tagline">
-        Personalized systems for overloaded professionals
-      </span>
+      <div class="brand">Magina</div>
+      <div class="motto" id="motto"></div>
     </div>
 
-    <div class="d-flex gap-3 align-items-center">
-      <a href="#how" class="muted" data-i18n="nav_how">How it works</a>
-      <a href="#deliverables" class="muted" data-i18n="nav_deliverables">What you get</a>
-      <a href="#pricing" class="muted" data-i18n="nav_pricing">Pricing</a>
-      <a href="#faq" class="muted" data-i18n="nav_faq">FAQ</a>
+    <div class="d-none d-lg-flex gap-1 align-items-center">
+      <a class="navlink" href="#problem" id="navProblem"></a>
+      <a class="navlink" href="#services" id="navServices"></a>
+      <a class="navlink" href="#workshops" id="navWorkshops"></a>
+      <a class="navlink" href="#who" id="navWho"></a>
+      <a class="navlink" href="#faq" id="navFaq"></a>
+      <a class="btn btn-accent btn-sm px-3 ms-1" href="#cta" id="navBook"></a>
+    </div>
 
-      <div class="lang-pill ms-2" aria-label="Language selector">
-        <button class="lang-btn active" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="es">ES</button>
-        <button class="lang-btn" data-lang="pt">PT</button>
+    <div class="d-flex align-items-center gap-2">
+      <div class="d-flex gap-1">
+        <button class="btn btn-sm btn-outline-light lang-btn" id="btnEN" type="button">EN</button>
+        <button class="btn btn-sm btn-outline-light lang-btn" id="btnES" type="button">ES</button>
+        <button class="btn btn-sm btn-outline-light lang-btn" id="btnPT" type="button">PT</button>
       </div>
-
-      <a href="#pricing" class="btn btn-primary btn-sm" data-i18n="nav_buy">Buy</a>
+      <div class="d-lg-none">
+        <a class="btn btn-accent btn-sm px-3" href="#cta" id="navBookMobile"></a>
+      </div>
     </div>
-
   </div>
 </div>
 
@@ -157,305 +249,348 @@
 <section class="hero text-center">
   <div class="container">
     <div class="mb-3">
-      <span class="badge-soft" data-i18n="hero_badge_1">No calls</span>
-      <span class="badge-soft" data-i18n="hero_badge_2">Personalized PDF</span>
-      <span class="badge-soft" data-i18n="hero_badge_3">Delivered in 24h</span>
+      <span class="chip" id="chip1"></span>
+      <span class="chip" id="chip2"></span>
+      <span class="chip" id="chip3"></span>
+      <span class="chip" id="chip4"></span>
     </div>
 
-    <h1 class="display-5 fw-bold mb-3">
-      <span data-i18n="hero_title_1">Magina</span>
-      <span class="accent" data-i18n="hero_title_2">FocusOS™</span>
-    </h1>
+    <div class="kicker mb-3" id="heroKicker"></div>
 
-    <p class="lead muted mb-4" data-i18n="hero_subtitle">
-      A personalized productivity & focus system built around your real workload, your role, and your constraints — so you stop fighting generic planners.
-    </p>
+    <h1 class="headline display-5 mb-3" id="heroTitle"></h1>
 
-    <a href="#pricing" class="btn btn-primary btn-lg me-2" data-i18n="hero_cta_primary">Get my FocusOS</a>
-    <a href="#how" class="btn btn-outline btn-lg" data-i18n="hero_cta_secondary">How it works</a>
+    <p class="subhead mb-4" id="heroText"></p>
 
-    <p class="muted mt-4 small-note" data-i18n="hero_note">
-      You pay → complete a short form → receive your tailored PDF. No meetings. No back-and-forth.
-    </p>
+    <div class="d-flex gap-2 justify-content-center flex-wrap">
+      <a class="btn btn-accent btn-lg px-4" href="#cta" id="ctaMain"></a>
+      <a class="btn btn-outline-soft btn-lg px-4" href="#services" id="ctaSecondary"></a>
+    </div>
+
+    <p class="smallnote mt-4" id="heroNote"></p>
   </div>
 </section>
 
-<!-- WHAT THIS IS -->
-<section class="section" id="what">
-  <div class="container">
-    <h2 class="fw-bold mb-4" data-i18n="what_title">What this is (and what it isn’t)</h2>
+<hr class="hr-soft">
 
-    <div class="row g-4">
-      <div class="col-md-6">
+<!-- PROBLEM -->
+<section class="section" id="problem">
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-lg-6">
+        <span class="kicker" id="problemKicker"></span>
+        <h2 class="headline mt-2 mb-3" id="problemTitle"></h2>
+        <p class="muted mb-0" id="problemText"></p>
+
+        <div class="mt-4" id="problemBadges"></div>
+      </div>
+
+      <div class="col-lg-6">
         <div class="cardx">
-          <strong class="accent" data-i18n="what_is_title">This is a tailored operating system</strong>
-          <p class="muted mt-2 mb-0" data-i18n="what_is_body">
-            A structured system (weekly plan + daily flow + decision rules) adapted to your role, workload and energy. Built to be used immediately.
-          </p>
+          <h5 class="mb-3 fw-bold" id="problemLooksTitle"></h5>
+          <ul class="list-check" id="problemLooksList"></ul>
+          <div class="mt-4 smallnote" id="problemLooksNote"></div>
         </div>
       </div>
-      <div class="col-md-6">
+    </div>
+  </div>
+</section>
+
+<!-- WHAT I DO -->
+<section class="section" id="what">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="kicker" id="whatKicker"></span>
+      <h2 class="headline mt-2 mb-3" id="whatTitle"></h2>
+      <p class="subhead" id="whatText"></p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4">
         <div class="cardx">
-          <strong data-i18n="what_not_title">This is NOT coaching or generic templates</strong>
-          <p class="muted mt-2 mb-0" data-i18n="what_not_body">
-            No calls. No “one-size-fits-all” planners. No ongoing support. You get a concrete deliverable designed to reduce chaos fast.
-          </p>
+          <h6 class="fw-bold mb-2" id="what1Title"></h6>
+          <p class="muted mb-0" id="what1Text"></p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="cardx">
+          <h6 class="fw-bold mb-2" id="what2Title"></h6>
+          <p class="muted mb-0" id="what2Text"></p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="cardx">
+          <h6 class="fw-bold mb-2" id="what3Title"></h6>
+          <p class="muted mb-0" id="what3Text"></p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="cardx">
+          <h6 class="fw-bold mb-2" id="what4Title"></h6>
+          <p class="muted mb-0" id="what4Text"></p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="cardx">
+          <h6 class="fw-bold mb-2" id="what5Title"></h6>
+          <p class="muted mb-0" id="what5Text"></p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="cardx">
+          <h6 class="fw-bold mb-2" id="what6Title"></h6>
+          <p class="muted mb-0" id="what6Text"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="kicker" id="servicesKicker"></span>
+      <h2 class="headline mt-2 mb-3" id="servicesTitle"></h2>
+      <p class="subhead" id="servicesText"></p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="cardx">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <h5 class="mb-0 fw-bold" id="svc1Title"></h5>
+            <span class="badge-soft" id="svc1Time"></span>
+          </div>
+          <p class="muted mb-3" id="svc1Desc"></p>
+          <ul class="list-check" id="svc1List"></ul>
+          <div class="mt-4">
+            <div class="pricehint" id="svc1Price"></div>
+            <div class="smallnote" id="svc1Note"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="cardx" style="border-color: rgba(94,234,212,.40); box-shadow: 0 0 0 1px rgba(94,234,212,.12) inset, var(--shadow);">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <h5 class="mb-0 fw-bold" id="svc2Title"></h5>
+            <span class="badge-soft" id="svc2Time"></span>
+          </div>
+          <p class="muted mb-3" id="svc2Desc"></p>
+          <ul class="list-check" id="svc2List"></ul>
+          <div class="mt-4">
+            <div class="pricehint" id="svc2Price"></div>
+            <div class="smallnote" id="svc2Note"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="cardx">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <h5 class="mb-0 fw-bold" id="svc3Title"></h5>
+            <span class="badge-soft" id="svc3Time"></span>
+          </div>
+          <p class="muted mb-3" id="svc3Desc"></p>
+          <ul class="list-check" id="svc3List"></ul>
+          <div class="mt-4">
+            <div class="pricehint" id="svc3Price"></div>
+            <div class="smallnote" id="svc3Note"></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 d-flex flex-wrap gap-2">
-      <span class="pill" data-i18n="pill_1">Built by a PMP / MBA</span>
-      <span class="pill" data-i18n="pill_2">Designed for real constraints</span>
-      <span class="pill" data-i18n="pill_3">Practical, not motivational</span>
+    <div class="row g-4 mt-1">
+      <div class="col-lg-12">
+        <div class="cardx">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <div>
+              <h5 class="mb-1 fw-bold" id="svc4Title"></h5>
+              <div class="muted" id="svc4Desc"></div>
+            </div>
+            <span class="badge-soft" id="svc4Time"></span>
+          </div>
+
+          <div class="row g-4 mt-1">
+            <div class="col-lg-8">
+              <ul class="list-check" id="svc4List"></ul>
+            </div>
+            <div class="col-lg-4">
+              <div class="pricehint" id="svc4Price"></div>
+              <div class="smallnote" id="svc4Note"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORKSHOPS -->
+<section class="section" id="workshops">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="kicker" id="workKicker"></span>
+      <h2 class="headline mt-2 mb-3" id="workTitle"></h2>
+      <p class="subhead" id="workText"></p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="cardx">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <h5 class="mb-0 fw-bold" id="work1Title"></h5>
+            <span class="badge-soft" id="work1Tag"></span>
+          </div>
+          <p class="muted mb-3" id="work1Desc"></p>
+          <ul class="list-check" id="work1List"></ul>
+          <div class="mt-4">
+            <div class="pricehint" id="work1Price"></div>
+            <div class="smallnote" id="work1Note"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="cardx">
+          <h5 class="mb-2 fw-bold" id="work2Title"></h5>
+          <p class="muted mb-3" id="work2Desc"></p>
+          <ul class="list-check" id="work2List"></ul>
+          <div class="mt-4 smallnote" id="work2Note"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- WHO IT'S FOR -->
-<section class="section" id="for">
+<section class="section" id="who">
   <div class="container">
-    <h2 class="fw-bold mb-4" data-i18n="for_title">Who this is for</h2>
+    <div class="text-center mb-5">
+      <span class="kicker" id="whoKicker"></span>
+      <h2 class="headline mt-2 mb-3" id="whoTitle"></h2>
+      <p class="subhead" id="whoText"></p>
+    </div>
 
     <div class="row g-4">
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <div class="cardx">
-          <strong data-i18n="for_1_title">Overloaded professionals</strong>
-          <p class="muted mt-2 mb-0" data-i18n="for_1_body">
-            Your days are full, your to-do keeps growing, and generic systems don’t stick.
-          </p>
+          <h6 class="fw-bold mb-2" id="who1Title"></h6>
+          <p class="muted mb-0" id="who1Text"></p>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <div class="cardx">
-          <strong data-i18n="for_2_title">Managers & leads</strong>
-          <p class="muted mt-2 mb-0" data-i18n="for_2_body">
-            Context switching, meetings, interruptions — you need a system that works in reality.
-          </p>
+          <h6 class="fw-bold mb-2" id="who2Title"></h6>
+          <p class="muted mb-0" id="who2Text"></p>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-lg-4">
         <div class="cardx">
-          <strong data-i18n="for_3_title">Founders / builders</strong>
-          <p class="muted mt-2 mb-0" data-i18n="for_3_body">
-            Too many priorities and no structure — you need focus and execution rules.
-          </p>
+          <h6 class="fw-bold mb-2" id="who3Title"></h6>
+          <p class="muted mb-0" id="who3Text"></p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section id="how" class="section">
+<!-- ABOUT + CTA -->
+<section class="section" id="cta">
   <div class="container">
-    <h2 class="fw-bold mb-4" data-i18n="how_title">How it works</h2>
-    <div class="row g-4">
-      <div class="col-md-3">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-7">
         <div class="cardx">
-          <strong data-i18n="how_1_title">1) Buy</strong>
-          <p class="muted mt-2 mb-0" data-i18n="how_1_body">
-            Pay securely via Stripe.
-          </p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="cardx">
-          <strong data-i18n="how_2_title">2) Fill the form</strong>
-          <p class="muted mt-2 mb-0" data-i18n="how_2_body">
-            A short form captures your role, constraints, goals and preferences.
-          </p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="cardx">
-          <strong data-i18n="how_3_title">3) We generate your system</strong>
-          <p class="muted mt-2 mb-0" data-i18n="how_3_body">
-            Your FocusOS is assembled and tailored into a clean, premium PDF.
-          </p>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="cardx">
-          <strong data-i18n="how_4_title">4) Delivered</strong>
-          <p class="muted mt-2 mb-0" data-i18n="how_4_body">
-            You receive it by email (typical delivery: within 24 hours).
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <p class="muted mt-4 mb-0 small-note" data-i18n="how_note">
-      No meetings. If your form is incomplete, we’ll ask for missing info by email.
-    </p>
-  </div>
-</section>
-
-<!-- DELIVERABLES -->
-<section id="deliverables" class="section">
-  <div class="container">
-    <h2 class="fw-bold mb-4" data-i18n="del_title">What you get</h2>
-
-    <div class="row g-4">
-      <div class="col-md-6">
-        <div class="cardx">
-          <strong class="accent" data-i18n="del_1_title">A personalized PDF system</strong>
-          <ul class="list-clean mt-3 mb-0">
-            <li data-i18n="del_1_b1">Weekly planning structure (built for your schedule)</li>
-            <li data-i18n="del_1_b2">Daily execution flow (what to do when everything hits at once)</li>
-            <li data-i18n="del_1_b3">Decision rules to reduce overwhelm</li>
-            <li data-i18n="del_1_b4">Focus blocks + meeting-heavy day adaptations</li>
-            <li data-i18n="del_1_b5">Simple templates you can reuse immediately</li>
-          </ul>
+          <span class="kicker" id="aboutKicker"></span>
+          <h2 class="headline mt-2 mb-3" id="aboutTitle"></h2>
+          <p class="muted mb-3" id="aboutText1"></p>
+          <p class="muted mb-0" id="aboutText2"></p>
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-lg-5">
         <div class="cardx">
-          <strong data-i18n="del_2_title">Practical guidance (not fluff)</strong>
-          <ul class="list-clean mt-3 mb-0">
-            <li data-i18n="del_2_b1">A “starting plan” for the next 7 days</li>
-            <li data-i18n="del_2_b2">What to stop doing (and why)</li>
-            <li data-i18n="del_2_b3">Priority model (so you don’t guess every day)</li>
-            <li data-i18n="del_2_b4">Interruption protocol (meeting-heavy reality)</li>
-            <li data-i18n="del_2_b5">Clear limits and usage instructions</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+          <h5 class="fw-bold mb-2" id="ctaTitle"></h5>
+          <p class="muted mb-3" id="ctaText"></p>
 
-    <p class="muted mt-4 mb-0 small-note" data-i18n="del_note">
-      This is a productivity system, not medical/mental health advice.
-    </p>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing" class="section">
-  <div class="container">
-    <h2 class="fw-bold mb-4" data-i18n="pricing_title">Pricing</h2>
-
-    <div class="row g-4 justify-content-center">
-      <div class="col-md-6 col-lg-5">
-        <div class="cardx highlight">
-          <div class="d-flex align-items-center justify-content-between">
-            <strong data-i18n="p_pro_title">Pro</strong>
-            <span class="badge-soft" data-i18n="p_pro_badge">Most popular</span>
+          <div class="d-grid gap-2">
+            <a class="btn btn-accent btn-lg" id="btnCalendar" href="#"></a>
+            <a class="btn btn-outline-soft" id="btnEmail" href="#"></a>
           </div>
 
-          <div class="price">$99</div>
+          <div class="mt-3 smallnote" id="ctaNote"></div>
 
-          <ul class="list-clean">
-            <li data-i18n="p_pro_b1">Personalized FocusOS PDF</li>
-            <li data-i18n="p_pro_b2">Deeper personalization (constraints + energy)</li>
-            <li data-i18n="p_pro_b3">Priority rules + interruption protocol</li>
-            <li data-i18n="p_pro_b4">7-day starting plan</li>
-            <li data-i18n="p_pro_b5">Delivery in 24h (typical)</li>
-          </ul>
+          <hr class="hr-soft my-4">
 
-          <div class="mt-4">
-            <a class="btn btn-primary w-100" id="btnPro" href="#" data-i18n="p_pro_cta">Pay with Stripe</a>
-            <p class="muted mt-2 mb-0 small-note" data-i18n="p_note_form">
-              After payment you’ll be redirected to the form.
-            </p>
+          <div class="smallnote" id="ctaLinkedInWrap">
+            <span id="ctaLinkedInText"></span> <a class="text-decoration-underline" id="btnLinkedIn" href="#"></a>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="mt-4">
-      <div class="cardx">
-        <strong data-i18n="form_title">Already paid?</strong>
-        <p class="muted mt-2 mb-3" data-i18n="form_body">
-          Use this link to complete the form (only submit after payment).
-        </p>
-        <a class="btn btn-outline" id="btnForm" href="#" data-i18n="form_cta">Open the form</a>
-        <p class="muted mt-3 mb-0 small-note">
-          <span data-i18n="support_note">Support:</span>
-          <a class="accent" id="supportEmail" href="#">email</a>
-        </p>
-      </div>
-    </div>
-
   </div>
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="section">
+<section class="section" id="faq">
   <div class="container">
-    <h2 class="fw-bold mb-4" data-i18n="faq_title">FAQ</h2>
+    <div class="text-center mb-5">
+      <span class="kicker" id="faqKicker"></span>
+      <h2 class="headline mt-2 mb-3" id="faqTitle"></h2>
+      <p class="subhead" id="faqText"></p>
+    </div>
 
     <div class="accordion" id="faqAcc">
-
-      <div class="accordion-item">
+      <div class="accordion-item mb-3">
         <h2 class="accordion-header" id="q1">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="false" aria-controls="a1" data-i18n="faq_q1">
-            How fast is delivery?
-          </button>
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a1" aria-expanded="false" aria-controls="a1" id="faqQ1"></button>
         </h2>
         <div id="a1" class="accordion-collapse collapse" aria-labelledby="q1" data-bs-parent="#faqAcc">
-          <div class="accordion-body" data-i18n="faq_a1">
-            Typical delivery is within 24 hours. During high demand periods it may take up to 48 hours.
-          </div>
+          <div class="accordion-body" id="faqA1"></div>
         </div>
       </div>
 
-      <div class="accordion-item">
+      <div class="accordion-item mb-3">
         <h2 class="accordion-header" id="q2">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2" data-i18n="faq_q2">
-            Do I need a call?
-          </button>
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a2" aria-expanded="false" aria-controls="a2" id="faqQ2"></button>
         </h2>
         <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faqAcc">
-          <div class="accordion-body" data-i18n="faq_a2">
-            No. The form is designed to capture everything needed. We only email you if key information is missing.
-          </div>
+          <div class="accordion-body" id="faqA2"></div>
         </div>
       </div>
 
-      <div class="accordion-item">
+      <div class="accordion-item mb-3">
         <h2 class="accordion-header" id="q3">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3" data-i18n="faq_q3">
-            Is this a planner template?
-          </button>
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a3" aria-expanded="false" aria-controls="a3" id="faqQ3"></button>
         </h2>
         <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faqAcc">
-          <div class="accordion-body" data-i18n="faq_a3">
-            No. You receive a tailored system assembled for your context. It includes templates, rules and a starting plan.
-          </div>
+          <div class="accordion-body" id="faqA3"></div>
         </div>
       </div>
 
-      <div class="accordion-item">
+      <div class="accordion-item mb-3">
         <h2 class="accordion-header" id="q4">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4" aria-expanded="false" aria-controls="a4" data-i18n="faq_q4">
-            What if I want changes?
-          </button>
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a4" aria-expanded="false" aria-controls="a4" id="faqQ4"></button>
         </h2>
         <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#faqAcc">
-          <div class="accordion-body" data-i18n="faq_a4">
-            One correction is included if there was incorrect input data. This is not ongoing coaching or unlimited revisions.
-          </div>
+          <div class="accordion-body" id="faqA4"></div>
         </div>
       </div>
 
       <div class="accordion-item">
         <h2 class="accordion-header" id="q5">
-          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a5" aria-expanded="false" aria-controls="a5" data-i18n="faq_q5">
-            Refunds?
-          </button>
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#a5" aria-expanded="false" aria-controls="a5" id="faqQ5"></button>
         </h2>
         <div id="a5" class="accordion-collapse collapse" aria-labelledby="q5" data-bs-parent="#faqAcc">
-          <div class="accordion-body" data-i18n="faq_a5">
-            Because this is a personalized digital deliverable, refunds are typically not available once production starts. If you submitted the form by mistake, contact support immediately.
-          </div>
+          <div class="accordion-body" id="faqA5"></div>
         </div>
       </div>
-
     </div>
 
-    <div class="mt-4">
-      <a href="#pricing" class="btn btn-primary" data-i18n="faq_cta">Get FocusOS</a>
+    <div class="text-center mt-4">
+      <a class="btn btn-accent btn-lg px-4" href="#cta" id="faqCta"></a>
     </div>
   </div>
 </section>
@@ -463,347 +598,597 @@
 <!-- FOOTER -->
 <footer>
   <div class="container text-center">
-    <strong>Magina Studio</strong>
-    <p class="muted mt-2 mb-1" data-i18n="footer_tagline">
-      Personalized systems — built for clarity and execution.
-    </p>
-    <p class="muted small mb-0">
-      © <span id="year"></span> Magina Consulting LLC
-    </p>
+    <div class="fw-bold">Magina Consulting LLC</div>
+    <div class="muted mt-2" id="footerTagline"></div>
+    <div class="smallnote mt-3">© <span id="year"></span> Magina Consulting LLC</div>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  // -----------------------------
-  // i18n dictionary
-  // -----------------------------
-  const I18N = {
+  const CONTENT = {
     en: {
-      nav_tagline: "Personalized systems for overloaded professionals",
-      nav_how: "How it works",
-      nav_deliverables: "What you get",
-      nav_pricing: "Pricing",
-      nav_faq: "FAQ",
-      nav_buy: "Buy",
-
-      hero_badge_1: "No calls",
-      hero_badge_2: "Personalized PDF",
-      hero_badge_3: "Delivered in 24h",
-      hero_title_1: "Magina",
-      hero_title_2: "FocusOS™",
-      hero_subtitle: "A personalized productivity & focus system built around your real workload, your role, and your constraints — so you stop fighting generic planners.",
-      hero_cta_primary: "Get my FocusOS",
-      hero_cta_secondary: "How it works",
-      hero_note: "You pay → complete a short form → receive your tailored PDF. No meetings. No back-and-forth.",
-
-      what_title: "What this is (and what it isn’t)",
-      what_is_title: "This is a tailored operating system",
-      what_is_body: "A structured system (weekly plan + daily flow + decision rules) adapted to your role, workload and energy. Built to be used immediately.",
-      what_not_title: "This is NOT coaching or generic templates",
-      what_not_body: "No calls. No “one-size-fits-all” planners. No ongoing support. You get a concrete deliverable designed to reduce chaos fast.",
-
-      pill_1: "Built by a PMP / MBA",
-      pill_2: "Designed for real constraints",
-      pill_3: "Practical, not motivational",
-
-      for_title: "Who this is for",
-      for_1_title: "Overloaded professionals",
-      for_1_body: "Your days are full, your to-do keeps growing, and generic systems don’t stick.",
-      for_2_title: "Managers & leads",
-      for_2_body: "Context switching, meetings, interruptions — you need a system that works in reality.",
-      for_3_title: "Founders / builders",
-      for_3_body: "Too many priorities and no structure — you need focus and execution rules.",
-
-      how_title: "How it works",
-      how_1_title: "1) Buy",
-      how_1_body: "Pay securely via Stripe.",
-      how_2_title: "2) Fill the form",
-      how_2_body: "A short form captures your role, constraints, goals and preferences.",
-      how_3_title: "3) We generate your system",
-      how_3_body: "Your FocusOS is assembled and tailored into a clean, premium PDF.",
-      how_4_title: "4) Delivered",
-      how_4_body: "You receive it by email (typical delivery: within 24 hours).",
-      how_note: "No meetings. If your form is incomplete, we’ll ask for missing info by email.",
-
-      del_title: "What you get",
-      del_1_title: "A personalized PDF system",
-      del_1_b1: "Weekly planning structure (built for your schedule)",
-      del_1_b2: "Daily execution flow (what to do when everything hits at once)",
-      del_1_b3: "Decision rules to reduce overwhelm",
-      del_1_b4: "Focus blocks + meeting-heavy day adaptations",
-      del_1_b5: "Simple templates you can reuse immediately",
-      del_2_title: "Practical guidance (not fluff)",
-      del_2_b1: "A “starting plan” for the next 7 days",
-      del_2_b2: "What to stop doing (and why)",
-      del_2_b3: "Priority model (so you don’t guess every day)",
-      del_2_b4: "Interruption protocol (meeting-heavy reality)",
-      del_2_b5: "Clear limits and usage instructions",
-      del_note: "This is a productivity system, not medical/mental health advice.",
-
-      pricing_title: "Pricing",
-      p_pro_title: "Pro",
-      p_pro_badge: "Most popular",
-      p_pro_b1: "Personalized FocusOS PDF",
-      p_pro_b2: "Deeper personalization (constraints + energy)",
-      p_pro_b3: "Priority rules + interruption protocol",
-      p_pro_b4: "7-day starting plan",
-      p_pro_b5: "Delivery in 24h (typical)",
-      p_pro_cta: "Pay with Stripe",
-      p_note_form: "After payment you’ll be redirected to the form.",
-
-      form_title: "Already paid?",
-      form_body: "Use this link to complete the form (only submit after payment).",
-      form_cta: "Open the form",
-      support_note: "Support:",
-
-      faq_title: "FAQ",
-      faq_q1: "How fast is delivery?",
-      faq_a1: "Typical delivery is within 24 hours. During high demand periods it may take up to 48 hours.",
-      faq_q2: "Do I need a call?",
-      faq_a2: "No. The form is designed to capture everything needed. We only email you if key information is missing.",
-      faq_q3: "Is this a planner template?",
-      faq_a3: "No. You receive a tailored system assembled for your context. It includes templates, rules and a starting plan.",
-      faq_q4: "What if I want changes?",
-      faq_a4: "One correction is included if there was incorrect input data. This is not ongoing coaching or unlimited revisions.",
-      faq_q5: "Refunds?",
-      faq_a5: "Because this is a personalized digital deliverable, refunds are typically not available once production starts. If you submitted the form by mistake, contact support immediately.",
-      faq_cta: "Get FocusOS",
-
-      footer_tagline: "Personalized systems — built for clarity and execution."
+      motto: "Structured Microsoft 365 operations — before things become fragile",
+      nav: { problem:"Problem", services:"Services", workshops:"Workshops", who:"Who it’s for", faq:"FAQ", book:"Book a call" },
+      chips: ["Microsoft 365", "Power Platform", "Practical governance", "Clear systems"],
+      hero: {
+        kicker: "Advisory + Implementation",
+        title: "Your company runs on Microsoft.<br class='d-none d-md-block'> But is it structured — or fragile?",
+        text: "If Power Automate flows, Power Apps, SharePoint sites, Excel-based processes and reports have grown without clear structure, you're likely building hidden operational risk. I help companies organize and scale their Microsoft environment so operations remain controlled and predictable.",
+        ctaMain: "Book a strategic call",
+        ctaSecondary: "See services",
+        note: "Simple, clear engagements. Start small. Scale when it makes sense."
+      },
+      problem: {
+        kicker:"The problem",
+        title:"Microsoft tools grow organically — then complexity hits.",
+        text:"Most companies start with quick wins: a flow here, a SharePoint list there, an Excel file that becomes “the system”. Over time, different people build different things. Rules get hardcoded. Ownership is unclear. Changes break other processes. It works… until it doesn’t.",
+        badges:["Hidden dependencies", "No clear ownership", "Hardcoded rules", "Fragile automation", "Excel as backend"],
+        looksTitle:"What “fragile” looks like",
+        looksList:[
+          "A flow fails and nobody knows where to look.",
+          "Only one person understands how the process works.",
+          "Rules are buried inside apps/flows, so changes take forever.",
+          "Data lives in too many places (SharePoint, Excel, emails).",
+          "Teams build new solutions without a shared structure."
+        ],
+        looksNote:"The goal is not “more automation”. The goal is structure: clear ownership, predictable changes, and systems that scale."
+      },
+      what: {
+        kicker:"What I do",
+        title:"I help you structure your Microsoft environment so it stays under control.",
+        text:"This is not about building random automations. It’s about making your internal Microsoft tools work together as a clear system — with ownership, rules and change control.",
+        items:[
+          ["Structure your internal systems", "Turn scattered tools into a clean, understandable system."],
+          ["Make changes predictable", "Separate business rules from execution so updates don’t break everything."],
+          ["Reduce dependency on individuals", "So your operations don’t rely on one “hero” who knows everything."],
+          ["Clarify ownership and responsibilities", "Who owns what, who approves changes, and who supports issues."],
+          ["Fix data sprawl", "Decide what belongs in SharePoint, Dataverse or Excel — and why."],
+          ["Keep governance practical", "Enough control to reduce risk, without slowing the business down."]
+        ]
+      },
+      services: {
+        kicker:"Services",
+        title:"Start small. Build trust. Then scale.",
+        text:"You can hire me for a focused assessment, a system design blueprint, or implementation when needed. Most clients start with an assessment or a leadership workshop.",
+        s1:{
+          title:"Microsoft Environment Assessment", time:"1–2 weeks",
+          desc:"A structured review of your Microsoft-based operations to identify risks, gaps and quick wins.",
+          list:["Current-state overview (apps, flows, sites, data)","Risk areas and fragile dependencies","Ownership and change-management gaps","Clear recommendations + prioritized roadmap"],
+          price:"Typical range: $4k–$8k", note:"Final scope depends on environment size."
+        },
+        s2:{
+          title:"System Design Blueprint", time:"2–3 weeks",
+          desc:"Before building or rebuilding, we design the right structure so implementation is predictable.",
+          list:["Process states + exception handling","Business rules structure (so changes are easy)","Data model (SharePoint vs Dataverse vs Excel)","Roles, ownership and governance model","Architecture diagram + implementation plan"],
+          price:"Typical range: $8k–$15k", note:"Ideal when multiple teams depend on the process."
+        },
+        s3:{
+          title:"Implementation (Optional)", time:"4–6 weeks",
+          desc:"When needed, I help implement the agreed structure inside your Microsoft environment and document it properly.",
+          list:["Build based on the approved blueprint","Modular flows/apps with clear structure","Logging + error handling","Documentation + handover"],
+          price:"Typical range: $20k–$40k", note:"Only offered when scope is clear and controlled."
+        },
+        s4:{
+          title:"Ongoing Advisory Retainer", time:"Monthly",
+          desc:"For teams who want ongoing guidance without hiring a full-time architect.",
+          list:["2–4 strategic sessions per month","Review of new apps/flows before they become messy","Risk checks, governance guidance, and recommendations","Short written memos so decisions are documented"],
+          price:"Typical range: $2k–$6k / month", note:"Great after an assessment or blueprint."
+        }
+      },
+      workshops:{
+        kicker:"Workshops",
+        title:"Clarity for leadership teams (not technical training).",
+        text:"A short, practical session to help decision-makers understand where operational risk is coming from and what “structure” actually means in Microsoft 365.",
+        w1:{
+          title:"Leadership Workshop (90 minutes)", tag:"Live",
+          desc:"A focused session to align leaders on risk, ownership and how to scale Microsoft-based operations without chaos.",
+          list:["Why quick automations become fragile over time","What clear ownership and rules look like","Simple framework to assess your current setup","Practical options for next steps"],
+          price:"Typical range: $2k–$4k", note:"Private corporate sessions (single company)."
+        },
+        w2:{
+          title:"Optional add-ons",
+          desc:"If you want a bit more than the live session:",
+          list:["Workshop summary PDF customized to your environment","Executive “next steps” memo for internal alignment","Follow-up Q&A session (30–45 minutes)"],
+          note:"Workshops are often a great first step before an assessment."
+        }
+      },
+      who:{
+        kicker:"Who it’s for",
+        title:"Companies that depend on Microsoft 365 for daily operations.",
+        text:"This is for organizations where internal systems exist — but structure, ownership and change control are missing.",
+        cards:[
+          ["Growing teams", "You’re adding people and processes, and the informal Microsoft setup is starting to crack."],
+          ["Multiple apps / flows", "There are many solutions, but no consistent structure — and changes are risky."],
+          ["Leadership wants control", "You want visibility, accountability and predictability — without bureaucracy."]
+        ]
+      },
+      about:{
+        kicker:"About",
+        title:"Practical structure, built from real corporate experience.",
+        t1:"I bring 17+ years of corporate experience working with complex stakeholders, processes and constraints. I combine project leadership, business thinking and hands-on Microsoft knowledge to design internal systems that are clear, maintainable and scalable.",
+        t2:"If your Microsoft environment is growing fast and starting to feel messy, we can fix it with a clear method — starting with a small engagement."
+      },
+      cta:{
+        title:"Book a strategic call",
+        text:"Tell me what’s happening in your environment. I’ll recommend the simplest next step.",
+        btnCalendar:"Open booking link",
+        btnEmailPrefix:"Email",
+        note:"No pressure. If we’re not a fit, I’ll tell you.",
+        liText:"Prefer LinkedIn?",
+        liLink:"Message me"
+      },
+      faq:{
+        kicker:"FAQ",
+        title:"Quick answers",
+        text:"A few common questions before we talk.",
+        q1:"Do you only work with Power Automate?",
+        a1:"No. Power Automate is often part of the picture, but we look at the full Microsoft environment: Power Apps, SharePoint, data structure, reporting, and governance. The goal is a clean system, not isolated tools.",
+        q2:"Can we start small before committing to a big project?",
+        a2:"Yes — that’s the preferred approach. Most clients start with an assessment or a leadership workshop. If we decide to move into implementation, it’s based on an approved blueprint and a clear scope.",
+        q3:"Do you work remotely?",
+        a3:"Yes. Most engagements work well remotely. If an on-site workshop is valuable, we can discuss it case by case.",
+        q4:"What industries do you work with?",
+        a4:"Any industry that relies heavily on Microsoft 365 for internal operations. The approach is about structure, ownership and change control — which applies across sectors.",
+        q5:"How do we handle access to our tenant?",
+        a5:"For assessments and blueprint work, we can start with interviews and inventories. If technical review is required, access is handled through your IT process (least privilege, limited scope, and clear ownership).",
+        cta:"Book a call"
+      },
+      footerTagline:"Structured Microsoft 365 operations — before things become fragile"
     },
 
     es: {
-      nav_tagline: "Sistemas personalizados para profesionales saturados",
-      nav_how: "Cómo funciona",
-      nav_deliverables: "Qué recibís",
-      nav_pricing: "Precio",
-      nav_faq: "FAQ",
-      nav_buy: "Comprar",
-
-      hero_badge_1: "Sin llamadas",
-      hero_badge_2: "PDF personalizado",
-      hero_badge_3: "Entrega 24h",
-      hero_title_1: "Magina",
-      hero_title_2: "FocusOS™",
-      hero_subtitle: "Un sistema personalizado de productividad y foco, diseñado según tu carga real, tu rol y tus restricciones — para dejar de pelearte con planners genéricos.",
-      hero_cta_primary: "Quiero mi FocusOS",
-      hero_cta_secondary: "Cómo funciona",
-      hero_note: "Pagás → completás un formulario corto → recibís tu PDF. Sin reuniones. Sin ida y vuelta.",
-
-      what_title: "Qué es (y qué no es)",
-      what_is_title: "Esto es un sistema operativo personalizado",
-      what_is_body: "Un sistema estructurado (plan semanal + flujo diario + reglas de decisión) adaptado a tu rol, carga y energía. Listo para usar.",
-      what_not_title: "Esto NO es coaching ni templates genéricos",
-      what_not_body: "Sin llamadas. Sin planners “para todos”. Sin soporte continuo. Recibís un entregable concreto para bajar el caos rápido.",
-
-      pill_1: "Hecho por PMP / MBA",
-      pill_2: "Diseñado para la vida real",
-      pill_3: "Práctico, sin humo",
-
-      for_title: "Para quién es",
-      for_1_title: "Profesionales saturados",
-      for_1_body: "Tus días están llenos, el to-do crece y los sistemas genéricos no te duran.",
-      for_2_title: "Managers y líderes",
-      for_2_body: "Reuniones, interrupciones, cambios de contexto — necesitás un sistema realista.",
-      for_3_title: "Founders / builders",
-      for_3_body: "Demasiadas prioridades y poca estructura — necesitás foco y reglas de ejecución.",
-
-      how_title: "Cómo funciona",
-      how_1_title: "1) Pagás",
-      how_1_body: "Pagás de forma segura con Stripe.",
-      how_2_title: "2) Completás el form",
-      how_2_body: "Un formulario corto captura tu rol, restricciones, objetivos y preferencias.",
-      how_3_title: "3) Generamos tu sistema",
-      how_3_body: "Armamos tu FocusOS y lo entregamos como PDF premium.",
-      how_4_title: "4) Entrega",
-      how_4_body: "Lo recibís por email (entrega típica: dentro de 24 horas).",
-      how_note: "Sin reuniones. Si falta info clave, te pedimos lo mínimo por email.",
-
-      del_title: "Qué recibís",
-      del_1_title: "Un sistema PDF personalizado",
-      del_1_b1: "Estructura semanal (según tu agenda real)",
-      del_1_b2: "Flujo diario de ejecución (cuando todo explota)",
-      del_1_b3: "Reglas de decisión para bajar estrés",
-      del_1_b4: "Bloques de foco + adaptación a días con reuniones",
-      del_1_b5: "Plantillas simples para usar ya",
-      del_2_title: "Guía práctica (sin motivación vacía)",
-      del_2_b1: "Plan de arranque para los próximos 7 días",
-      del_2_b2: "Qué dejar de hacer (y por qué)",
-      del_2_b3: "Modelo de prioridades (para no decidir todo cada día)",
-      del_2_b4: "Protocolo de interrupciones (vida real)",
-      del_2_b5: "Instrucciones claras de uso",
-      del_note: "Esto es un sistema de productividad, no consejo médico/psicológico.",
-
-      pricing_title: "Precio",
-      p_pro_title: "Pro",
-      p_pro_badge: "Más elegido",
-      p_pro_b1: "FocusOS PDF personalizado",
-      p_pro_b2: "Personalización más profunda (restricciones + energía)",
-      p_pro_b3: "Reglas de prioridad + protocolo de interrupciones",
-      p_pro_b4: "Plan de arranque 7 días",
-      p_pro_b5: "Entrega 24h (típica)",
-      p_pro_cta: "Pagar con Stripe",
-      p_note_form: "Luego del pago te redirigimos al formulario.",
-
-      form_title: "¿Ya pagaste?",
-      form_body: "Usá este link para completar el formulario (solo enviar luego del pago).",
-      form_cta: "Abrir formulario",
-      support_note: "Soporte:",
-
-      faq_title: "FAQ",
-      faq_q1: "¿Cuánto tarda la entrega?",
-      faq_a1: "La entrega típica es dentro de 24 horas. En picos de demanda puede demorar hasta 48 horas.",
-      faq_q2: "¿Necesito una llamada?",
-      faq_a2: "No. El formulario está diseñado para capturar todo. Solo te escribimos si falta un dato clave.",
-      faq_q3: "¿Es un planner genérico?",
-      faq_a3: "No. Recibís un sistema personalizado para tu contexto, con plantillas, reglas y plan de arranque.",
-      faq_q4: "¿Y si quiero cambios?",
-      faq_a4: "Incluye 1 corrección si hubo un dato mal cargado. No es coaching ni revisiones ilimitadas.",
-      faq_q5: "¿Reembolsos?",
-      faq_a5: "Como es un entregable digital personalizado, en general no hay reembolsos una vez iniciada la producción. Si te equivocaste, escribí a soporte inmediato.",
-      faq_cta: "Quiero FocusOS",
-
-      footer_tagline: "Sistemas personalizados — claridad y ejecución."
+      motto: "Operaciones en Microsoft 365 bien estructuradas — antes de que se vuelvan frágiles",
+      nav: { problem:"Problema", services:"Servicios", workshops:"Workshops", who:"Para quién", faq:"FAQ", book:"Agendar" },
+      chips: ["Microsoft 365", "Power Platform", "Gobernanza práctica", "Sistemas claros"],
+      hero: {
+        kicker: "Advisory + Implementación",
+        title: "Tu empresa funciona sobre Microsoft.<br class='d-none d-md-block'> ¿Pero está estructurada — o es frágil?",
+        text: "Si tus flows, apps, sitios de SharePoint, procesos en Excel y reportes crecieron sin estructura clara, probablemente estés acumulando riesgo operativo. Ayudo a empresas a organizar y escalar su entorno Microsoft para que las operaciones sean controladas y predecibles.",
+        ctaMain: "Agendar llamada estratégica",
+        ctaSecondary: "Ver servicios",
+        note: "Engagements simples y claros. Empezá chico. Escalá cuando tenga sentido."
+      },
+      problem: {
+        kicker:"El problema",
+        title:"Las herramientas de Microsoft crecen “orgánicamente” — y luego aparece la complejidad.",
+        text:"La mayoría empieza con quick wins: un flow acá, una lista de SharePoint allá, un Excel que termina siendo “el sistema”. Con el tiempo, diferentes personas construyen cosas distintas. Las reglas quedan hardcodeadas. No hay ownership claro. Los cambios rompen otros procesos. Funciona… hasta que deja de funcionar.",
+        badges:["Dependencias ocultas", "Sin ownership claro", "Reglas hardcodeadas", "Automatización frágil", "Excel como backend"],
+        looksTitle:"Cómo se ve lo “frágil”",
+        looksList:[
+          "Falla un flow y nadie sabe dónde mirar.",
+          "Solo una persona entiende cómo funciona el proceso.",
+          "Las reglas están enterradas en apps/flows y cambiar algo tarda muchísimo.",
+          "Los datos viven en demasiados lugares (SharePoint, Excel, emails).",
+          "Los equipos crean soluciones nuevas sin una estructura compartida."
+        ],
+        looksNote:"El objetivo no es “más automatización”. El objetivo es estructura: ownership claro, cambios predecibles y sistemas que escalan."
+      },
+      what: {
+        kicker:"Qué hago",
+        title:"Te ayudo a estructurar tu entorno Microsoft para que se mantenga bajo control.",
+        text:"Esto no se trata de hacer automatizaciones sueltas. Se trata de que tus herramientas internas de Microsoft trabajen como un sistema — con ownership, reglas y control de cambios.",
+        items:[
+          ["Estructurar tus sistemas internos", "Convertir herramientas dispersas en un sistema claro y entendible."],
+          ["Hacer cambios predecibles", "Separar reglas de negocio de la ejecución para que actualizar no rompa todo."],
+          ["Reducir dependencia de personas", "Que tu operación no dependa de un “héroe” que sabe todo."],
+          ["Aclarar ownership y responsabilidades", "Quién es dueño de qué, quién aprueba cambios y quién atiende incidentes."],
+          ["Ordenar el caos de datos", "Decidir qué va en SharePoint, Dataverse o Excel — y por qué."],
+          ["Gobernanza práctica", "El control justo para bajar riesgo, sin frenar el negocio."]
+        ]
+      },
+      services: {
+        kicker:"Servicios",
+        title:"Empezá chico. Construí confianza. Luego escalá.",
+        text:"Podés contratarme para un assessment, un blueprint, o implementación cuando sea necesario. La mayoría empieza con un assessment o un workshop.",
+        s1:{
+          title:"Assessment del entorno Microsoft", time:"1–2 semanas",
+          desc:"Revisión estructurada de tus operaciones basadas en Microsoft para detectar riesgos, gaps y quick wins.",
+          list:["Overview del estado actual (apps, flows, sites, datos)","Riesgos y dependencias frágiles","Gaps de ownership y gestión de cambios","Recomendaciones claras + roadmap priorizado"],
+          price:"Rango típico: USD 4k–8k", note:"El alcance final depende del tamaño del entorno."
+        },
+        s2:{
+          title:"Blueprint de diseño de sistema", time:"2–3 semanas",
+          desc:"Antes de construir o reconstruir, diseñamos la estructura correcta para que implementar sea predecible.",
+          list:["Estados del proceso + manejo de excepciones","Estructura de reglas (cambios fáciles)","Modelo de datos (SharePoint vs Dataverse vs Excel)","Roles, ownership y modelo de gobernanza","Diagrama + plan de implementación"],
+          price:"Rango típico: USD 8k–15k", note:"Ideal cuando varios equipos dependen del proceso."
+        },
+        s3:{
+          title:"Implementación (opcional)", time:"4–6 semanas",
+          desc:"Cuando tiene sentido, implemento la estructura acordada dentro de tu entorno Microsoft y lo documento correctamente.",
+          list:["Construcción basada en blueprint aprobado","Flows/apps modulares con estructura clara","Logging + manejo de errores","Documentación + handover"],
+          price:"Rango típico: USD 20k–40k", note:"Solo cuando el alcance está claro y controlado."
+        },
+        s4:{
+          title:"Retainer de advisory", time:"Mensual",
+          desc:"Para equipos que quieren guía continua sin contratar un arquitecto full-time.",
+          list:["2–4 sesiones estratégicas por mes","Revisión de nuevas apps/flows antes de que se ensucien","Chequeos de riesgo, gobernanza y recomendaciones","Memos cortos para documentar decisiones"],
+          price:"Rango típico: USD 2k–6k / mes", note:"Ideal luego de un assessment o blueprint."
+        }
+      },
+      workshops:{
+        kicker:"Workshops",
+        title:"Claridad para líderes (no es entrenamiento técnico).",
+        text:"Sesión corta y práctica para que los decisores entiendan de dónde viene el riesgo operativo y qué significa “estructura” en Microsoft 365.",
+        w1:{
+          title:"Workshop para liderazgo (90 minutos)", tag:"En vivo",
+          desc:"Sesión enfocada para alinear a líderes sobre riesgo, ownership y cómo escalar sin caos.",
+          list:["Por qué los quick wins se vuelven frágiles","Qué se ve como ownership y reglas claras","Framework simple para evaluar tu setup actual","Opciones prácticas de próximos pasos"],
+          price:"Rango típico: USD 2k–4k", note:"Sesión privada para una empresa."
+        },
+        w2:{
+          title:"Add-ons opcionales",
+          desc:"Si querés un poco más que la sesión en vivo:",
+          list:["PDF resumen adaptado a tu entorno","Memo ejecutivo de próximos pasos","Sesión de Q&A (30–45 minutos)"],
+          note:"Muchas veces el workshop es un excelente primer paso antes del assessment."
+        }
+      },
+      who:{
+        kicker:"Para quién",
+        title:"Empresas que dependen de Microsoft 365 para operar.",
+        text:"Esto es para organizaciones donde ya existen sistemas internos — pero falta estructura, ownership y control de cambios.",
+        cards:[
+          ["Equipos en crecimiento", "Sumás gente y procesos y el setup “informal” empieza a romperse."],
+          ["Muchas apps / flows", "Hay soluciones por todos lados, pero sin estructura consistente los cambios son riesgosos."],
+          ["Líderes quieren control", "Querés visibilidad, responsabilidad y predictibilidad — sin burocracia."]
+        ]
+      },
+      about:{
+        kicker:"Sobre mí",
+        title:"Estructura práctica, basada en experiencia real corporativa.",
+        t1:"Tengo 17+ años de experiencia corporativa trabajando con stakeholders, procesos y restricciones reales. Combino liderazgo de proyectos, visión de negocio y conocimiento práctico del ecosistema Microsoft para diseñar sistemas internos claros, mantenibles y escalables.",
+        t2:"Si tu entorno Microsoft está creciendo rápido y se siente desordenado, lo podemos ordenar con un método claro — empezando con un engagement chico."
+      },
+      cta:{
+        title:"Agendá una llamada estratégica",
+        text:"Contame qué está pasando. Te recomiendo el próximo paso más simple.",
+        btnCalendar:"Abrir link de agenda",
+        btnEmailPrefix:"Email",
+        note:"Cero presión. Si no somos fit, te lo digo.",
+        liText:"¿Preferís LinkedIn?",
+        liLink:"Escribime"
+      },
+      faq:{
+        kicker:"FAQ",
+        title:"Respuestas rápidas",
+        text:"Algunas preguntas comunes antes de hablar.",
+        q1:"¿Solo trabajás con Power Automate?",
+        a1:"No. Power Automate suele ser parte del panorama, pero vemos el entorno completo: Power Apps, SharePoint, estructura de datos, reporting y gobernanza. El objetivo es un sistema claro, no herramientas aisladas.",
+        q2:"¿Podemos empezar chico antes de un proyecto grande?",
+        a2:"Sí — es lo ideal. La mayoría empieza con un assessment o un workshop. Si avanzamos a implementación, es con blueprint aprobado y alcance claro.",
+        q3:"¿Trabajás remoto?",
+        a3:"Sí. La mayoría de los engagements funcionan perfecto remoto. Si un workshop presencial aporta valor, lo conversamos caso por caso.",
+        q4:"¿En qué industrias trabajás?",
+        a4:"En cualquier industria que use Microsoft 365 para operaciones internas. El enfoque es estructura, ownership y control de cambios — aplica en todos los sectores.",
+        q5:"¿Cómo se maneja el acceso al tenant?",
+        a5:"Para assessment y blueprint podemos empezar con entrevistas e inventarios. Si hace falta revisión técnica, el acceso se maneja por el proceso de IT (mínimos privilegios, alcance limitado y ownership claro).",
+        cta:"Agendar"
+      },
+      footerTagline:"Operaciones en Microsoft 365 bien estructuradas — antes de que se vuelvan frágiles"
     },
 
     pt: {
-      nav_tagline: "Sistemas personalizados para profissionais sobrecarregados",
-      nav_how: "Como funciona",
-      nav_deliverables: "O que você recebe",
-      nav_pricing: "Preço",
-      nav_faq: "FAQ",
-      nav_buy: "Comprar",
-
-      hero_badge_1: "Sem chamadas",
-      hero_badge_2: "PDF personalizado",
-      hero_badge_3: "Entrega 24h",
-      hero_title_1: "Magina",
-      hero_title_2: "FocusOS™",
-      hero_subtitle: "Um sistema personalizado de produtividade e foco, construído para sua carga real, seu papel e suas restrições — para parar de lutar com planners genéricos.",
-      hero_cta_primary: "Quero meu FocusOS",
-      hero_cta_secondary: "Como funciona",
-      hero_note: "Você paga → preenche um formulário curto → recebe seu PDF. Sem reuniões. Sem idas e vindas.",
-
-      what_title: "O que é (e o que não é)",
-      what_is_title: "Isto é um sistema operacional personalizado",
-      what_is_body: "Um sistema estruturado (plano semanal + fluxo diário + regras de decisão) adaptado ao seu papel, carga e energia. Pronto para usar.",
-      what_not_title: "Isto NÃO é coaching nem templates genéricos",
-      what_not_body: "Sem chamadas. Sem planners “para todos”. Sem suporte contínuo. Você recebe um entregável concreto para reduzir caos rápido.",
-
-      pill_1: "Criado por PMP / MBA",
-      pill_2: "Feito para a vida real",
-      pill_3: "Prático, sem “fluff”",
-
-      for_title: "Para quem é",
-      for_1_title: "Profissionais sobrecarregados",
-      for_1_body: "Seus dias estão cheios, o to-do cresce e sistemas genéricos não funcionam.",
-      for_2_title: "Managers e líderes",
-      for_2_body: "Reuniões, interrupções, troca de contexto — você precisa de um sistema realista.",
-      for_3_title: "Founders / builders",
-      for_3_body: "Muitas prioridades e pouca estrutura — você precisa de foco e regras de execução.",
-
-      how_title: "Como funciona",
-      how_1_title: "1) Comprar",
-      how_1_body: "Pague com segurança via Stripe.",
-      how_2_title: "2) Preencher o formulário",
-      how_2_body: "Um formulário curto captura seu papel, restrições, objetivos e preferências.",
-      how_3_title: "3) Geramos seu sistema",
-      how_3_body: "Montamos seu FocusOS e entregamos um PDF premium.",
-      how_4_title: "4) Entrega",
-      how_4_body: "Você recebe por email (entrega típica: em até 24 horas).",
-      how_note: "Sem reuniões. Se faltar informação chave, pedimos o mínimo por email.",
-
-      del_title: "O que você recebe",
-      del_1_title: "Um sistema PDF personalizado",
-      del_1_b1: "Estrutura semanal (para sua agenda real)",
-      del_1_b2: "Fluxo diário (quando tudo acontece ao mesmo tempo)",
-      del_1_b3: "Regras de decisão para reduzir sobrecarga",
-      del_1_b4: "Blocos de foco + adaptação para dias com reuniões",
-      del_1_b5: "Templates simples para usar já",
-      del_2_title: "Guia prática (sem “motivação vazia”)",
-      del_2_b1: "Plano de início para os próximos 7 dias",
-      del_2_b2: "O que parar de fazer (e por quê)",
-      del_2_b3: "Modelo de prioridades (para não decidir tudo todo dia)",
-      del_2_b4: "Protocolo de interrupções (vida real)",
-      del_2_b5: "Instruções claras de uso",
-      del_note: "Isto é um sistema de produtividade, não aconselhamento médico/psicológico.",
-
-      pricing_title: "Preço",
-      p_pro_title: "Pro",
-      p_pro_badge: "Mais escolhido",
-      p_pro_b1: "FocusOS PDF personalizado",
-      p_pro_b2: "Personalização mais profunda (restrições + energia)",
-      p_pro_b3: "Regras de prioridade + protocolo de interrupões",
-      p_pro_b4: "Plano inicial de 7 dias",
-      p_pro_b5: "Entrega 24h (típica)",
-      p_pro_cta: "Pagar com Stripe",
-      p_note_form: "Após o pagamento, você será redirecionado ao formulário.",
-
-      form_title: "Já pagou?",
-      form_body: "Use este link para preencher o formulário (envie somente após pagar).",
-      form_cta: "Abrir formulário",
-      support_note: "Suporte:",
-
-      faq_title: "FAQ",
-      faq_q1: "Quanto tempo leva?",
-      faq_a1: "Entrega típica em até 24 horas. Em períodos de alta demanda pode levar até 48 horas.",
-      faq_q2: "Preciso de uma chamada?",
-      faq_a2: "Não. O formulário captura tudo. Só enviamos email se faltar um dado chave.",
-      faq_q3: "É um planner genérico?",
-      faq_a3: "Não. Você recebe um sistema personalizado para seu contexto, com templates, regras e plano inicial.",
-      faq_q4: "E se eu quiser mudanças?",
-      faq_a4: "Inclui 1 correção se houve dado inserido incorretamente. Não é coaching nem revisões ilimitadas.",
-      faq_q5: "Reembolsos?",
-      faq_a5: "Como é um entregável digital personalizado, normalmente não há reembolso após iniciar a produção. Se foi engano, contate o suporte imediatamente.",
-      faq_cta: "Quero FocusOS",
-
-      footer_tagline: "Sistemas personalizados — clareza e execução."
+      motto: "Operações em Microsoft 365 bem estruturadas — antes de ficarem frágeis",
+      nav: { problem:"Problema", services:"Serviços", workshops:"Workshops", who:"Para quem", faq:"FAQ", book:"Agendar" },
+      chips: ["Microsoft 365", "Power Platform", "Governança prática", "Sistemas claros"],
+      hero: {
+        kicker: "Advisory + Implementação",
+        title: "Sua empresa roda em Microsoft.<br class='d-none d-md-block'> Mas está estruturada — ou frágil?",
+        text: "Se seus fluxos, apps, sites do SharePoint, processos em Excel e relatórios cresceram sem estrutura clara, você pode estar criando risco operacional oculto. Eu ajudo empresas a organizar e escalar o ambiente Microsoft para manter operações controladas e previsíveis.",
+        ctaMain: "Agendar chamada estratégica",
+        ctaSecondary: "Ver serviços",
+        note: "Engajamentos simples e claros. Comece pequeno. Escale quando fizer sentido."
+      },
+      problem: {
+        kicker:"O problema",
+        title:"As ferramentas Microsoft crescem “organicamentes” — e a complexidade aparece.",
+        text:"A maioria começa com quick wins: um fluxo aqui, uma lista do SharePoint ali, um Excel que vira “o sistema”. Com o tempo, pessoas diferentes constroem coisas diferentes. Regras ficam hardcoded. Não há ownership claro. Mudanças quebram outros processos. Funciona… até não funcionar mais.",
+        badges:["Dependências ocultas", "Sem ownership claro", "Regras hardcoded", "Automação frágil", "Excel como backend"],
+        looksTitle:"Como a fragilidade aparece",
+        looksList:[
+          "Um fluxo falha e ninguém sabe onde olhar.",
+          "Apenas uma pessoa entende como o processo funciona.",
+          "Regras ficam escondidas em apps/fluxos e mudar algo demora.",
+          "Dados vivem em lugares demais (SharePoint, Excel, e-mails).",
+          "Equipes criam novas soluções sem uma estrutura comum."
+        ],
+        looksNote:"O objetivo não é “mais automação”. O objetivo é estrutura: ownership claro, mudanças previsíveis e sistemas que escalam."
+      },
+      what: {
+        kicker:"O que eu faço",
+        title:"Eu ajudo a estruturar seu ambiente Microsoft para manter tudo sob controle.",
+        text:"Não é sobre automações soltas. É sobre fazer suas ferramentas internas Microsoft funcionarem como um sistema — com ownership, regras e controle de mudanças.",
+        items:[
+          ["Estruturar sistemas internos", "Transformar ferramentas espalhadas em um sistema claro e entendível."],
+          ["Tornar mudanças previsíveis", "Separar regras de negócio da execução para evitar que tudo quebre."],
+          ["Reduzir dependência de pessoas", "Para sua operação não depender de um “herói” que sabe tudo."],
+          ["Clarificar ownership e responsabilidades", "Quem é dono de quê, quem aprova mudanças e quem suporta incidentes."],
+          ["Organizar o caos de dados", "Decidir o que fica em SharePoint, Dataverse ou Excel — e por quê."],
+          ["Governança prática", "Controle suficiente para reduzir risco sem travar o negócio."]
+        ]
+      },
+      services: {
+        kicker:"Serviços",
+        title:"Comece pequeno. Crie confiança. Depois escale.",
+        text:"Você pode me contratar para um assessment, um blueprint, ou implementação quando necessário. A maioria começa com um assessment ou um workshop.",
+        s1:{
+          title:"Assessment do ambiente Microsoft", time:"1–2 semanas",
+          desc:"Revisão estruturada das operações baseadas em Microsoft para identificar riscos, lacunas e quick wins.",
+          list:["Visão do estado atual (apps, fluxos, sites, dados)","Riscos e dependências frágeis","Lacunas de ownership e gestão de mudanças","Recomendações claras + roadmap priorizado"],
+          price:"Faixa típica: USD 4k–8k", note:"Escopo final depende do tamanho do ambiente."
+        },
+        s2:{
+          title:"Blueprint de design do sistema", time:"2–3 semanas",
+          desc:"Antes de construir ou reconstruir, desenhamos a estrutura correta para uma implementação previsível.",
+          list:["Estados do processo + exceções","Estrutura de regras (mudanças fáceis)","Modelo de dados (SharePoint vs Dataverse vs Excel)","Papéis, ownership e governança","Diagrama + plano de implementação"],
+          price:"Faixa típica: USD 8k–15k", note:"Ideal quando vários times dependem do processo."
+        },
+        s3:{
+          title:"Implementação (opcional)", time:"4–6 semanas",
+          desc:"Quando fizer sentido, implemento a estrutura acordada no seu ambiente Microsoft e documento corretamente.",
+          list:["Construção baseada em blueprint aprovado","Apps/fluxos modulares com estrutura clara","Logging + tratamento de erros","Documentação + handover"],
+          price:"Faixa típica: USD 20k–40k", note:"Somente quando o escopo estiver claro e controlado."
+        },
+        s4:{
+          title:"Retainer de advisory", time:"Mensal",
+          desc:"Para equipes que querem orientação contínua sem contratar um arquiteto full-time.",
+          list:["2–4 sessões estratégicas por mês","Revisão de novos apps/fluxos antes de virar bagunça","Checagens de risco, governança e recomendações","Memos curtos para documentar decisões"],
+          price:"Faixa típica: USD 2k–6k / mês", note:"Ótimo após assessment ou blueprint."
+        }
+      },
+      workshops:{
+        kicker:"Workshops",
+        title:"Clareza para liderança (não é treinamento técnico).",
+        text:"Sessão curta e prática para ajudar decisores a entender de onde vem o risco operacional e o que “estrutura” significa em Microsoft 365.",
+        w1:{
+          title:"Workshop para liderança (90 minutos)", tag:"Ao vivo",
+          desc:"Sessão focada para alinhar líderes sobre risco, ownership e como escalar sem caos.",
+          list:["Por que quick wins ficam frágeis","Como ownership e regras claras funcionam","Framework simples para avaliar seu setup","Opções práticas de próximos passos"],
+          price:"Faixa típica: USD 2k–4k", note:"Sessão corporativa privada (uma empresa)."
+        },
+        w2:{
+          title:"Add-ons opcionais",
+          desc:"Se você quiser mais do que a sessão ao vivo:",
+          list:["PDF resumo adaptado ao seu ambiente","Memo executivo de próximos passos","Sessão de Q&A (30–45 minutos)"],
+          note:"Workshops são um ótimo primeiro passo antes do assessment."
+        }
+      },
+      who:{
+        kicker:"Para quem",
+        title:"Empresas que dependem de Microsoft 365 para operar.",
+        text:"Para organizações onde já existem sistemas internos — mas falta estrutura, ownership e controle de mudanças.",
+        cards:[
+          ["Times em crescimento", "Você adiciona pessoas e processos e o setup informal começa a quebrar."],
+          ["Muitos apps / fluxos", "Há soluções demais sem estrutura consistente — e mudanças ficam arriscadas."],
+          ["Liderança quer controle", "Você quer visibilidade, responsabilidade e previsibilidade — sem burocracia."]
+        ]
+      },
+      about:{
+        kicker:"Sobre",
+        title:"Estrutura prática, baseada em experiência corporativa real.",
+        t1:"Tenho 17+ anos de experiência corporativa com stakeholders, processos e restrições reais. Combino liderança de projetos, visão de negócio e conhecimento prático do ecossistema Microsoft para desenhar sistemas internos claros, mantíveis e escaláveis.",
+        t2:"Se o seu ambiente Microsoft está crescendo e ficando bagunçado, podemos organizar com um método claro — começando pequeno."
+      },
+      cta:{
+        title:"Agendar uma chamada estratégica",
+        text:"Conte o que está acontecendo. Eu recomendo o próximo passo mais simples.",
+        btnCalendar:"Abrir link de agenda",
+        btnEmailPrefix:"Email",
+        note:"Sem pressão. Se não houver fit, eu aviso.",
+        liText:"Prefere LinkedIn?",
+        liLink:"Me mande mensagem"
+      },
+      faq:{
+        kicker:"FAQ",
+        title:"Respostas rápidas",
+        text:"Algumas perguntas comuns antes de conversar.",
+        q1:"Você trabalha só com Power Automate?",
+        a1:"Não. Power Automate é parte do cenário, mas olhamos o ambiente completo: Power Apps, SharePoint, estrutura de dados, reporting e governança. O objetivo é um sistema limpo, não ferramentas isoladas.",
+        q2:"Podemos começar pequeno antes de um projeto grande?",
+        a2:"Sim — é o ideal. A maioria começa com um assessment ou workshop. Se avançarmos para implementação, será com blueprint aprovado e escopo claro.",
+        q3:"Você trabalha remoto?",
+        a3:"Sim. A maioria funciona muito bem remoto. Se um workshop presencial fizer sentido, conversamos caso a caso.",
+        q4:"Em quais indústrias você atua?",
+        a4:"Qualquer indústria que use Microsoft 365 para operações internas. O enfoque é estrutura, ownership e controle de mudanças — isso vale para todos os setores.",
+        q5:"Como lidamos com acesso ao tenant?",
+        a5:"Para assessment e blueprint podemos começar com entrevistas e inventários. Se precisar revisão técnica, o acesso segue o processo de TI (menor privilégio, escopo limitado e ownership claro).",
+        cta:"Agendar"
+      },
+      footerTagline:"Operações em Microsoft 365 bem estruturadas — antes de ficarem frágeis"
     }
   };
 
-  function setLanguage(lang) {
-    const dict = I18N[lang] || I18N.en;
-    document.documentElement.lang = lang;
-
-    document.querySelectorAll("[data-i18n]").forEach(el => {
-      const key = el.getAttribute("data-i18n");
-      if (dict[key]) el.textContent = dict[key];
-    });
-
-    document.querySelectorAll(".lang-btn").forEach(btn => {
-      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
-    });
-
-    try { localStorage.setItem("magina_focusos_lang", lang); } catch(e) {}
-  }
-
-  // Init year
-  document.getElementById("year").textContent = new Date().getFullYear();
-
-  // Wire links
-  function safeSetHref(id, href) {
+  function setText(id, html){
     const el = document.getElementById(id);
-    if (el && href && typeof href === "string") el.href = href;
+    if(!el) return;
+    el.innerHTML = html;
   }
 
-  safeSetHref("btnPro", CONFIG.stripePro);
-  safeSetHref("btnForm", CONFIG.formUrl);
-
-  const support = document.getElementById("supportEmail");
-  if (support) {
-    support.textContent = CONFIG.supportEmail || "support@example.com";
-    support.href = "mailto:" + (CONFIG.supportEmail || "support@example.com");
+  function setList(id, items){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML = items.map(x => `<li>${x}</li>`).join("");
   }
 
-  // Language init
-  const saved = (() => { try { return localStorage.getItem("magina_focusos_lang"); } catch(e) { return null; } })();
-  setLanguage(saved || "en");
+  function setBadges(id, items){
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.innerHTML = items.map(x => `<span class="badge-soft">${x}</span>`).join("");
+  }
 
-  document.querySelectorAll(".lang-btn").forEach(btn => {
-    btn.addEventListener("click", () => setLanguage(btn.getAttribute("data-lang")));
-  });
+  function setLang(lang){
+    const c = CONTENT[lang] || CONTENT.en;
+
+    // language button active state
+    ["EN","ES","PT"].forEach(code => {
+      const b = document.getElementById("btn"+code);
+      if(!b) return;
+      b.classList.toggle("active", (code.toLowerCase() === lang));
+    });
+
+    // top
+    setText("motto", c.motto);
+    setText("navProblem", c.nav.problem);
+    setText("navServices", c.nav.services);
+    setText("navWorkshops", c.nav.workshops);
+    setText("navWho", c.nav.who);
+    setText("navFaq", c.nav.faq);
+    setText("navBook", c.nav.book);
+    setText("navBookMobile", c.nav.book);
+
+    setText("chip1", c.chips[0]);
+    setText("chip2", c.chips[1]);
+    setText("chip3", c.chips[2]);
+    setText("chip4", c.chips[3]);
+
+    setText("heroKicker", c.hero.kicker);
+    setText("heroTitle", c.hero.title);
+    setText("heroText", c.hero.text);
+    setText("ctaMain", c.hero.ctaMain);
+    setText("ctaSecondary", c.hero.ctaSecondary);
+    setText("heroNote", c.hero.note);
+
+    // problem
+    setText("problemKicker", c.problem.kicker);
+    setText("problemTitle", c.problem.title);
+    setText("problemText", c.problem.text);
+    setBadges("problemBadges", c.problem.badges);
+    setText("problemLooksTitle", c.problem.looksTitle);
+    setList("problemLooksList", c.problem.looksList);
+    setText("problemLooksNote", c.problem.looksNote);
+
+    // what
+    setText("whatKicker", c.what.kicker);
+    setText("whatTitle", c.what.title);
+    setText("whatText", c.what.text);
+    const w = c.what.items;
+    setText("what1Title", w[0][0]); setText("what1Text", w[0][1]);
+    setText("what2Title", w[1][0]); setText("what2Text", w[1][1]);
+    setText("what3Title", w[2][0]); setText("what3Text", w[2][1]);
+    setText("what4Title", w[3][0]); setText("what4Text", w[3][1]);
+    setText("what5Title", w[4][0]); setText("what5Text", w[4][1]);
+    setText("what6Title", w[5][0]); setText("what6Text", w[5][1]);
+
+    // services
+    setText("servicesKicker", c.services.kicker);
+    setText("servicesTitle", c.services.title);
+    setText("servicesText", c.services.text);
+
+    setText("svc1Title", c.services.s1.title);
+    setText("svc1Time", c.services.s1.time);
+    setText("svc1Desc", c.services.s1.desc);
+    setList("svc1List", c.services.s1.list);
+    setText("svc1Price", c.services.s1.price);
+    setText("svc1Note", c.services.s1.note);
+
+    setText("svc2Title", c.services.s2.title);
+    setText("svc2Time", c.services.s2.time);
+    setText("svc2Desc", c.services.s2.desc);
+    setList("svc2List", c.services.s2.list);
+    setText("svc2Price", c.services.s2.price);
+    setText("svc2Note", c.services.s2.note);
+
+    setText("svc3Title", c.services.s3.title);
+    setText("svc3Time", c.services.s3.time);
+    setText("svc3Desc", c.services.s3.desc);
+    setList("svc3List", c.services.s3.list);
+    setText("svc3Price", c.services.s3.price);
+    setText("svc3Note", c.services.s3.note);
+
+    setText("svc4Title", c.services.s4.title);
+    setText("svc4Time", c.services.s4.time);
+    setText("svc4Desc", c.services.s4.desc);
+    setList("svc4List", c.services.s4.list);
+    setText("svc4Price", c.services.s4.price);
+    setText("svc4Note", c.services.s4.note);
+
+    // workshops
+    setText("workKicker", c.workshops.kicker);
+    setText("workTitle", c.workshops.title);
+    setText("workText", c.workshops.text);
+
+    setText("work1Title", c.workshops.w1.title);
+    setText("work1Tag", c.workshops.w1.tag);
+    setText("work1Desc", c.workshops.w1.desc);
+    setList("work1List", c.workshops.w1.list);
+    setText("work1Price", c.workshops.w1.price);
+    setText("work1Note", c.workshops.w1.note);
+
+    setText("work2Title", c.workshops.w2.title);
+    setText("work2Desc", c.workshops.w2.desc);
+    setList("work2List", c.workshops.w2.list);
+    setText("work2Note", c.workshops.w2.note);
+
+    // who
+    setText("whoKicker", c.who.kicker);
+    setText("whoTitle", c.who.title);
+    setText("whoText", c.who.text);
+    setText("who1Title", c.who.cards[0][0]); setText("who1Text", c.who.cards[0][1]);
+    setText("who2Title", c.who.cards[1][0]); setText("who2Text", c.who.cards[1][1]);
+    setText("who3Title", c.who.cards[2][0]); setText("who3Text", c.who.cards[2][1]);
+
+    // about
+    setText("aboutKicker", c.about.kicker);
+    setText("aboutTitle", c.about.title);
+    setText("aboutText1", c.about.t1);
+    setText("aboutText2", c.about.t2);
+
+    // CTA
+    setText("ctaTitle", c.cta.title);
+    setText("ctaText", c.cta.text);
+    setText("btnCalendar", c.cta.btnCalendar);
+
+    // email label includes actual email
+    const email = CONFIG.email || "YOUR_EMAIL";
+    setText("btnEmail", `${c.cta.btnEmailPrefix}: ${email}`);
+
+    setText("ctaNote", c.cta.note);
+    setText("ctaLinkedInText", c.cta.liText);
+    setText("btnLinkedIn", c.cta.liLink);
+
+    // FAQ
+    setText("faqKicker", c.faq.kicker);
+    setText("faqTitle", c.faq.title);
+    setText("faqText", c.faq.text);
+
+    setText("faqQ1", c.faq.q1); setText("faqA1", c.faq.a1);
+    setText("faqQ2", c.faq.q2); setText("faqA2", c.faq.a2);
+    setText("faqQ3", c.faq.q3); setText("faqA3", c.faq.a3);
+    setText("faqQ4", c.faq.q4); setText("faqA4", c.faq.a4);
+    setText("faqQ5", c.faq.q5); setText("faqA5", c.faq.a5);
+    setText("faqCta", c.faq.cta);
+
+    // footer
+    setText("footerTagline", c.footerTagline);
+  }
+
+  // wire config links
+  function wireLinks(){
+    const btnCalendar = document.getElementById("btnCalendar");
+    const btnEmail = document.getElementById("btnEmail");
+    const btnLinkedIn = document.getElementById("btnLinkedIn");
+    const wrap = document.getElementById("ctaLinkedInWrap");
+
+    if (CONFIG.calendarUrl && btnCalendar) btnCalendar.href = CONFIG.calendarUrl;
+    if (CONFIG.email && btnEmail) btnEmail.href = "mailto:" + CONFIG.email;
+
+    if (CONFIG.linkedinUrl && btnLinkedIn){
+      btnLinkedIn.href = CONFIG.linkedinUrl;
+    } else if (wrap){
+      wrap.style.display = "none";
+    }
+  }
+
+  // language buttons
+  document.getElementById("btnEN").addEventListener("click", () => setLang("en"));
+  document.getElementById("btnES").addEventListener("click", () => setLang("es"));
+  document.getElementById("btnPT").addEventListener("click", () => setLang("pt"));
+
+  // init
+  document.getElementById("year").textContent = new Date().getFullYear();
+  wireLinks();
+  setLang((CONFIG.defaultLang || "en").toLowerCase());
 </script>
 
 </body>
