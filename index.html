@@ -19,7 +19,6 @@
       --brand: #3b82f6;
       --brand2: #2563eb;
 
-      /* Button contrast helpers */
       --btnText: #ffffff;
       --btnHover: #1d4ed8;
       --btnActive: #1e40af;
@@ -70,6 +69,12 @@
       padding:22px;
       height:100%;
     }
+    .cardx:hover{
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.05);
+      transform: translateY(-1px);
+      transition: .15s ease;
+    }
 
     .muted{ color: var(--muted); }
     .badge-soft{
@@ -78,7 +83,6 @@
       color:#cfe1ff;
     }
 
-    /* Brand buttons (high contrast) */
     .btn-brand{
       background: var(--brand2);
       border:1px solid rgba(255,255,255,.14);
@@ -116,19 +120,17 @@
     .anchor-offset{ scroll-margin-top: 92px; }
 
     .avatar{
-  width:180px;
-  height:180px;
-  border-radius:50%;
-  object-fit:cover;
-  object-position:center 5%; /* ← ESTO ES LO QUE FALTA */
-  display:block;
-  margin:0 auto;
-  border:3px solid rgba(255,255,255,.14);
-  box-shadow:0 20px 60px rgba(0,0,0,.35);
-  background: rgba(255,255,255,.04);
-}
-
-    .avatar-note{ font-size:.9rem; color: var(--muted); }
+      width:180px;
+      height:180px;
+      border-radius:50%;
+      object-fit:cover;
+      object-position:center 8%;
+      display:block;
+      margin:0 auto;
+      border:3px solid rgba(255,255,255,.14);
+      box-shadow:0 20px 60px rgba(0,0,0,.35);
+      background: rgba(255,255,255,.04);
+    }
 
     .footer{
       padding:36px 0;
@@ -169,6 +171,18 @@
       background: rgba(255,255,255,.02);
     }
 
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:.5rem;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:.45rem .7rem;
+      border-radius:999px;
+      font-size:.88rem;
+      color: var(--text);
+    }
+
     @media (max-width: 576px){
       .hero-card{ padding:22px; }
       .avatar{ width:160px;height:160px; }
@@ -177,14 +191,13 @@
 </head>
 
 <body>
-  <!-- CONFIG (edit if needed) -->
+  <!-- CONFIG -->
   <script>
     const CONFIG = {
       calendarUrl: "https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled",
       linkedinUrl: "https://www.linkedin.com/in/ariel-mart%C3%ADnez-26521511/",
-      // Upload your headshot into the same folder as index.html, name it profile.jpg
-      photoFile: "profile.png",
-      defaultLang: "en" // en | es | pt
+      photoFile: "profile.png",   // keep this in the repo root next to index.html
+      defaultLang: "en"           // en | es | pt
     };
   </script>
 
@@ -210,8 +223,7 @@
         </div>
 
         <a id="navBookBtn" class="btn btn-brand btn-sm" target="_blank" rel="noopener"
-           href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-           data-i18n="nav.book">Book a Call</a>
+           href="#" data-i18n="nav.book">Book a Call</a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
                 aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -221,14 +233,13 @@
 
       <div class="collapse navbar-collapse order-lg-2" id="navMenu">
         <ul class="navbar-nav ms-lg-4 me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#usecases" data-i18n="nav.usecases">Use cases</a></li>
           <li class="nav-item"><a class="nav-link" href="#services" data-i18n="nav.services">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#framework" data-i18n="nav.framework">Framework</a></li>
           <li class="nav-item"><a class="nav-link" href="#workshops" data-i18n="nav.workshops">Workshops</a></li>
           <li class="nav-item"><a class="nav-link" href="#about" data-i18n="nav.about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a></li>
         </ul>
 
-        <!-- mobile language -->
         <div class="d-md-none mt-3">
           <label class="small muted mb-1" for="langSelectMobile" data-i18n="nav.language">Language</label>
           <select class="form-select form-select-sm" id="langSelectMobile">
@@ -248,31 +259,34 @@
         <div class="row g-4 align-items-center">
           <div class="col-lg-7">
             <span class="badge badge-soft rounded-pill mb-3 px-3 py-2" data-i18n="hero.badge">
-              Excel-driven Operations · Microsoft Ecosystem · Governance
+              Finance & Ops · Excel Systems · Microsoft 365 · Controls
             </span>
 
             <h1 class="display-6 fw-bold mb-3" data-i18n="hero.title">
-              Stabilize and scale Excel-driven operational systems.
+              Fix fragile Excel operations — without breaking the business.
             </h1>
 
             <p class="lead muted mb-4" data-i18n="hero.subtitle">
-              I help Finance and Operations teams turn fragile spreadsheets into controlled, maintainable systems — and integrate Microsoft tools (Power Automate, SharePoint, Power BI) only when scale requires it.
+              I help teams reduce errors, tighten controls, and speed up reporting by turning spreadsheet “workarounds” into governed operational systems. Excel stays when it’s the right tool — and we scale into Power Platform / M365 only when scale demands it.
             </p>
 
             <div class="d-flex flex-wrap gap-2">
               <a id="heroBookBtn" class="btn btn-brand btn-lg" target="_blank" rel="noopener"
-                 href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-                 data-i18n="hero.ctaPrimary">Book a Call</a>
-
-              <a class="btn btn-ghost btn-lg" href="#services" data-i18n="hero.ctaSecondary">See Services</a>
-
+                 href="#" data-i18n="hero.ctaPrimary">Book a Call</a>
+              <a class="btn btn-ghost btn-lg" href="#usecases" data-i18n="hero.ctaSecondary">See common use cases</a>
               <a class="btn btn-ghost btn-lg" target="_blank" rel="noopener"
-                 href="https://www.linkedin.com/in/ariel-mart%C3%ADnez-26521511/"
-                 data-i18n="hero.ctaLinkedin">LinkedIn</a>
+                 href="#" id="heroLinkedin" data-i18n="hero.ctaLinkedin">LinkedIn</a>
             </div>
 
-            <div class="mt-4 small muted" data-i18n="hero.note">
-              Executive-friendly. Remote-first. Available in English, Spanish, and Portuguese.
+            <div class="mt-4 d-flex flex-wrap gap-2">
+              <span class="pill" data-i18n="hero.pill1">Risk & controls</span>
+              <span class="pill" data-i18n="hero.pill2">Close & reporting speed</span>
+              <span class="pill" data-i18n="hero.pill3">Automation with governance</span>
+              <span class="pill" data-i18n="hero.pill4">Executive-ready outputs</span>
+            </div>
+
+            <div class="mt-3 small muted" data-i18n="hero.note">
+              Remote-first. Executive-friendly. Available in English, Spanish, and Portuguese.
             </div>
           </div>
 
@@ -280,32 +294,41 @@
             <div class="row g-3">
               <div class="col-12">
                 <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="hero.kpi1Title">What you get</div>
+                  <div class="fw-semibold mb-1" data-i18n="hero.kpi1Title">Typical outcomes</div>
                   <div class="muted" data-i18n="hero.kpi1Text">
-                    Reliable numbers, clear ownership, and a system your team can maintain (not a “spreadsheet hero” dependency).
+                    Fewer errors, faster cycles, clear ownership, and controls that survive team changes.
                   </div>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="hero.kpi2Title">Good fit for</div>
+                  <div class="fw-semibold mb-1" data-i18n="hero.kpi2Title">Best fit</div>
                   <div class="muted" data-i18n="hero.kpi2Text">
-                    CFO / Finance, FP&A, Ops, Shared Services.
+                    CFO / FP&A, Finance Ops, RevOps, Shared Services, Business Systems.
                   </div>
                 </div>
               </div>
 
               <div class="col-md-6">
                 <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="hero.kpi3Title">Typical outcomes</div>
+                  <div class="fw-semibold mb-1" data-i18n="hero.kpi3Title">First step</div>
                   <div class="muted" data-i18n="hero.kpi3Text">
-                    Less rework, fewer errors, faster close / reporting cycles, and stronger control.
+                    A 20-minute call → pick the right sprint (diagnostic, build, or advisory).
                   </div>
                 </div>
               </div>
-            </div>
 
+              <div class="col-12">
+                <div class="kpi">
+                  <div class="fw-semibold mb-1" data-i18n="hero.kpi4Title">AI (when useful)</div>
+                  <div class="muted" data-i18n="hero.kpi4Text">
+                    AI helps accelerate documentation, testing, anomaly checks, and automation — governance stays the core.
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
@@ -314,239 +337,284 @@
 
   <hr class="hrline" />
 
-  <!-- SERVICES -->
-  <section id="services" class="section anchor-offset">
+  <!-- USE CASES (tangible pains) -->
+  <section id="usecases" class="section anchor-offset">
     <div class="container">
       <div class="row align-items-end mb-4 g-3">
-        <div class="col-lg-7">
-          <h2 class="fw-bold mb-2" data-i18n="services.title">Services</h2>
-          <p class="muted mb-0" data-i18n="services.subtitle">
-            Projects sized by impact: tactical improvements, strategic redesigns, and transformational systems.
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-2" data-i18n="use.title">Common problems I fix</h2>
+          <p class="muted mb-0" data-i18n="use.subtitle">
+            Pick the pain — I’ll map it to the fastest engagement model.
           </p>
         </div>
-        <div class="col-lg-5 text-lg-end">
-          <a class="btn btn-brand" target="_blank" rel="noopener"
-             href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-             data-i18n="services.cta">Discuss your case</a>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="useCta" data-i18n="use.cta">
+            Discuss your case
+          </a>
         </div>
       </div>
 
       <div class="row g-3">
-        <div class="col-md-6 col-xl-3">
+        <div class="col-md-6 col-xl-4">
           <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="services.s1Title">Structural Risk Diagnostic</div>
-            <div class="muted" data-i18n="services.s1Text">
-              Executive-level assessment of Excel-driven systems: structure, dependency risk, and reliability.
+            <div class="fw-semibold mb-2" data-i18n="use.u1Title">Close & reporting is slow (and no one trusts the numbers)</div>
+            <div class="muted" data-i18n="use.u1Text">
+              Consolidations, manual checks, broken links, and last-minute fixes every month.
             </div>
             <ul class="mt-3 mb-0 small">
-              <li data-i18n="services.s1b1">Data model & table structure review</li>
-              <li data-i18n="services.s1b2">Fragility & key-person dependency map</li>
-              <li data-i18n="services.s1b3">Clear next-step options (keep Excel vs scale)</li>
+              <li data-i18n="use.u1b1">Re-architecture the model (inputs → model → outputs)</li>
+              <li data-i18n="use.u1b2">Add controls (reconciliations, tie-outs, audit trail)</li>
+              <li data-i18n="use.u1b3">Standardize refresh & handoffs (M365 / Power Automate as needed)</li>
             </ul>
           </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
+        <div class="col-md-6 col-xl-4">
           <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="services.s2Title">Architecture Blueprint</div>
-            <div class="muted" data-i18n="services.s2Text">
-              A redesign plan: structure, logic layers, ownership, governance, and automation roadmap.
+            <div class="fw-semibold mb-2" data-i18n="use.u2Title">Critical spreadsheets depend on one person</div>
+            <div class="muted" data-i18n="use.u2Text">
+              Key-person risk: when they’re away, the business slows down.
             </div>
             <ul class="mt-3 mb-0 small">
-              <li data-i18n="services.s2b1">Inputs / model / outputs separation</li>
-              <li data-i18n="services.s2b2">Governance (change control + approvals)</li>
-              <li data-i18n="services.s2b3">Scalability roadmap (Excel → Microsoft ecosystem)</li>
+              <li data-i18n="use.u2b1">Dependency map + quick stability fixes</li>
+              <li data-i18n="use.u2b2">Documentation that’s actually operational</li>
+              <li data-i18n="use.u2b3">Governed change process (so “small changes” don’t break everything)</li>
             </ul>
           </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
+        <div class="col-md-6 col-xl-4">
           <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="services.s3Title">Implementation & Integration</div>
-            <div class="muted" data-i18n="services.s3Text">
-              Build the redesigned system and integrate Microsoft tools only where they add strategic value.
+            <div class="fw-semibold mb-2" data-i18n="use.u3Title">Version chaos and hidden errors</div>
+            <div class="muted" data-i18n="use.u3Text">
+              Multiple files, inconsistent logic, and error hunting that wastes senior time.
             </div>
             <ul class="mt-3 mb-0 small">
-              <li data-i18n="services.s3b1">Excel stabilization & performance optimization</li>
-              <li data-i18n="services.s3b2">Power Automate / SharePoint / Power BI (as needed)</li>
-              <li data-i18n="services.s3b3">Documentation your team can run</li>
+              <li data-i18n="use.u3b1">Single source of truth design</li>
+              <li data-i18n="use.u3b2">Validation checks + exception reporting</li>
+              <li data-i18n="use.u3b3">Access + approvals + release notes (governance)</li>
             </ul>
           </div>
         </div>
 
-        <div class="col-md-6 col-xl-3">
+        <div class="col-md-6 col-xl-4">
           <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="services.s4Title">Governed Evolution Retainer</div>
-            <div class="muted" data-i18n="services.s4Text">
-              Ongoing stability: controlled changes, optimization, and continuous improvement without breaking the system.
+            <div class="fw-semibold mb-2" data-i18n="use.u4Title">Manual processes around Excel (emails, copy/paste, approvals)</div>
+            <div class="muted" data-i18n="use.u4Text">
+              People act as “integrations” between systems. That’s expensive and risky.
             </div>
             <ul class="mt-3 mb-0 small">
-              <li data-i18n="services.s4b1">Monthly change backlog</li>
-              <li data-i18n="services.s4b2">Governed releases & documentation</li>
-              <li data-i18n="services.s4b3">Leadership reporting & reliability KPIs</li>
+              <li data-i18n="use.u4b1">Automate intake & approvals (Forms/SharePoint/Power Automate)</li>
+              <li data-i18n="use.u4b2">Reduce rework with structured data capture</li>
+              <li data-i18n="use.u4b3">Keep Excel as the calculation engine when it makes sense</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="cardx">
+            <div class="fw-semibold mb-2" data-i18n="use.u5Title">Dashboards exist, but decisions still happen in spreadsheets</div>
+            <div class="muted" data-i18n="use.u5Text">
+              Data model is messy, metrics are inconsistent, and stakeholders don’t adopt.
+            </div>
+            <ul class="mt-3 mb-0 small">
+              <li data-i18n="use.u5b1">Metric definition + governance</li>
+              <li data-i18n="use.u5b2">Power BI modeling (DAX, performance) when needed</li>
+              <li data-i18n="use.u5b3">Executive-ready reporting cadence</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4">
+          <div class="cardx">
+            <div class="fw-semibold mb-2" data-i18n="use.u6Title">You want AI — but you don’t want new chaos</div>
+            <div class="muted" data-i18n="use.u6Text">
+              AI is powerful, but without structure and governance it amplifies risk.
+            </div>
+            <ul class="mt-3 mb-0 small">
+              <li data-i18n="use.u6b1">AI-ready architecture (clean inputs, clear logic layers)</li>
+              <li data-i18n="use.u6b2">Controls for prompts, data access, and output validation</li>
+              <li data-i18n="use.u6b3">Use AI as an accelerator (not a replacement for controls)</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="mt-4 muted small" data-i18n="services.note">
-        Note: Many projects remain in Excel by design — the goal is reliability. We scale into Microsoft tools only when it improves control and reduces risk.
+      <div class="mt-4 muted small" data-i18n="use.note">
+        Note: Not every problem requires migrating away from Excel. The default is: stabilize first, scale only if the math says it’s worth it.
       </div>
     </div>
   </section>
 
   <hr class="hrline" />
 
-  <!-- FRAMEWORK -->
-  <section id="framework" class="section anchor-offset">
+  <!-- SERVICES (packaged + premium) -->
+  <section id="services" class="section anchor-offset">
     <div class="container">
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-6">
-          <h2 class="fw-bold mb-2" data-i18n="framework.title">Magina Operational Architecture Framework</h2>
-          <p class="muted mb-3" data-i18n="framework.subtitle">
-            A simple method to stabilize Excel-driven environments and scale them safely.
+      <div class="row align-items-end mb-4 g-3">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-2" data-i18n="svc.title">Services (tangible + premium)</h2>
+          <p class="muted mb-0" data-i18n="svc.subtitle">
+            Fast entry points for urgent pain — plus a premium advisory layer when leadership wants a bigger redesign.
           </p>
-
-          <div class="d-grid gap-2">
-            <div class="cardx">
-              <div class="fw-semibold" data-i18n="framework.p1Title">1) Structural Diagnosis</div>
-              <div class="muted" data-i18n="framework.p1Text">
-                Identify model issues, table structure gaps, dependency risk, and reliability failures.
-              </div>
-            </div>
-            <div class="cardx">
-              <div class="fw-semibold" data-i18n="framework.p2Title">2) Model Re-Architecture</div>
-              <div class="muted" data-i18n="framework.p2Text">
-                Redesign the data model and logic layers for performance, clarity, and maintainability.
-              </div>
-            </div>
-            <div class="cardx">
-              <div class="fw-semibold" data-i18n="framework.p3Title">3) Controlled Automation</div>
-              <div class="muted" data-i18n="framework.p3Text">
-                Automate only after architecture is sound — avoid “automation on top of chaos”.
-              </div>
-            </div>
-            <div class="cardx">
-              <div class="fw-semibold" data-i18n="framework.p4Title">4) Scalable Integration</div>
-              <div class="muted" data-i18n="framework.p4Text">
-                Integrate SharePoint, Power Automate, Power BI when scale and governance require it.
-              </div>
-            </div>
-          </div>
         </div>
+        <div class="col-lg-4 text-lg-end">
+          <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="svcCta" data-i18n="svc.cta">
+            Book a scoping call
+          </a>
+        </div>
+      </div>
 
-        <div class="col-lg-6">
+      <div class="row g-3">
+        <!-- B: Fast -->
+        <div class="col-md-6 col-xl-3">
           <div class="cardx">
-            <h5 class="fw-semibold mb-3" data-i18n="framework.compareTitle">Spreadsheet vs. System</h5>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="framework.leftTitle">Common situation</div>
-                  <ul class="mb-0 small">
-                    <li data-i18n="framework.l1">Hundreds of formulas, unclear logic</li>
-                    <li data-i18n="framework.l2">Version chaos and hidden errors</li>
-                    <li data-i18n="framework.l3">Depends on one person</li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="framework.rightTitle">Magina outcome</div>
-                  <ul class="mb-0 small">
-                    <li data-i18n="framework.r1">Clear model + logic layers</li>
-                    <li data-i18n="framework.r2">Ownership + change control</li>
-                    <li data-i18n="framework.r3">Reliable operations that scale</li>
-                  </ul>
-                </div>
-              </div>
+            <div class="fw-semibold mb-2" data-i18n="svc.s1Title">Diagnostic Sprint (Fast)</div>
+            <div class="muted" data-i18n="svc.s1Text">
+              Rapid assessment of one critical spreadsheet/process: risk, controls, bottlenecks, and the fastest fix plan.
             </div>
-
-            <div class="mt-3 muted small" data-i18n="framework.note">
-              The goal is not “more tools”. The goal is stable operations and trustworthy numbers.
-            </div>
-          </div>
-
-          <div class="mt-3 d-flex flex-wrap gap-2">
-            <a class="btn btn-brand" target="_blank" rel="noopener"
-               href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-               data-i18n="framework.cta">See if this fits your team</a>
-            <a class="btn btn-ghost" href="#workshops" data-i18n="framework.cta2">Workshops</a>
+            <ul class="mt-3 mb-0 small">
+              <li data-i18n="svc.s1b1">Risk map + “where errors come from”</li>
+              <li data-i18n="svc.s1b2">Quick-win recommendations</li>
+              <li data-i18n="svc.s1b3">Decision: stabilize vs. redesign vs. automate</li>
+            </ul>
           </div>
         </div>
+
+        <!-- C: Build -->
+        <div class="col-md-6 col-xl-3">
+          <div class="cardx">
+            <div class="fw-semibold mb-2" data-i18n="svc.s2Title">Build Sprint (Implementation)</div>
+            <div class="muted" data-i18n="svc.s2Text">
+              Build the improved system: restructure, harden controls, and automate surrounding workflows where it reduces risk.
+            </div>
+            <ul class="mt-3 mb-0 small">
+              <li data-i18n="svc.s2b1">Model architecture (inputs/model/outputs)</li>
+              <li data-i18n="svc.s2b2">Controls + validations + exception handling</li>
+              <li data-i18n="svc.s2b3">Optional Power Automate / SharePoint / BI</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- A: Premium -->
+        <div class="col-md-6 col-xl-3">
+          <div class="cardx">
+            <div class="fw-semibold mb-2" data-i18n="svc.s3Title">Operational Systems Architecture (Premium)</div>
+            <div class="muted" data-i18n="svc.s3Text">
+              Executive-level redesign across multiple processes: ownership, governance, roadmap, and scalable architecture.
+            </div>
+            <ul class="mt-3 mb-0 small">
+              <li data-i18n="svc.s3b1">Architecture blueprint + operating model</li>
+              <li data-i18n="svc.s3b2">Governance: change control, approvals, audit trail</li>
+              <li data-i18n="svc.s3b3">Roadmap: Excel-first → Microsoft ecosystem (when required)</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Retainer -->
+        <div class="col-md-6 col-xl-3">
+          <div class="cardx">
+            <div class="fw-semibold mb-2" data-i18n="svc.s4Title">Governed Evolution Retainer</div>
+            <div class="muted" data-i18n="svc.s4Text">
+              Keep systems stable while the business changes: controlled releases, continuous improvement, and KPIs.
+            </div>
+            <ul class="mt-3 mb-0 small">
+              <li data-i18n="svc.s4b1">Monthly backlog + priority triage</li>
+              <li data-i18n="svc.s4b2">Governed releases + documentation</li>
+              <li data-i18n="svc.s4b3">Leadership updates (reliability & efficiency)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 cardx">
+        <div class="row g-3 align-items-center">
+          <div class="col-lg-8">
+            <div class="fw-semibold mb-1" data-i18n="svc.delTitle">Deliverables you can show leadership</div>
+            <div class="muted" data-i18n="svc.delText">
+              Risk map, architecture blueprint, controls checklist, documentation, and a prioritized roadmap — not just “a better spreadsheet”.
+            </div>
+          </div>
+          <div class="col-lg-4 text-lg-end">
+            <a class="btn btn-ghost" href="#workshops" data-i18n="svc.delCta">Prefer a workshop first?</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-3 muted small" data-i18n="svc.note">
+        I can work inside your tenant when needed (M365 / Power Platform). For Excel-only engagements, the goal is still governance and reliability.
       </div>
     </div>
   </section>
 
   <hr class="hrline" />
 
-  <!-- WORKSHOPS -->
+  <!-- WORKSHOPS (generic + topic-specific) -->
   <section id="workshops" class="section anchor-offset">
     <div class="container">
       <div class="row g-4 align-items-center">
         <div class="col-lg-7">
-          <h2 class="fw-bold mb-2" data-i18n="work.title">Workshops</h2>
-          <p class="muted mb-3" data-i18n="work.subtitle">
-            Executive-friendly sessions to expose spreadsheet risk, align ownership, and define an architecture roadmap.
+          <h2 class="fw-bold mb-2" data-i18n="wk.title">Workshops</h2>
+          <p class="muted mb-3" data-i18n="wk.subtitle">
+            A workshop is the fastest way to align multiple stakeholders, expose risk, and decide the right next step.
           </p>
 
           <div class="row g-3">
             <div class="col-md-6">
               <div class="cardx">
-                <div class="fw-semibold" data-i18n="work.w1Title">Excel-Driven Risk Workshop (2–3 hours)</div>
-                <div class="muted" data-i18n="work.w1Text">
-                  Identify fragility, key-person dependency, version chaos, and reliability risk in critical spreadsheets.
+                <div class="fw-semibold" data-i18n="wk.w1Title">Excel Risk & Controls (2–3h)</div>
+                <div class="muted" data-i18n="wk.w1Text">
+                  Identify where errors happen, why controls fail, and what “good” looks like for critical spreadsheets.
                 </div>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="cardx">
-                <div class="fw-semibold" data-i18n="work.w2Title">Operational Architecture Alignment</div>
-                <div class="muted" data-i18n="work.w2Text">
-                  Align leadership on ownership, governance, and a clear path from Excel to scalable systems.
+                <div class="fw-semibold" data-i18n="wk.w2Title">Close Acceleration (Finance Ops)</div>
+                <div class="muted" data-i18n="wk.w2Text">
+                  Reduce manual steps and rework. Define a reliable close/reporting operating model.
                 </div>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="cardx">
-                <div class="fw-semibold" data-i18n="work.w3Title">Reporting Reliability & Close Acceleration</div>
-                <div class="muted" data-i18n="work.w3Text">
-                  Improve trust in numbers: model structure, controls, and faster reporting cycles (Finance & Ops).
+                <div class="fw-semibold" data-i18n="wk.w3Title">Automation Without Fragility (Power Platform)</div>
+                <div class="muted" data-i18n="wk.w3Text">
+                  How to automate intake, approvals, and reporting without creating a new “automation mess”.
                 </div>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="cardx">
-                <div class="fw-semibold" data-i18n="work.w4Title">Automation Without Fragility</div>
-                <div class="muted" data-i18n="work.w4Text">
-                  How to automate safely: stabilize the model first, then apply Power Automate/SharePoint where it reduces risk.
+                <div class="fw-semibold" data-i18n="wk.w4Title">Custom Workshop (Your pain, your artifacts)</div>
+                <div class="muted" data-i18n="wk.w4Text">
+                  Tailored to your process: revenue adjustments, accruals, budgeting, forecasting, or operational reporting.
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="mt-3 muted small" data-i18n="work.note">
-            Designed for CFO / Finance leaders, Operations, Shared Services, and Business Systems teams.
+          <div class="mt-3 muted small" data-i18n="wk.note">
+            Designed for Finance/Ops leaders and the people who own the spreadsheets/processes day-to-day.
           </div>
         </div>
 
         <div class="col-lg-5">
           <div class="cardx">
-            <h5 class="fw-semibold mb-2" data-i18n="work.outcomesTitle">What your team leaves with</h5>
+            <h5 class="fw-semibold mb-2" data-i18n="wk.outTitle">What you leave with</h5>
             <ul class="mb-0">
-              <li data-i18n="work.o1">A clear risk map and priority list</li>
-              <li data-i18n="work.o2">Ownership & governance recommendations</li>
-              <li data-i18n="work.o3">A practical architecture roadmap</li>
+              <li data-i18n="wk.o1">Risk map + priority list</li>
+              <li data-i18n="wk.o2">Controls & governance recommendations</li>
+              <li data-i18n="wk.o3">Architecture roadmap (quick wins → scalable systems)</li>
+              <li data-i18n="wk.o4">Clear next step: Diagnostic Sprint or Build Sprint</li>
             </ul>
 
             <div class="mt-3 d-grid gap-2">
-              <a class="btn btn-brand" target="_blank" rel="noopener"
-                 href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-                 data-i18n="work.cta">Plan a workshop</a>
-              <a class="btn btn-ghost" href="#services" data-i18n="work.cta2">See services</a>
+              <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="wkCta" data-i18n="wk.cta">Plan a workshop</a>
+              <a class="btn btn-ghost" href="#services" data-i18n="wk.cta2">See services</a>
             </div>
           </div>
         </div>
@@ -562,29 +630,26 @@
     <div class="container">
       <div class="row g-4 align-items-center">
         <div class="col-lg-4 text-center">
-          <!-- PHOTO PLACEHOLDER -->
           <img id="profileImg" class="avatar" src="" alt="Ariel Martínez" />
-          <!--<div class="mt-3 avatar-note" data-i18n="about.photoNote">
-            Upload a file named <strong>profile.jpg</strong> into your site repository to replace this placeholder.
-          </div>-->
+          <div class="mt-3 small muted" data-i18n="about.photoHint">Tip: use a square photo; the circle crop will keep your face centered.</div>
         </div>
-        
+
         <div class="col-lg-8">
           <h2 class="fw-bold mb-2" data-i18n="about.title">About</h2>
           <p class="muted mb-2">
             <strong data-i18n="about.nameLine">Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC</strong>
           </p>
           <p class="mb-3 muted" data-i18n="about.bio">
-            17+ years in corporate environments leading automation, BI, and operational transformation. My strongest foundation is advanced Excel-driven architecture — designing stable models, optimizing performance, and scaling into Microsoft ecosystems when needed.
+            17+ years leading automation, BI, and operational transformation. I specialize in turning “Excel operations” into governed systems: clearer models, stronger controls, lower key-person risk, and scalable workflows across Microsoft 365 / Power Platform when needed.
           </p>
 
           <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-brand" target="_blank" rel="noopener"
-               href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-               data-i18n="about.cta">Book a Call</a>
-            <a class="btn btn-ghost" target="_blank" rel="noopener"
-               href="https://www.linkedin.com/in/ariel-mart%C3%ADnez-26521511/"
-               data-i18n="about.linkedin">LinkedIn</a>
+            <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="aboutCta" data-i18n="about.cta">Book a Call</a>
+            <a class="btn btn-ghost" target="_blank" rel="noopener" href="#" id="aboutLinkedin" data-i18n="about.linkedin">LinkedIn</a>
+          </div>
+
+          <div class="mt-3 muted small" data-i18n="about.note">
+            My focus is outcomes: reliability, speed, and control — not “more tools”.
           </div>
         </div>
       </div>
@@ -597,7 +662,7 @@
   <section id="faq" class="section anchor-offset">
     <div class="container">
       <div class="row g-3 align-items-end mb-3">
-        <div class="col-lg-7">
+        <div class="col-lg-8">
           <h2 class="fw-bold mb-2" data-i18n="faq.title">FAQ</h2>
           <p class="muted mb-0" data-i18n="faq.subtitle">Short answers to common questions.</p>
         </div>
@@ -612,7 +677,7 @@
           </h2>
           <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
             <div class="accordion-body muted" data-i18n="faq.a1">
-              No. Excel is often the environment where the system lives. The work is operational architecture: stabilizing the model, reducing dependency risk, and adding governance. Some systems stay in Excel by design; others scale into Microsoft tools when needed.
+              No. Excel is often where the system lives — but the work is architecture + controls + governance. Some systems stay in Excel by design; others scale into M365 / Power Platform when it reduces risk and improves control.
             </div>
           </div>
         </div>
@@ -620,12 +685,12 @@
         <div class="accordion-item bg-transparent border-0 mt-2">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">
-              <span data-i18n="faq.q2">Do you build in our tenant?</span>
+              <span data-i18n="faq.q2">What’s the fastest starting point?</span>
             </button>
           </h2>
           <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
             <div class="accordion-body muted" data-i18n="faq.a2">
-              Yes. If the solution includes Power Automate, SharePoint, or Power BI, it is built inside your Microsoft environment. Documentation is included so your team can maintain it safely.
+              A Diagnostic Sprint on one critical spreadsheet/process. It gives leadership a clear risk map and the right next step (quick fix, build sprint, or premium advisory).
             </div>
           </div>
         </div>
@@ -633,12 +698,12 @@
         <div class="accordion-item bg-transparent border-0 mt-2">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3">
-              <span data-i18n="faq.q3">What is the typical first step?</span>
+              <span data-i18n="faq.q3">Do you work inside our Microsoft tenant?</span>
             </button>
           </h2>
           <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
             <div class="accordion-body muted" data-i18n="faq.a3">
-              A short call, then a Structural Risk Diagnostic (or a Workshop if multiple stakeholders are involved). From there, we decide whether a quick fix, a blueprint, or a larger redesign is the right move.
+              Yes, when it’s required. Power Automate / SharePoint / Power BI can be part of the solution — but only after the operational model is stable and governed.
             </div>
           </div>
         </div>
@@ -646,21 +711,32 @@
         <div class="accordion-item bg-transparent border-0 mt-2">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4">
-              <span data-i18n="faq.q4">Will AI replace this work?</span>
+              <span data-i18n="faq.q4">Do you use AI?</span>
             </button>
           </h2>
           <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
             <div class="accordion-body muted" data-i18n="faq.a4">
-              AI can help write formulas or code faster, but it doesn’t replace architectural decisions: ownership, governance, risk controls, cross-team dependencies, and system redesign. AI becomes an accelerator — not a substitute — when the model is structured correctly.
+              When it helps: documentation, testing, anomaly detection, and accelerating automation. But governance, controls, and architecture remain the foundation — AI is an accelerator, not a substitute.
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item bg-transparent border-0 mt-2">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f5">
+              <span data-i18n="faq.q5">Can you do this remotely?</span>
+            </button>
+          </h2>
+          <div id="f5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+            <div class="accordion-body muted" data-i18n="faq.a5">
+              Yes. Workshops and sprints work well remote-first. On-site is possible by request (and usually only when multiple stakeholders are involved).
             </div>
           </div>
         </div>
       </div>
 
       <div class="mt-4 text-center">
-        <a class="btn btn-brand btn-lg" target="_blank" rel="noopener"
-           href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-           data-i18n="faq.cta">Book a Call</a>
+        <a class="btn btn-brand btn-lg" target="_blank" rel="noopener" href="#" id="faqCta" data-i18n="faq.cta">Book a Call</a>
       </div>
     </div>
   </section>
@@ -674,11 +750,8 @@
           <div class="small">© <span id="year"></span> · <span class="muted" data-i18n="footer.tag">Operational Systems Architecture</span></div>
         </div>
         <div class="col-md-5 text-md-end">
-          <a class="text-decoration-none me-3" style="color: var(--muted);" target="_blank" rel="noopener"
-             href="https://www.linkedin.com/in/ariel-mart%C3%ADnez-26521511/">LinkedIn</a>
-          <a class="text-decoration-none" style="color: var(--muted);" target="_blank" rel="noopener"
-             href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled"
-             data-i18n="footer.book">Book a Call</a>
+          <a class="text-decoration-none me-3" style="color: var(--muted);" target="_blank" rel="noopener" href="#" id="footerLinkedin">LinkedIn</a>
+          <a class="text-decoration-none" style="color: var(--muted);" target="_blank" rel="noopener" href="#" id="footerBook" data-i18n="footer.book">Book a Call</a>
         </div>
       </div>
     </div>
@@ -690,197 +763,451 @@
 
     I18N.en = {
       "nav.motto":"Excel-driven systems, built to scale.",
-      "nav.language":"Language","nav.services":"Services","nav.framework":"Framework","nav.workshops":"Workshops","nav.about":"About","nav.faq":"FAQ","nav.book":"Book a Call",
+      "nav.language":"Language",
+      "nav.usecases":"Use cases",
+      "nav.services":"Services",
+      "nav.workshops":"Workshops",
+      "nav.about":"About",
+      "nav.faq":"FAQ",
+      "nav.book":"Book a Call",
 
-      "hero.badge":"Excel-driven Operations · Microsoft Ecosystem · Governance",
-      "hero.title":"Stabilize and scale Excel-driven operational systems.",
-      "hero.subtitle":"I help Finance and Operations teams turn fragile spreadsheets into controlled, maintainable systems — and integrate Microsoft tools (Power Automate, SharePoint, Power BI) only when scale requires it.",
-      "hero.ctaPrimary":"Book a Call","hero.ctaSecondary":"See Services","hero.ctaLinkedin":"LinkedIn",
-      "hero.note":"Executive-friendly. Remote-first. Available in English, Spanish, and Portuguese.",
-      "hero.kpi1Title":"What you get","hero.kpi1Text":"Reliable numbers, clear ownership, and a system your team can maintain (not a “spreadsheet hero” dependency).",
-      "hero.kpi2Title":"Good fit for","hero.kpi2Text":"CFO / Finance, FP&A, Ops, Shared Services.",
-      "hero.kpi3Title":"Typical outcomes","hero.kpi3Text":"Less rework, fewer errors, faster close / reporting cycles, and stronger control.",
+      "hero.badge":"Finance & Ops · Excel Systems · Microsoft 365 · Controls",
+      "hero.title":"Fix fragile Excel operations — without breaking the business.",
+      "hero.subtitle":"I help teams reduce errors, tighten controls, and speed up reporting by turning spreadsheet “workarounds” into governed operational systems. Excel stays when it’s the right tool — and we scale into Power Platform / M365 only when scale demands it.",
+      "hero.ctaPrimary":"Book a Call",
+      "hero.ctaSecondary":"See common use cases",
+      "hero.ctaLinkedin":"LinkedIn",
+      "hero.pill1":"Risk & controls",
+      "hero.pill2":"Close & reporting speed",
+      "hero.pill3":"Automation with governance",
+      "hero.pill4":"Executive-ready outputs",
+      "hero.note":"Remote-first. Executive-friendly. Available in English, Spanish, and Portuguese.",
+      "hero.kpi1Title":"Typical outcomes",
+      "hero.kpi1Text":"Fewer errors, faster cycles, clear ownership, and controls that survive team changes.",
+      "hero.kpi2Title":"Best fit",
+      "hero.kpi2Text":"CFO / FP&A, Finance Ops, RevOps, Shared Services, Business Systems.",
+      "hero.kpi3Title":"First step",
+      "hero.kpi3Text":"A 20-minute call → pick the right sprint (diagnostic, build, or advisory).",
+      "hero.kpi4Title":"AI (when useful)",
+      "hero.kpi4Text":"AI helps accelerate documentation, testing, anomaly checks, and automation — governance stays the core.",
 
-      "services.title":"Services","services.subtitle":"Projects sized by impact: tactical improvements, strategic redesigns, and transformational systems.",
-      "services.cta":"Discuss your case",
-      "services.s1Title":"Structural Risk Diagnostic","services.s1Text":"Executive-level assessment of Excel-driven systems: structure, dependency risk, and reliability.",
-      "services.s1b1":"Data model & table structure review","services.s1b2":"Fragility & key-person dependency map","services.s1b3":"Clear next-step options (keep Excel vs scale)",
-      "services.s2Title":"Architecture Blueprint","services.s2Text":"A redesign plan: structure, logic layers, ownership, governance, and automation roadmap.",
-      "services.s2b1":"Inputs / model / outputs separation","services.s2b2":"Governance (change control + approvals)","services.s2b3":"Scalability roadmap (Excel → Microsoft ecosystem)",
-      "services.s3Title":"Implementation & Integration","services.s3Text":"Build the redesigned system and integrate Microsoft tools only where they add strategic value.",
-      "services.s3b1":"Excel stabilization & performance optimization","services.s3b2":"Power Automate / SharePoint / Power BI (as needed)","services.s3b3":"Documentation your team can run",
-      "services.s4Title":"Governed Evolution Retainer","services.s4Text":"Ongoing stability: controlled changes, optimization, and continuous improvement without breaking the system.",
-      "services.s4b1":"Monthly change backlog","services.s4b2":"Governed releases & documentation","services.s4b3":"Leadership reporting & reliability KPIs",
-      "services.note":"Note: Many projects remain in Excel by design — the goal is reliability. We scale into Microsoft tools only when it improves control and reduces risk.",
+      "use.title":"Common problems I fix",
+      "use.subtitle":"Pick the pain — I’ll map it to the fastest engagement model.",
+      "use.cta":"Discuss your case",
+      "use.u1Title":"Close & reporting is slow (and no one trusts the numbers)",
+      "use.u1Text":"Consolidations, manual checks, broken links, and last-minute fixes every month.",
+      "use.u1b1":"Re-architecture the model (inputs → model → outputs)",
+      "use.u1b2":"Add controls (reconciliations, tie-outs, audit trail)",
+      "use.u1b3":"Standardize refresh & handoffs (M365 / Power Automate as needed)",
 
-      "framework.title":"Magina Operational Architecture Framework","framework.subtitle":"A simple method to stabilize Excel-driven environments and scale them safely.",
-      "framework.p1Title":"1) Structural Diagnosis","framework.p1Text":"Identify model issues, table structure gaps, dependency risk, and reliability failures.",
-      "framework.p2Title":"2) Model Re-Architecture","framework.p2Text":"Redesign the data model and logic layers for performance, clarity, and maintainability.",
-      "framework.p3Title":"3) Controlled Automation","framework.p3Text":"Automate only after architecture is sound — avoid “automation on top of chaos”.",
-      "framework.p4Title":"4) Scalable Integration","framework.p4Text":"Integrate SharePoint, Power Automate, Power BI when scale and governance require it.",
-      "framework.compareTitle":"Spreadsheet vs. System",
-      "framework.leftTitle":"Common situation","framework.l1":"Hundreds of formulas, unclear logic","framework.l2":"Version chaos and hidden errors","framework.l3":"Depends on one person",
-      "framework.rightTitle":"Magina outcome","framework.r1":"Clear model + logic layers","framework.r2":"Ownership + change control","framework.r3":"Reliable operations that scale",
-      "framework.note":"The goal is not “more tools”. The goal is stable operations and trustworthy numbers.",
-      "framework.cta":"See if this fits your team","framework.cta2":"Workshops",
+      "use.u2Title":"Critical spreadsheets depend on one person",
+      "use.u2Text":"Key-person risk: when they’re away, the business slows down.",
+      "use.u2b1":"Dependency map + quick stability fixes",
+      "use.u2b2":"Documentation that’s actually operational",
+      "use.u2b3":"Governed change process (so “small changes” don’t break everything)",
 
-      "work.title":"Workshops","work.subtitle":"Executive-friendly sessions to expose spreadsheet risk, align ownership, and define an architecture roadmap.",
-      "work.w1Title":"Excel-Driven Risk Workshop (2–3 hours)","work.w1Text":"Identify fragility, key-person dependency, version chaos, and reliability risk in critical spreadsheets.",
-      "work.w2Title":"Operational Architecture Alignment","work.w2Text":"Align leadership on ownership, governance, and a clear path from Excel to scalable systems.",
-      "work.w3Title":"Reporting Reliability & Close Acceleration","work.w3Text":"Improve trust in numbers: model structure, controls, and faster reporting cycles (Finance & Ops).",
-      "work.w4Title":"Automation Without Fragility","work.w4Text":"How to automate safely: stabilize the model first, then apply Power Automate/SharePoint where it reduces risk.",
-      "work.note":"Designed for CFO / Finance leaders, Operations, Shared Services, and Business Systems teams.",
-      "work.outcomesTitle":"What your team leaves with","work.o1":"A clear risk map and priority list","work.o2":"Ownership & governance recommendations","work.o3":"A practical architecture roadmap",
-      "work.cta":"Plan a workshop","work.cta2":"See services",
+      "use.u3Title":"Version chaos and hidden errors",
+      "use.u3Text":"Multiple files, inconsistent logic, and error hunting that wastes senior time.",
+      "use.u3b1":"Single source of truth design",
+      "use.u3b2":"Validation checks + exception reporting",
+      "use.u3b3":"Access + approvals + release notes (governance)",
+
+      "use.u4Title":"Manual processes around Excel (emails, copy/paste, approvals)",
+      "use.u4Text":"People act as “integrations” between systems. That’s expensive and risky.",
+      "use.u4b1":"Automate intake & approvals (Forms/SharePoint/Power Automate)",
+      "use.u4b2":"Reduce rework with structured data capture",
+      "use.u4b3":"Keep Excel as the calculation engine when it makes sense",
+
+      "use.u5Title":"Dashboards exist, but decisions still happen in spreadsheets",
+      "use.u5Text":"Data model is messy, metrics are inconsistent, and stakeholders don’t adopt.",
+      "use.u5b1":"Metric definition + governance",
+      "use.u5b2":"Power BI modeling (DAX, performance) when needed",
+      "use.u5b3":"Executive-ready reporting cadence",
+
+      "use.u6Title":"You want AI — but you don’t want new chaos",
+      "use.u6Text":"AI is powerful, but without structure and governance it amplifies risk.",
+      "use.u6b1":"AI-ready architecture (clean inputs, clear logic layers)",
+      "use.u6b2":"Controls for prompts, data access, and output validation",
+      "use.u6b3":"Use AI as an accelerator (not a replacement for controls)",
+
+      "use.note":"Note: Not every problem requires migrating away from Excel. The default is: stabilize first, scale only if the math says it’s worth it.",
+
+      "svc.title":"Services (tangible + premium)",
+      "svc.subtitle":"Fast entry points for urgent pain — plus a premium advisory layer when leadership wants a bigger redesign.",
+      "svc.cta":"Book a scoping call",
+
+      "svc.s1Title":"Diagnostic Sprint (Fast)",
+      "svc.s1Text":"Rapid assessment of one critical spreadsheet/process: risk, controls, bottlenecks, and the fastest fix plan.",
+      "svc.s1b1":"Risk map + “where errors come from”",
+      "svc.s1b2":"Quick-win recommendations",
+      "svc.s1b3":"Decision: stabilize vs. redesign vs. automate",
+
+      "svc.s2Title":"Build Sprint (Implementation)",
+      "svc.s2Text":"Build the improved system: restructure, harden controls, and automate surrounding workflows where it reduces risk.",
+      "svc.s2b1":"Model architecture (inputs/model/outputs)",
+      "svc.s2b2":"Controls + validations + exception handling",
+      "svc.s2b3":"Optional Power Automate / SharePoint / BI",
+
+      "svc.s3Title":"Operational Systems Architecture (Premium)",
+      "svc.s3Text":"Executive-level redesign across multiple processes: ownership, governance, roadmap, and scalable architecture.",
+      "svc.s3b1":"Architecture blueprint + operating model",
+      "svc.s3b2":"Governance: change control, approvals, audit trail",
+      "svc.s3b3":"Roadmap: Excel-first → Microsoft ecosystem (when required)",
+
+      "svc.s4Title":"Governed Evolution Retainer",
+      "svc.s4Text":"Keep systems stable while the business changes: controlled releases, continuous improvement, and KPIs.",
+      "svc.s4b1":"Monthly backlog + priority triage",
+      "svc.s4b2":"Governed releases + documentation",
+      "svc.s4b3":"Leadership updates (reliability & efficiency)",
+
+      "svc.delTitle":"Deliverables you can show leadership",
+      "svc.delText":"Risk map, architecture blueprint, controls checklist, documentation, and a prioritized roadmap — not just “a better spreadsheet”.",
+      "svc.delCta":"Prefer a workshop first?",
+      "svc.note":"I can work inside your tenant when needed (M365 / Power Platform). For Excel-only engagements, the goal is still governance and reliability.",
+
+      "wk.title":"Workshops",
+      "wk.subtitle":"A workshop is the fastest way to align multiple stakeholders, expose risk, and decide the right next step.",
+      "wk.w1Title":"Excel Risk & Controls (2–3h)",
+      "wk.w1Text":"Identify where errors happen, why controls fail, and what “good” looks like for critical spreadsheets.",
+      "wk.w2Title":"Close Acceleration (Finance Ops)",
+      "wk.w2Text":"Reduce manual steps and rework. Define a reliable close/reporting operating model.",
+      "wk.w3Title":"Automation Without Fragility (Power Platform)",
+      "wk.w3Text":"How to automate intake, approvals, and reporting without creating a new “automation mess”.",
+      "wk.w4Title":"Custom Workshop (Your pain, your artifacts)",
+      "wk.w4Text":"Tailored to your process: revenue adjustments, accruals, budgeting, forecasting, or operational reporting.",
+      "wk.note":"Designed for Finance/Ops leaders and the people who own the spreadsheets/processes day-to-day.",
+      "wk.outTitle":"What you leave with",
+      "wk.o1":"Risk map + priority list",
+      "wk.o2":"Controls & governance recommendations",
+      "wk.o3":"Architecture roadmap (quick wins → scalable systems)",
+      "wk.o4":"Clear next step: Diagnostic Sprint or Build Sprint",
+      "wk.cta":"Plan a workshop",
+      "wk.cta2":"See services",
 
       "about.title":"About",
-      /*"about.photoNote":"Upload a file named <strong>profile.jpg</strong> into your site repository to replace this placeholder.",*/
+      "about.photoHint":"Tip: use a square photo; the circle crop will keep your face centered.",
       "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
-      "about.bio":"17+ years in corporate environments leading automation, BI, and operational transformation. My strongest foundation is advanced Excel-driven architecture — designing stable models, optimizing performance, and scaling into Microsoft ecosystems when needed.",
-      "about.cta":"Book a Call","about.linkedin":"LinkedIn",
+      "about.bio":"17+ years leading automation, BI, and operational transformation. I specialize in turning “Excel operations” into governed systems: clearer models, stronger controls, lower key-person risk, and scalable workflows across Microsoft 365 / Power Platform when needed.",
+      "about.cta":"Book a Call",
+      "about.linkedin":"LinkedIn",
+      "about.note":"My focus is outcomes: reliability, speed, and control — not “more tools”.",
 
-      "faq.title":"FAQ","faq.subtitle":"Short answers to common questions.",
+      "faq.title":"FAQ",
+      "faq.subtitle":"Short answers to common questions.",
       "faq.q1":"Is this “just Excel consulting”?",
-      "faq.a1":"No. Excel is often the environment where the system lives. The work is operational architecture: stabilizing the model, reducing dependency risk, and adding governance. Some systems stay in Excel by design; others scale into Microsoft tools when needed.",
-      "faq.q2":"Do you build in our tenant?",
-      "faq.a2":"Yes. If the solution includes Power Automate, SharePoint, or Power BI, it is built inside your Microsoft environment. Documentation is included so your team can maintain it safely.",
-      "faq.q3":"What is the typical first step?",
-      "faq.a3":"A short call, then a Structural Risk Diagnostic (or a Workshop if multiple stakeholders are involved). From there, we decide whether a quick fix, a blueprint, or a larger redesign is the right move.",
-      "faq.q4":"Will AI replace this work?",
-      "faq.a4":"AI can help write formulas or code faster, but it doesn’t replace architectural decisions: ownership, governance, risk controls, cross-team dependencies, and system redesign. AI becomes an accelerator — not a substitute — when the model is structured correctly.",
+      "faq.a1":"No. Excel is often where the system lives — but the work is architecture + controls + governance. Some systems stay in Excel by design; others scale into M365 / Power Platform when it reduces risk and improves control.",
+      "faq.q2":"What’s the fastest starting point?",
+      "faq.a2":"A Diagnostic Sprint on one critical spreadsheet/process. It gives leadership a clear risk map and the right next step (quick fix, build sprint, or premium advisory).",
+      "faq.q3":"Do you work inside our Microsoft tenant?",
+      "faq.a3":"Yes, when it’s required. Power Automate / SharePoint / Power BI can be part of the solution — but only after the operational model is stable and governed.",
+      "faq.q4":"Do you use AI?",
+      "faq.a4":"When it helps: documentation, testing, anomaly detection, and accelerating automation. But governance, controls, and architecture remain the foundation — AI is an accelerator, not a substitute.",
+      "faq.q5":"Can you do this remotely?",
+      "faq.a5":"Yes. Workshops and sprints work well remote-first. On-site is possible by request (and usually only when multiple stakeholders are involved).",
       "faq.cta":"Book a Call",
 
-      "footer.tag":"Operational Systems Architecture","footer.book":"Book a Call"
+      "footer.tag":"Operational Systems Architecture",
+      "footer.book":"Book a Call"
     };
 
     I18N.es = {
       "nav.motto":"Sistemas basados en Excel, listos para escalar.",
-      "nav.language":"Idioma","nav.services":"Servicios","nav.framework":"Framework","nav.workshops":"Workshops","nav.about":"About","nav.faq":"FAQ","nav.book":"Agendar llamada",
+      "nav.language":"Idioma",
+      "nav.usecases":"Casos comunes",
+      "nav.services":"Servicios",
+      "nav.workshops":"Workshops",
+      "nav.about":"About",
+      "nav.faq":"FAQ",
+      "nav.book":"Agendar llamada",
 
-      "hero.badge":"Operaciones en Excel · Ecosistema Microsoft · Gobernanza",
-      "hero.title":"Estabilizá y escalá sistemas operativos basados en Excel.",
-      "hero.subtitle":"Ayudo a equipos de Finanzas y Operaciones a convertir planillas frágiles en sistemas controlados y mantenibles — e integrar herramientas Microsoft (Power Automate, SharePoint, Power BI) solo cuando la escala lo requiere.",
-      "hero.ctaPrimary":"Agendar llamada","hero.ctaSecondary":"Ver servicios","hero.ctaLinkedin":"LinkedIn",
-      "hero.note":"Enfoque ejecutivo. Remoto. Disponible en inglés, español y portugués.",
-      "hero.kpi1Title":"Qué obtenés","hero.kpi1Text":"Números confiables, ownership claro y un sistema mantenible (sin depender de un “héroe de Excel”).",
-      "hero.kpi2Title":"Ideal para","hero.kpi2Text":"CFO/Finanzas, FP&A, Operaciones, Servicios Compartidos.",
-      "hero.kpi3Title":"Resultados típicos","hero.kpi3Text":"Menos retrabajo, menos errores, cierres/reportes más rápidos y mayor control.",
+      "hero.badge":"Finanzas y Ops · Sistemas en Excel · Microsoft 365 · Controles",
+      "hero.title":"Arreglá operaciones frágiles en Excel — sin romper el negocio.",
+      "hero.subtitle":"Ayudo a reducir errores, reforzar controles y acelerar reporting transformando “workarounds” en sistemas operativos gobernados. Excel se queda cuando es la herramienta correcta — y escalamos a Power Platform / M365 solo cuando la escala lo exige.",
+      "hero.ctaPrimary":"Agendar llamada",
+      "hero.ctaSecondary":"Ver casos comunes",
+      "hero.ctaLinkedin":"LinkedIn",
+      "hero.pill1":"Riesgo y controles",
+      "hero.pill2":"Cierre y velocidad de reporting",
+      "hero.pill3":"Automatización con gobernanza",
+      "hero.pill4":"Outputs para ejecutivos",
+      "hero.note":"Remoto. Enfoque ejecutivo. Disponible en inglés, español y portugués.",
+      "hero.kpi1Title":"Resultados típicos",
+      "hero.kpi1Text":"Menos errores, ciclos más rápidos, ownership claro y controles que sobreviven cambios de equipo.",
+      "hero.kpi2Title":"Ideal para",
+      "hero.kpi2Text":"CFO / FP&A, Finance Ops, RevOps, Servicios Compartidos, Business Systems.",
+      "hero.kpi3Title":"Primer paso",
+      "hero.kpi3Text":"Llamada de 20 min → elegimos el sprint correcto (diagnóstico, build o advisory).",
+      "hero.kpi4Title":"AI (cuando suma)",
+      "hero.kpi4Text":"AI acelera documentación, testing, chequeos de anomalías y automatización — la base sigue siendo gobernanza.",
 
-      "services.title":"Servicios","services.subtitle":"Proyectos según impacto: mejoras tácticas, rediseños estratégicos y transformaciones.",
-      "services.cta":"Conversar tu caso",
-      "services.s1Title":"Diagnóstico de Riesgo Estructural","services.s1Text":"Assessment ejecutivo de sistemas en Excel: estructura, dependencia y confiabilidad.",
-      "services.s1b1":"Revisión de modelo de datos y tablas","services.s1b2":"Mapa de fragilidad y dependencia de personas","services.s1b3":"Opciones claras (quedar en Excel vs escalar)",
-      "services.s2Title":"Blueprint de Arquitectura","services.s2Text":"Plan de rediseño: estructura, capas lógicas, ownership, gobernanza y roadmap de automatización.",
-      "services.s2b1":"Separación inputs / modelo / outputs","services.s2b2":"Gobernanza (control de cambios + aprobaciones)","services.s2b3":"Roadmap de escalabilidad (Excel → ecosistema Microsoft)",
-      "services.s3Title":"Implementación e Integración","services.s3Text":"Construcción del sistema rediseñado e integración Microsoft solo donde agrega valor estratégico.",
-      "services.s3b1":"Estabilización de Excel y optimización de performance","services.s3b2":"Power Automate / SharePoint / Power BI (según necesidad)","services.s3b3":"Documentación operable por tu equipo",
-      "services.s4Title":"Retainer de Evolución Gobernada","services.s4Text":"Estabilidad continua: cambios controlados, optimización y mejora sin romper el sistema.",
-      "services.s4b1":"Backlog mensual de cambios","services.s4b2":"Releases gobernados + documentación","services.s4b3":"KPIs de confiabilidad para liderazgo",
-      "services.note":"Nota: muchos proyectos quedan en Excel por diseño — el objetivo es confiabilidad. Se escala a herramientas Microsoft solo si mejora control y reduce riesgo.",
+      "use.title":"Problemas comunes que resuelvo",
+      "use.subtitle":"Elegí el dolor — y lo mapeamos al modelo de engagement más rápido.",
+      "use.cta":"Conversar tu caso",
 
-      "framework.title":"Magina Operational Architecture Framework","framework.subtitle":"Método simple para estabilizar entornos en Excel y escalar con seguridad.",
-      "framework.p1Title":"1) Diagnóstico Estructural","framework.p1Text":"Detectar problemas del modelo, estructura de tablas, dependencia y fallas de confiabilidad.",
-      "framework.p2Title":"2) Re-Arquitectura del Modelo","framework.p2Text":"Rediseñar el modelo y capas lógicas para performance, claridad y mantenibilidad.",
-      "framework.p3Title":"3) Automatización Controlada","framework.p3Text":"Automatizar solo con arquitectura sólida — evitar “automatizar sobre caos”.",
-      "framework.p4Title":"4) Integración Escalable","framework.p4Text":"Integrar SharePoint, Power Automate y Power BI cuando la escala lo requiere.",
-      "framework.compareTitle":"Planilla vs. Sistema",
-      "framework.leftTitle":"Situación común","framework.l1":"Cientos de fórmulas, lógica poco clara","framework.l2":"Caos de versiones y errores ocultos","framework.l3":"Depende de una persona",
-      "framework.rightTitle":"Resultado Magina","framework.r1":"Modelo claro + capas lógicas","framework.r2":"Ownership + control de cambios","framework.r3":"Operación confiable que escala",
-      "framework.note":"El objetivo no es “más herramientas”. Es operación estable y números confiables.",
-      "framework.cta":"Ver si encaja","framework.cta2":"Workshops",
+      "use.u1Title":"El cierre/reporting es lento (y nadie confía en los números)",
+      "use.u1Text":"Consolidaciones, chequeos manuales, links rotos y arreglos de último minuto todos los meses.",
+      "use.u1b1":"Re-arquitectura del modelo (inputs → modelo → outputs)",
+      "use.u1b2":"Controles (reconciliaciones, tie-outs, audit trail)",
+      "use.u1b3":"Refresh y handoffs estandarizados (M365 / Power Automate según necesidad)",
 
-      "work.title":"Workshops","work.subtitle":"Sesiones ejecutivas para exponer riesgo, alinear ownership y definir roadmap de arquitectura.",
-      "work.w1Title":"Workshop de Riesgo en Excel (2–3 horas)","work.w1Text":"Identificar fragilidad, dependencia de personas, caos de versiones y riesgo en planillas críticas.",
-      "work.w2Title":"Alineación de Arquitectura Operativa","work.w2Text":"Alinear liderazgo sobre ownership, gobernanza y el camino de Excel a sistemas escalables.",
-      "work.w3Title":"Confiabilidad de Reportes y Aceleración del Cierre","work.w3Text":"Mejorar confianza en números: estructura, controles y ciclos más rápidos (Finanzas y Ops).",
-      "work.w4Title":"Automatización sin Fragilidad","work.w4Text":"Cómo automatizar con seguridad: estabilizar el modelo y luego aplicar Power Automate/SharePoint donde reduzca riesgo.",
-      "work.note":"Diseñado para CFO/Finanzas, Operaciones, Servicios Compartidos y Business Systems.",
-      "work.outcomesTitle":"Qué se lleva tu equipo","work.o1":"Mapa de riesgos y prioridades","work.o2":"Recomendaciones de ownership y gobernanza","work.o3":"Roadmap práctico de arquitectura",
-      "work.cta":"Planear workshop","work.cta2":"Ver servicios",
+      "use.u2Title":"Planillas críticas dependen de una sola persona",
+      "use.u2Text":"Riesgo de dependencia: si esa persona no está, el negocio se frena.",
+      "use.u2b1":"Mapa de dependencia + fixes de estabilidad",
+      "use.u2b2":"Documentación realmente operable",
+      "use.u2b3":"Control de cambios (para que “pequeños cambios” no rompan todo)",
+
+      "use.u3Title":"Caos de versiones y errores ocultos",
+      "use.u3Text":"Múltiples archivos, lógica inconsistente y “cazar errores” consume tiempo senior.",
+      "use.u3b1":"Diseño de single source of truth",
+      "use.u3b2":"Validaciones + reporte de excepciones",
+      "use.u3b3":"Accesos + aprobaciones + release notes (gobernanza)",
+
+      "use.u4Title":"Procesos manuales alrededor de Excel (emails, copy/paste, approvals)",
+      "use.u4Text":"Las personas funcionan como “integraciones” entre sistemas. Es caro y riesgoso.",
+      "use.u4b1":"Automatizar intake y aprobaciones (Forms/SharePoint/Power Automate)",
+      "use.u4b2":"Reducir retrabajo con captura estructurada",
+      "use.u4b3":"Mantener Excel como motor de cálculo cuando corresponde",
+
+      "use.u5Title":"Hay dashboards, pero las decisiones siguen en planillas",
+      "use.u5Text":"Modelo confuso, métricas inconsistentes y baja adopción.",
+      "use.u5b1":"Definición de métricas + gobernanza",
+      "use.u5b2":"Modelado Power BI (DAX, performance) cuando haga falta",
+      "use.u5b3":"Cadencia de reporting ejecutiva",
+
+      "use.u6Title":"Querés AI — pero no querés nuevo caos",
+      "use.u6Text":"AI es potente, pero sin estructura y gobernanza amplifica el riesgo.",
+      "use.u6b1":"Arquitectura lista para AI (inputs limpios, capas claras)",
+      "use.u6b2":"Controles de prompts, acceso a datos y validación de outputs",
+      "use.u6b3":"AI como acelerador (no reemplazo de controles)",
+
+      "use.note":"Nota: no todo requiere migrar fuera de Excel. El default: estabilizar primero, escalar solo si el ROI lo justifica.",
+
+      "svc.title":"Servicios (tangible + premium)",
+      "svc.subtitle":"Entradas rápidas para urgencias — y una capa premium cuando liderazgo quiere rediseño más amplio.",
+      "svc.cta":"Agendar llamada",
+
+      "svc.s1Title":"Sprint de Diagnóstico (Rápido)",
+      "svc.s1Text":"Assessment de 1 planilla/proceso crítico: riesgo, controles, cuellos de botella y plan de arreglo más rápido.",
+      "svc.s1b1":"Mapa de riesgo + “de dónde salen los errores”",
+      "svc.s1b2":"Recomendaciones quick wins",
+      "svc.s1b3":"Decisión: estabilizar vs. rediseñar vs. automatizar",
+
+      "svc.s2Title":"Sprint de Build (Implementación)",
+      "svc.s2Text":"Construcción del sistema mejorado: reestructura, controles fuertes y automatización alrededor cuando reduzca riesgo.",
+      "svc.s2b1":"Arquitectura del modelo (inputs/model/outputs)",
+      "svc.s2b2":"Controles + validaciones + manejo de excepciones",
+      "svc.s2b3":"Opcional Power Automate / SharePoint / BI",
+
+      "svc.s3Title":"Operational Systems Architecture (Premium)",
+      "svc.s3Text":"Rediseño ejecutivo multi-proceso: ownership, gobernanza, roadmap y arquitectura escalable.",
+      "svc.s3b1":"Blueprint + operating model",
+      "svc.s3b2":"Gobernanza: control de cambios, aprobaciones, audit trail",
+      "svc.s3b3":"Roadmap: Excel-first → ecosistema Microsoft (cuando corresponda)",
+
+      "svc.s4Title":"Retainer de Evolución Gobernada",
+      "svc.s4Text":"Mantener estabilidad mientras cambia el negocio: releases controlados, mejora continua y KPIs.",
+      "svc.s4b1":"Backlog mensual + triage",
+      "svc.s4b2":"Releases gobernados + documentación",
+      "svc.s4b3":"Updates ejecutivos (confiabilidad y eficiencia)",
+
+      "svc.delTitle":"Entregables para mostrar a liderazgo",
+      "svc.delText":"Mapa de riesgo, blueprint, checklist de controles, documentación y roadmap priorizado — no solo “una planilla mejor”.",
+      "svc.delCta":"¿Preferís empezar con workshop?",
+      "svc.note":"Puedo trabajar dentro de tu tenant cuando haga falta (M365 / Power Platform). En Excel-only el objetivo sigue siendo gobernanza y confiabilidad.",
+
+      "wk.title":"Workshops",
+      "wk.subtitle":"La forma más rápida de alinear stakeholders, exponer riesgo y decidir el próximo paso.",
+      "wk.w1Title":"Riesgo y Controles en Excel (2–3h)",
+      "wk.w1Text":"Detectar dónde ocurren errores, por qué fallan controles y qué es “buena práctica” en planillas críticas.",
+      "wk.w2Title":"Aceleración de Cierre (Finance Ops)",
+      "wk.w2Text":"Reducir pasos manuales y retrabajo. Definir un modelo confiable de cierre/reporting.",
+      "wk.w3Title":"Automatización sin Fragilidad (Power Platform)",
+      "wk.w3Text":"Automatizar intake, aprobaciones y reporting sin crear un nuevo “desorden de automatizaciones”.",
+      "wk.w4Title":"Workshop a medida (tu dolor, tus artefactos)",
+      "wk.w4Text":"Adaptado a tu proceso: revenue adjustments, accruals, budgeting, forecasting o reporting operativo.",
+      "wk.note":"Diseñado para líderes y dueños reales del proceso/planillas.",
+      "wk.outTitle":"Qué se llevan",
+      "wk.o1":"Mapa de riesgo + prioridades",
+      "wk.o2":"Recomendaciones de controles y gobernanza",
+      "wk.o3":"Roadmap de arquitectura (quick wins → escalabilidad)",
+      "wk.o4":"Siguiente paso claro: Sprint de Diagnóstico o Build",
+      "wk.cta":"Planear workshop",
+      "wk.cta2":"Ver servicios",
 
       "about.title":"About",
-      /*"about.photoNote":"Subí un archivo llamado <strong>profile.jpg</strong> para reemplazar este placeholder.",*/
+      "about.photoHint":"Tip: usá una foto cuadrada; el recorte circular mantiene la cara centrada.",
       "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
-      "about.bio":"17+ años en entornos corporativos liderando automatización, BI y transformación operativa. Mi base más fuerte es arquitectura avanzada en Excel: modelos estables, performance y escalamiento al ecosistema Microsoft cuando corresponde.",
-      "about.cta":"Agendar llamada","about.linkedin":"LinkedIn",
+      "about.bio":"17+ años liderando automatización, BI y transformación operativa. Me especializo en convertir “operaciones en Excel” en sistemas gobernados: modelos más claros, controles más fuertes, menor dependencia y flujos escalables en Microsoft 365 / Power Platform cuando corresponde.",
+      "about.cta":"Agendar llamada",
+      "about.linkedin":"LinkedIn",
+      "about.note":"Enfoque en outcomes: confiabilidad, velocidad y control — no “más herramientas”.",
 
-      "faq.title":"FAQ","faq.subtitle":"Respuestas cortas a preguntas comunes.",
+      "faq.title":"FAQ",
+      "faq.subtitle":"Respuestas cortas a preguntas comunes.",
       "faq.q1":"¿Esto es “solo consultoría de Excel”?",
-      "faq.a1":"No. Excel suele ser el entorno donde vive el sistema. El trabajo es arquitectura operativa: estabilizar el modelo, reducir dependencia y agregar gobernanza. Algunos sistemas quedan en Excel por diseño; otros escalan a herramientas Microsoft cuando hace falta.",
-      "faq.q2":"¿Construís dentro de nuestro tenant?",
-      "faq.a2":"Sí. Si incluye Power Automate, SharePoint o Power BI, se construye dentro de tu entorno Microsoft. Incluye documentación para mantenimiento seguro.",
-      "faq.q3":"¿Cuál es el primer paso típico?",
-      "faq.a3":"Una llamada corta y luego un Diagnóstico de Riesgo Estructural (o un Workshop si hay varios stakeholders). A partir de ahí definimos si conviene quick fix, blueprint o rediseño mayor.",
-      "faq.q4":"¿AI reemplaza este trabajo?",
-      "faq.a4":"AI acelera fórmulas o código, pero no reemplaza decisiones de arquitectura: ownership, gobernanza, controles, dependencias entre áreas y rediseño de sistema. Con modelo estructurado, AI es acelerador — no sustituto.",
+      "faq.a1":"No. Excel suele ser donde vive el sistema — pero el trabajo es arquitectura + controles + gobernanza. Algunos sistemas quedan en Excel por diseño; otros escalan a M365 / Power Platform cuando reduce riesgo y mejora control.",
+      "faq.q2":"¿Cuál es el punto de arranque más rápido?",
+      "faq.a2":"Un Sprint de Diagnóstico sobre 1 planilla/proceso crítico. Le da a liderazgo un mapa de riesgo y el próximo paso correcto (quick fix, build o advisory premium).",
+      "faq.q3":"¿Trabajás dentro del tenant Microsoft?",
+      "faq.a3":"Sí, cuando corresponde. Power Automate / SharePoint / Power BI pueden ser parte — pero solo con modelo estable y gobernado.",
+      "faq.q4":"¿Usás AI?",
+      "faq.a4":"Cuando suma: documentación, testing, detección de anomalías y acelerar automatizaciones. Pero gobernanza, controles y arquitectura siguen siendo la base.",
+      "faq.q5":"¿Se puede hacer remoto?",
+      "faq.a5":"Sí. Workshops y sprints funcionan muy bien remoto. Presencial es posible a pedido (sobre todo con varios stakeholders).",
       "faq.cta":"Agendar llamada",
 
-      "footer.tag":"Arquitectura de Sistemas Operativos","footer.book":"Agendar llamada"
+      "footer.tag":"Arquitectura de Sistemas Operativos",
+      "footer.book":"Agendar llamada"
     };
 
     I18N.pt = {
       "nav.motto":"Sistemas em Excel, prontos para escalar.",
-      "nav.language":"Idioma","nav.services":"Serviços","nav.framework":"Framework","nav.workshops":"Workshops","nav.about":"About","nav.faq":"FAQ","nav.book":"Agendar call",
+      "nav.language":"Idioma",
+      "nav.usecases":"Casos",
+      "nav.services":"Serviços",
+      "nav.workshops":"Workshops",
+      "nav.about":"About",
+      "nav.faq":"FAQ",
+      "nav.book":"Agendar call",
 
-      "hero.badge":"Operações em Excel · Ecossistema Microsoft · Governança",
-      "hero.title":"Estabilize e escale sistemas operacionais baseados em Excel.",
-      "hero.subtitle":"Ajudo equipes de Finanças e Operações a transformar planilhas frágeis em sistemas controlados e sustentáveis — e integrar ferramentas Microsoft (Power Automate, SharePoint, Power BI) apenas quando a escala exige.",
-      "hero.ctaPrimary":"Agendar call","hero.ctaSecondary":"Ver serviços","hero.ctaLinkedin":"LinkedIn",
-      "hero.note":"Sessões executivas. Remoto. Disponível em inglês, espanhol e português.",
-      "hero.kpi1Title":"O que você recebe","hero.kpi1Text":"Números confiáveis, ownership claro e um sistema sustentável (sem depender de um “herói do Excel”).",
-      "hero.kpi2Title":"Bom para","hero.kpi2Text":"CFO/Finanças, FP&A, Operações, Serviços Compartilhados.",
-      "hero.kpi3Title":"Resultados típicos","hero.kpi3Text":"Menos retrabalho, menos erros, fechamento/relatórios mais rápidos e mais controle.",
+      "hero.badge":"Finanças e Ops · Sistemas em Excel · Microsoft 365 · Controles",
+      "hero.title":"Conserte operações frágeis em Excel — sem quebrar o negócio.",
+      "hero.subtitle":"Eu ajudo a reduzir erros, reforçar controles e acelerar relatórios transformando “workarounds” em sistemas operacionais governados. Excel fica quando é a ferramenta certa — e escalamos para Power Platform / M365 apenas quando a escala exige.",
+      "hero.ctaPrimary":"Agendar call",
+      "hero.ctaSecondary":"Ver casos",
+      "hero.ctaLinkedin":"LinkedIn",
+      "hero.pill1":"Risco e controles",
+      "hero.pill2":"Fechamento e velocidade de reporting",
+      "hero.pill3":"Automação com governança",
+      "hero.pill4":"Outputs executivos",
+      "hero.note":"Remoto. Foco executivo. Disponível em inglês, espanhol e português.",
+      "hero.kpi1Title":"Resultados típicos",
+      "hero.kpi1Text":"Menos erros, ciclos mais rápidos, ownership claro e controles que resistem a mudanças de time.",
+      "hero.kpi2Title":"Bom para",
+      "hero.kpi2Text":"CFO / FP&A, Finance Ops, RevOps, Serviços Compartilhados, Business Systems.",
+      "hero.kpi3Title":"Primeiro passo",
+      "hero.kpi3Text":"Call de 20 min → escolher o sprint certo (diagnóstico, build ou advisory).",
+      "hero.kpi4Title":"AI (quando ajuda)",
+      "hero.kpi4Text":"AI acelera documentação, testes, checagens de anomalias e automação — governança é a base.",
 
-      "services.title":"Serviços","services.subtitle":"Projetos por impacto: melhorias táticas, redesenhos estratégicos e transformações.",
-      "services.cta":"Conversar sobre seu caso",
-      "services.s1Title":"Diagnóstico de Risco Estrutural","services.s1Text":"Assessment executivo de sistemas em Excel: estrutura, dependência e confiabilidade.",
-      "services.s1b1":"Revisão do modelo de dados e tabelas","services.s1b2":"Mapa de fragilidade e dependência de pessoas","services.s1b3":"Opções claras (ficar no Excel vs escalar)",
-      "services.s2Title":"Blueprint de Arquitetura","services.s2Text":"Plano de redesenho: estrutura, camadas lógicas, ownership, governança e roadmap de automação.",
-      "services.s2b1":"Separação inputs / modelo / outputs","services.s2b2":"Governança (controle de mudanças + aprovações)","services.s2b3":"Roadmap de escalabilidade (Excel → ecossistema Microsoft)",
-      "services.s3Title":"Implementação & Integração","services.s3Text":"Construção do sistema redesenhado e integração Microsoft apenas onde agrega valor estratégico.",
-      "services.s3b1":"Estabilização do Excel e otimização de performance","services.s3b2":"Power Automate / SharePoint / Power BI (quando necessário)","services.s3b3":"Documentação para o time operar",
-      "services.s4Title":"Retainer de Evolução Governada","services.s4Text":"Estabilidade contínua: mudanças controladas, otimização e melhorias sem quebrar o sistema.",
-      "services.s4b1":"Backlog mensal de mudanças","services.s4b2":"Releases governados + documentação","services.s4b3":"KPIs de confiabilidade para liderança",
-      "services.note":"Nota: muitos projetos permanecem em Excel por design — o objetivo é confiabilidade. Escalamos para ferramentas Microsoft apenas quando melhora controle e reduz risco.",
+      "use.title":"Problemas comuns que eu resolvo",
+      "use.subtitle":"Escolha a dor — e eu mapeio para o modelo mais rápido.",
+      "use.cta":"Conversar sobre seu caso",
 
-      "framework.title":"Magina Operational Architecture Framework","framework.subtitle":"Método simples para estabilizar ambientes em Excel e escalar com segurança.",
-      "framework.p1Title":"1) Diagnóstico Estrutural","framework.p1Text":"Identificar problemas do modelo, estrutura de tabelas, dependência e falhas de confiabilidade.",
-      "framework.p2Title":"2) Re-Arquitetura do Modelo","framework.p2Text":"Redesenhar o modelo e camadas lógicas para performance, clareza e manutenção.",
-      "framework.p3Title":"3) Automação Controlada","framework.p3Text":"Automatizar apenas com arquitetura sólida — evitar “automação em cima do caos”.",
-      "framework.p4Title":"4) Integração Escalável","framework.p4Text":"Integrar SharePoint, Power Automate e Power BI quando a escala exigir.",
-      "framework.compareTitle":"Planilha vs. Sistema",
-      "framework.leftTitle":"Situação comum","framework.l1":"Centenas de fórmulas, lógica pouco clara","framework.l2":"Caos de versões e erros ocultos","framework.l3":"Depende de uma pessoa",
-      "framework.rightTitle":"Resultado Magina","framework.r1":"Modelo claro + camadas lógicas","framework.r2":"Ownership + controle de mudanças","framework.r3":"Operação confiável que escala",
-      "framework.note":"O objetivo não é “mais ferramentas”. É operação estável e números confiáveis.",
-      "framework.cta":"Ver se faz sentido","framework.cta2":"Workshops",
+      "use.u1Title":"Fechamento/reporting lento (ninguém confia nos números)",
+      "use.u1Text":"Consolidações, checagens manuais, links quebrados e correções de última hora todo mês.",
+      "use.u1b1":"Re-arquitetura do modelo (inputs → modelo → outputs)",
+      "use.u1b2":"Controles (reconciliações, tie-outs, trilha de auditoria)",
+      "use.u1b3":"Padronizar refresh e handoffs (M365 / Power Automate conforme necessário)",
 
-      "work.title":"Workshops","work.subtitle":"Sessões executivas para expor risco, alinhar ownership e definir roadmap de arquitetura.",
-      "work.w1Title":"Workshop de Risco em Excel (2–3 horas)","work.w1Text":"Identificar fragilidade, dependência, caos de versões e risco em planilhas críticas.",
-      "work.w2Title":"Alinhamento de Arquitetura Operacional","work.w2Text":"Alinhar liderança sobre ownership, governança e o caminho do Excel para sistemas escaláveis.",
-      "work.w3Title":"Confiabilidade de Relatórios e Aceleração do Fechamento","work.w3Text":"Aumentar confiança nos números: estrutura, controles e ciclos mais rápidos (Finanças e Ops).",
-      "work.w4Title":"Automação sem Fragilidade","work.w4Text":"Como automatizar com segurança: estabilizar o modelo e depois aplicar Power Automate/SharePoint onde reduz risco.",
-      "work.note":"Para CFO/Finanças, Operações, Serviços Compartilhados e Business Systems.",
-      "work.outcomesTitle":"O que o time leva","work.o1":"Mapa de riscos e prioridades","work.o2":"Recomendações de ownership e governança","work.o3":"Roadmap prático de arquitetura",
-      "work.cta":"Planejar workshop","work.cta2":"Ver serviços",
+      "use.u2Title":"Planilhas críticas dependem de uma pessoa",
+      "use.u2Text":"Risco de dependência: quando ela não está, o negócio trava.",
+      "use.u2b1":"Mapa de dependência + correções rápidas",
+      "use.u2b2":"Documentação realmente operável",
+      "use.u2b3":"Controle de mudanças (para evitar quebrar tudo)",
+
+      "use.u3Title":"Caos de versões e erros ocultos",
+      "use.u3Text":"Vários arquivos, lógica inconsistente e caça a erros consome tempo senior.",
+      "use.u3b1":"Single source of truth",
+      "use.u3b2":"Validações + relatório de exceções",
+      "use.u3b3":"Acessos + aprovações + release notes (governança)",
+
+      "use.u4Title":"Processos manuais ao redor do Excel (emails, copiar/colar, aprovações)",
+      "use.u4Text":"Pessoas viram “integrações” entre sistemas. É caro e arriscado.",
+      "use.u4b1":"Automatizar intake e aprovações (Forms/SharePoint/Power Automate)",
+      "use.u4b2":"Reduzir retrabalho com captura estruturada",
+      "use.u4b3":"Manter Excel como motor de cálculo quando fizer sentido",
+
+      "use.u5Title":"Dashboards existem, mas decisões ainda são em planilhas",
+      "use.u5Text":"Modelo confuso, métricas inconsistentes e baixa adoção.",
+      "use.u5b1":"Definição de métricas + governança",
+      "use.u5b2":"Modelagem Power BI (DAX, performance) quando necessário",
+      "use.u5b3":"Cadência executiva de reporting",
+
+      "use.u6Title":"Você quer AI — mas não quer novo caos",
+      "use.u6Text":"AI é poderosa, mas sem estrutura e governança aumenta risco.",
+      "use.u6b1":"Arquitetura pronta para AI (inputs limpos, camadas claras)",
+      "use.u6b2":"Controles de prompts, acesso e validação",
+      "use.u6b3":"AI como acelerador (não substituto de controles)",
+
+      "use.note":"Nota: nem tudo exige sair do Excel. Padrão: estabilizar primeiro, escalar só se o ROI justificar.",
+
+      "svc.title":"Serviços (tangível + premium)",
+      "svc.subtitle":"Entradas rápidas para urgências — e camada premium quando liderança quer redesenho amplo.",
+      "svc.cta":"Agendar call",
+
+      "svc.s1Title":"Sprint de Diagnóstico (Rápido)",
+      "svc.s1Text":"Assessment de 1 planilha/processo crítico: risco, controles, gargalos e plano mais rápido.",
+      "svc.s1b1":"Mapa de risco + origem dos erros",
+      "svc.s1b2":"Quick wins",
+      "svc.s1b3":"Decisão: estabilizar vs redesenhar vs automatizar",
+
+      "svc.s2Title":"Sprint de Build (Implementação)",
+      "svc.s2Text":"Construir o sistema melhorado: reestrutura, controles e automação ao redor quando reduzir risco.",
+      "svc.s2b1":"Arquitetura (inputs/model/outputs)",
+      "svc.s2b2":"Controles + validações + exceções",
+      "svc.s2b3":"Opcional Power Automate / SharePoint / BI",
+
+      "svc.s3Title":"Operational Systems Architecture (Premium)",
+      "svc.s3Text":"Redesenho executivo multi-processo: ownership, governança, roadmap e arquitetura escalável.",
+      "svc.s3b1":"Blueprint + operating model",
+      "svc.s3b2":"Governança: controle de mudanças, aprovações, trilha",
+      "svc.s3b3":"Roadmap: Excel-first → ecossistema Microsoft (quando necessário)",
+
+      "svc.s4Title":"Retainer de Evolução Governada",
+      "svc.s4Text":"Manter estabilidade enquanto o negócio muda: releases controlados, melhoria contínua e KPIs.",
+      "svc.s4b1":"Backlog mensal + triagem",
+      "svc.s4b2":"Releases governados + documentação",
+      "svc.s4b3":"Updates executivos",
+
+      "svc.delTitle":"Entregáveis para liderança",
+      "svc.delText":"Mapa de risco, blueprint, checklist de controles, documentação e roadmap priorizado — não só “uma planilha melhor”.",
+      "svc.delCta":"Quer começar com workshop?",
+      "svc.note":"Posso trabalhar no seu tenant (M365 / Power Platform). Em Excel-only o objetivo continua sendo governança e confiabilidade.",
+
+      "wk.title":"Workshops",
+      "wk.subtitle":"A forma mais rápida de alinhar stakeholders, expor risco e decidir o próximo passo.",
+      "wk.w1Title":"Risco e Controles em Excel (2–3h)",
+      "wk.w1Text":"Identificar onde erros acontecem, por que controles falham e como é “boa prática” em planilhas críticas.",
+      "wk.w2Title":"Aceleração de Fechamento (Finance Ops)",
+      "wk.w2Text":"Reduzir passos manuais e retrabalho. Definir um modelo confiável de fechamento/reporting.",
+      "wk.w3Title":"Automação sem Fragilidade (Power Platform)",
+      "wk.w3Text":"Automatizar intake, aprovações e reporting sem criar novo caos.",
+      "wk.w4Title":"Workshop sob medida",
+      "wk.w4Text":"Adaptado ao seu processo: ajustes de receita, accruals, orçamento, forecast ou reporting operacional.",
+      "wk.note":"Para líderes e donos reais do processo/planilhas.",
+      "wk.outTitle":"O que você leva",
+      "wk.o1":"Mapa de risco + prioridades",
+      "wk.o2":"Recomendações de controles e governança",
+      "wk.o3":"Roadmap (quick wins → escalabilidade)",
+      "wk.o4":"Próximo passo claro: Diagnóstico ou Build",
+      "wk.cta":"Planejar workshop",
+      "wk.cta2":"Ver serviços",
 
       "about.title":"About",
-      /*"about.photoNote":"Envie um arquivo chamado <strong>profile.jpg</strong> para substituir este placeholder.",*/
+      "about.photoHint":"Dica: use uma foto quadrada; o recorte circular centraliza o rosto.",
       "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
-      "about.bio":"17+ anos em ambientes corporativos liderando automação, BI e transformação operacional. Minha base mais forte é arquitetura avançada em Excel: modelos estáveis, performance e escala para o ecossistema Microsoft quando necessário.",
-      "about.cta":"Agendar call","about.linkedin":"LinkedIn",
+      "about.bio":"17+ anos liderando automação, BI e transformação operacional. Eu transformo “operações em Excel” em sistemas governados: modelos mais claros, controles mais fortes, menor dependência e fluxos escaláveis em Microsoft 365 / Power Platform quando necessário.",
+      "about.cta":"Agendar call",
+      "about.linkedin":"LinkedIn",
+      "about.note":"Foco em outcomes: confiabilidade, velocidade e controle — não “mais ferramentas”.",
 
-      "faq.title":"FAQ","faq.subtitle":"Respostas curtas para dúvidas comuns.",
+      "faq.title":"FAQ",
+      "faq.subtitle":"Respostas curtas.",
       "faq.q1":"Isso é “apenas consultoria de Excel”?",
-      "faq.a1":"Não. Excel часто é o ambiente onde o sistema vive. O trabalho é arquitetura operacional: estabilizar o modelo, reduzir dependência e adicionar governança. Alguns sistemas ficam em Excel por design; outros escalam para ferramentas Microsoft quando necessário.",
-      "faq.q2":"Você constrói no nosso tenant?",
-      "faq.a2":"Sim. Se incluir Power Automate, SharePoint ou Power BI, é construído no seu ambiente Microsoft. Inclui documentação para manutenção segura.",
-      "faq.q3":"Qual o primeiro passo típico?",
-      "faq.a3":"Uma call curta e depois um Diagnóstico de Risco Estrutural (ou um Workshop se houver vários stakeholders). Depois decidimos entre quick fix, blueprint ou redesenho maior.",
-      "faq.q4":"AI vai substituir esse trabalho?",
-      "faq.a4":"AI acelera fórmulas e código, mas não substitui decisões de arquitetura: ownership, governança, controles, dependências entre áreas e redesenho do sistema. Com modelo estruturado, AI é acelerador — não substituto.",
+      "faq.a1":"Não. Excel costuma ser onde o sistema vive — o trabalho é arquitetura + controles + governança. Alguns sistemas ficam em Excel por design; outros escalam para M365 / Power Platform quando reduz risco e melhora controle.",
+      "faq.q2":"Qual o início mais rápido?",
+      "faq.a2":"Um Sprint de Diagnóstico em uma planilha/processo crítico. Entrega mapa de risco e o próximo passo correto.",
+      "faq.q3":"Você trabalha no tenant Microsoft?",
+      "faq.a3":"Sim, quando necessário. Power Automate / SharePoint / Power BI entram depois de estabilizar e governar.",
+      "faq.q4":"Você usa AI?",
+      "faq.a4":"Quando ajuda: documentação, testes, anomalias e acelerar automação. Governança e controles continuam sendo a base.",
+      "faq.q5":"Dá para fazer remoto?",
+      "faq.a5":"Sim. Remoto funciona muito bem. Presencial é possível por demanda.",
       "faq.cta":"Agendar call",
 
-      "footer.tag":"Arquitetura de Sistemas Operacionais","footer.book":"Agendar call"
+      "footer.tag":"Arquitetura de Sistemas Operacionais",
+      "footer.book":"Agendar call"
     };
 
     function applyLang(lang){
@@ -902,18 +1229,24 @@
     function init(){
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      // booking buttons
-      ["navBookBtn","heroBookBtn"].forEach(id=>{
+      // set links from CONFIG
+      const bookLinks = ["navBookBtn","heroBookBtn","useCta","svcCta","wkCta","aboutCta","faqCta","footerBook"];
+      bookLinks.forEach(id=>{
         const el = document.getElementById(id);
         if (el) el.href = CONFIG.calendarUrl;
       });
 
-      // profile image placeholder
+      const linkedinLinks = ["heroLinkedin","aboutLinkedin","footerLinkedin"];
+      linkedinLinks.forEach(id=>{
+        const el = document.getElementById(id);
+        if (el) el.href = CONFIG.linkedinUrl;
+      });
+
       const img = document.getElementById("profileImg");
       if (img){
         img.src = CONFIG.photoFile;
         img.onerror = () => {
-          img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Crect width='100%25' height='100%25' rx='120' ry='120' fill='%231f2937'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Arial' font-size='14'%3Eprofile.jpg%3C/text%3E%3C/svg%3E";
+          img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Crect width='100%25' height='100%25' rx='120' ry='120' fill='%231f2937'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Arial' font-size='14'%3Eprofile.png%3C/text%3E%3C/svg%3E";
         };
       }
 
@@ -933,14 +1266,3 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
