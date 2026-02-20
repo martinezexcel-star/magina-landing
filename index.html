@@ -196,6 +196,7 @@
     const CONFIG = {
       calendarUrl: "https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled",
       linkedinUrl: "https://www.linkedin.com/in/ariel-mart%C3%ADnez-26521511/",
+      contactEmail: "arielmartinez@maginaconsulting.com",
       photoFile: "profile.png",   // keep this in the repo root next to index.html
       defaultLang: "en"           // en | es | pt
     };
@@ -276,6 +277,11 @@
               <a class="btn btn-ghost btn-lg" href="#usecases" data-i18n="hero.ctaSecondary">See common use cases</a>
               <a class="btn btn-ghost btn-lg" target="_blank" rel="noopener"
                  href="#" id="heroLinkedin" data-i18n="hero.ctaLinkedin">LinkedIn</a>
+            </div>
+
+            <div class="mt-3 small muted">
+              <span data-i18n="contact.label">Email</span>:
+              <a id="heroEmail" class="text-decoration-none" style="color: var(--muted);" href="#"> </a>
             </div>
 
             <div class="mt-4 d-flex flex-wrap gap-2">
@@ -631,7 +637,6 @@
       <div class="row g-4 align-items-center">
         <div class="col-lg-4 text-center">
           <img id="profileImg" class="avatar" src="" alt="Ariel Martínez" />
-          <div class="mt-3 small muted" data-i18n="about.photoHint">Tip: use a square photo; the circle crop will keep your face centered.</div>
         </div>
 
         <div class="col-lg-8">
@@ -751,7 +756,8 @@
         </div>
         <div class="col-md-5 text-md-end">
           <a class="text-decoration-none me-3" style="color: var(--muted);" target="_blank" rel="noopener" href="#" id="footerLinkedin">LinkedIn</a>
-          <a class="text-decoration-none" style="color: var(--muted);" target="_blank" rel="noopener" href="#" id="footerBook" data-i18n="footer.book">Book a Call</a>
+          <a class="text-decoration-none me-3" style="color: var(--muted);" target="_blank" rel="noopener" href="#" id="footerBook" data-i18n="footer.book">Book a Call</a>
+          <a class="text-decoration-none" style="color: var(--muted);" href="#" id="footerEmail"></a>
         </div>
       </div>
     </div>
@@ -762,6 +768,8 @@
     const I18N = {};
 
     I18N.en = {
+      "contact.label":"Email",
+
       "nav.motto":"Excel-driven systems, built to scale.",
       "nav.language":"Language",
       "nav.usecases":"Use cases",
@@ -885,7 +893,6 @@
       "wk.cta2":"See services",
 
       "about.title":"About",
-      "about.photoHint":"Tip: use a square photo; the circle crop will keep your face centered.",
       "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
       "about.bio":"17+ years leading automation, BI, and operational transformation. I specialize in turning “Excel operations” into governed systems: clearer models, stronger controls, lower key-person risk, and scalable workflows across Microsoft 365 / Power Platform when needed.",
       "about.cta":"Book a Call",
@@ -911,6 +918,8 @@
     };
 
     I18N.es = {
+      "contact.label":"Email",
+
       "nav.motto":"Sistemas basados en Excel, listos para escalar.",
       "nav.language":"Idioma",
       "nav.usecases":"Casos comunes",
@@ -1035,7 +1044,6 @@
       "wk.cta2":"Ver servicios",
 
       "about.title":"About",
-      "about.photoHint":"Tip: usá una foto cuadrada; el recorte circular mantiene la cara centrada.",
       "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
       "about.bio":"17+ años liderando automatización, BI y transformación operativa. Me especializo en convertir “operaciones en Excel” en sistemas gobernados: modelos más claros, controles más fuertes, menor dependencia y flujos escalables en Microsoft 365 / Power Platform cuando corresponde.",
       "about.cta":"Agendar llamada",
@@ -1061,6 +1069,8 @@
     };
 
     I18N.pt = {
+      "contact.label":"Email",
+
       "nav.motto":"Sistemas em Excel, prontos para escalar.",
       "nav.language":"Idioma",
       "nav.usecases":"Casos",
@@ -1185,7 +1195,6 @@
       "wk.cta2":"Ver serviços",
 
       "about.title":"About",
-      "about.photoHint":"Dica: use uma foto quadrada; o recorte circular centraliza o rosto.",
       "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
       "about.bio":"17+ anos liderando automação, BI e transformação operacional. Eu transformo “operações em Excel” em sistemas governados: modelos mais claros, controles mais fortes, menor dependência e fluxos escaláveis em Microsoft 365 / Power Platform quando necessário.",
       "about.cta":"Agendar call",
@@ -1240,6 +1249,16 @@
       linkedinLinks.forEach(id=>{
         const el = document.getElementById(id);
         if (el) el.href = CONFIG.linkedinUrl;
+      });
+
+      // email links from CONFIG
+      const emailLinks = ["heroEmail","footerEmail"];
+      emailLinks.forEach(id=>{
+        const el = document.getElementById(id);
+        if (el){
+          el.href = "mailto:" + CONFIG.contactEmail;
+          el.textContent = CONFIG.contactEmail;
+        }
       });
 
       const img = document.getElementById("profileImg");
