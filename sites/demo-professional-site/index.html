@@ -1,11 +1,456 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>TEST-200</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Demo Professional | Professional Services</title>
+  <meta name="description" content="Professional services landing page" />
+  <style>
+    :root {
+      --bg: #f7f8fb;
+      --surface: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --primary: #2563eb;
+      --primary-2: #1d4ed8;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Segoe UI, Arial, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { width: min(100% - 32px, var(--max)); margin: 0 auto; }
+    .section { padding: 72px 0; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.8);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+    .btn-primary { background: var(--primary); color: #fff; }
+    .btn-primary:hover { background: var(--primary-2); }
+    .btn-secondary { background: #fff; border-color: var(--line); color: var(--text); }
+    .btn-secondary:hover { background: #f9fafb; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(248,250,252,.75);
+      border-bottom: 1px solid rgba(229,231,235,.9);
+    }
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+    }
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      object-fit: cover;
+      background: #dbeafe;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .hero-copy h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(38px, 7vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -.03em;
+    }
+    .hero-copy p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 60ch;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .hero-visual {
+      padding: 22px;
+    }
+    .hero-visual img {
+      width: 100%;
+      border-radius: 20px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #e5e7eb;
+    }
+
+    .section-head {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+    .section-head h2 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.1;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .features-grid,
+    .offerings-grid,
+    .faq-grid {
+      display: grid;
+      gap: 20px;
+    }
+    .features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .offerings-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .faq-grid { grid-template-columns: 1fr; }
+
+    .feature-card,
+    .offering-card,
+    .faq-item,
+    .cta-box {
+      padding: 24px;
+    }
+    .feature-card h3,
+    .offering-card h3,
+    .faq-item h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+    .feature-card p,
+    .offering-card p,
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .offering-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    .price {
+      white-space: nowrap;
+      font-weight: 700;
+      color: var(--primary-2);
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .faq-item details { width: 100%; }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-answer {
+      margin-top: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .about-grid,
+    .cta-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .about-copy h2,
+    .cta-copy h2,
+    .contact-copy h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.1;
+    }
+    .about-copy p,
+    .cta-copy p,
+    .contact-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .about-image img,
+    .contact-image img {
+      border-radius: 20px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: #e5e7eb;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .contact-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      color: var(--text);
+    }
+    .contact-row span { color: var(--muted); }
+
+    .footer {
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about-grid,
+      .cta-grid,
+      .contact-grid,
+      .features-grid,
+      .offerings-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-inner {
+        min-height: auto;
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .section { padding: 56px 0; }
+      .hero-copy p { font-size: 16px; }
+      .footer-inner {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>TEST-200</h1>
-  <p>Publisher test</p>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="#top">
+        <img class="nav-logo" src="https://maginaconsulting.sharepoint.com/:i:/s/MaginaStudio/IQCnb5bmWNvMQ5tQRoWk7-g7AaXVCkcbS38YBZNqXM0ziuU?e=bbu1sr" alt="Demo Professional logo" />
+        <span>Demo Professional</span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#offerings">Services</a>
+        <a href="#faqs">FAQs</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="pill">Professional services</span>
+          <h1>Demo Professional</h1>
+          <p>Trusted services tailored to your business needs.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Contact us</a>
+            <a class="btn btn-secondary" href="#offerings">View services</a>
+          </div>
+
+          <div class="hero-meta">
+            <span class="pill">Buenos Aires, AR</span>
+            <span class="pill">Spanish</span>
+            <span class="pill">Tailored solutions</span>
+          </div>
+        </div>
+
+        <div class="hero-visual card">
+          <img src="https://maginaconsulting.sharepoint.com/:i:/s/MaginaStudio/IQCnb5bmWNvMQ5tQRoWk7-g7AaXVCkcbS38YBZNqXM0ziuU?e=bbu1sr" alt="Demo Professional hero image" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container about-grid">
+        <div class="about-copy">
+          <h2>About us</h2>
+          <p>We help clients with reliable and professional services designed for practical results.</p>
+        </div>
+        <div class="about-image card">
+          <img src="https://maginaconsulting.sharepoint.com/:i:/s/MaginaStudio/IQCnb5bmWNvMQ5tQRoWk7-g7AaXVCkcbS38YBZNqXM0ziuU?e=bbu1sr" alt="Demo Professional about image" />
+        </div>
+      </div>
+    </section>
+
+    <section id="benefits" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Why choose us</h2>
+          <p>Clear value, personalized support and practical delivery.</p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card card"><h3>Personalized service</h3><p>Solutions adapted to your goals.</p></article><article class="feature-card card"><h3>Reliable execution</h3><p>Clear process and predictable delivery.</p></article><article class="feature-card card"><h3>Professional results</h3><p>High quality content and presentation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="offerings" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Services</h2>
+          <p>Explore our current offerings.</p>
+        </div>
+
+        <div class="offerings-grid">
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="faqs" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Frequently asked questions</h2>
+          <p>Answers to common questions.</p>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-item card"><details><summary>What</summary><div class="faq-answer">No</div></details></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta" class="section">
+      <div class="container">
+        <div class="cta-box card">
+          <div class="cta-grid">
+            <div class="cta-copy">
+              <h2>Ready to get started?</h2>
+              <p>Contact us to discuss your project and next steps.</p>
+            </div>
+            <div style="display:flex; justify-content:flex-start; align-items:center; gap:12px; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="#contact">Contact us</a>
+              <a class="btn btn-secondary" href="#offerings">View services</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="container contact-grid">
+        <div class="contact-copy">
+          <h2>Contact</h2>
+          <p>Get in touch to learn more about our services.</p>
+
+          <div class="contact-list">
+            <a class="contact-row" href="mailto:arielmartinez@maginaconsulting.com"><strong>Email</strong> <span>arielmartinez@maginaconsulting.com</span></a>
+            <a class="contact-row" href="#contact"><strong>WhatsApp</strong> <span>WhatsApp</span></a>
+            <a class="contact-row" href="#contact"><strong>Instagram</strong> <span>Instagram</span></a>
+          </div>
+        </div>
+
+        <div class="contact-image card">
+          <img src="https://maginaconsulting.sharepoint.com/:i:/s/MaginaStudio/IQCnb5bmWNvMQ5tQRoWk7-g7AaXVCkcbS38YBZNqXM0ziuU?e=bbu1sr" alt="Demo Professional contact image" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 Demo Professional. All rights reserved.</span>
+      <span>Professional services</span>
+    </div>
+  </footer>
 </body>
 </html>
