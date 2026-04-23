@@ -1,1287 +1,1371 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Magina | Operational Systems Architecture</title>
-
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Magina | Turn your idea into a business people trust and buy from</title>
+  <meta name="description" content="Magina helps entrepreneurs, professionals and small businesses turn ideas or messy operations into something clearer, more professional and easier to sell." />
   <style>
-    :root {
-      --bg: #0b1220;
-      --panel: rgba(255,255,255,.04);
-      --panel2: rgba(255,255,255,.06);
-      --text: #e5e7eb;
-      --muted: #a3b3c7;
-      --line: rgba(255,255,255,.10);
-      --brand: #3b82f6;
-      --brand2: #2563eb;
-
-      --btnText: #ffffff;
-      --btnHover: #1d4ed8;
-      --btnActive: #1e40af;
-      --btnRing: rgba(59,130,246,.35);
+    :root{
+      --bg:#06101d;
+      --bg2:#0b1728;
+      --bg3:#112542;
+      --card:rgba(15,31,52,.82);
+      --card-strong:rgba(11,24,41,.96);
+      --line:rgba(160,191,255,.16);
+      --text:#eef5ff;
+      --muted:#aabed8;
+      --soft:#849dbc;
+      --accent:#7cc7ff;
+      --accent2:#9b86ff;
+      --success:#84f1c2;
+      --shadow:0 22px 64px rgba(0,0,0,.34);
+      --glow:0 18px 44px rgba(124,199,255,.25);
+      --radius:24px;
+      --max:1180px;
     }
 
-    html, body { background: var(--bg); color: var(--text); }
-    body { font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,"Segoe UI",Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(124,199,255,.14), transparent 28%),
+        radial-gradient(circle at top right, rgba(155,134,255,.12), transparent 24%),
+        linear-gradient(180deg,#06101d 0%,#0a1627 45%,#06101d 100%);
+      line-height:1.55;
+    }
 
-    .nav-blur {
-      background: rgba(11,18,32,.78);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--line);
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    .container{width:min(var(--max), calc(100% - 32px));margin:0 auto}
+    .section{padding:94px 0}
+    .center{text-align:center}
+    .small{font-size:14px}
+    .lead{font-size:18px;max-width:760px}
+    .muted{color:var(--muted)}
+    .soft{color:var(--soft)}
+
+    h1,h2,h3,h4{margin:0 0 14px}
+    h1{font-size:clamp(42px,6.6vw,80px);line-height:1.01;letter-spacing:-1.9px}
+    h2{font-size:clamp(30px,4.2vw,50px);line-height:1.08;letter-spacing:-1px}
+    h3{font-size:clamp(22px,3vw,30px);line-height:1.15}
+    p{margin:0 0 14px;color:var(--muted)}
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#dceaff;
+      font-size:13px;
+    }
+    .eyebrow::before{
+      content:"";
+      width:8px;height:8px;border-radius:50%;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 18px rgba(124,199,255,.72);
+    }
+
+    .grid{display:grid;gap:24px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+      height:100%;
+    }
+
+    .site-header{
+      position:sticky;top:0;z-index:1000;
+      backdrop-filter:blur(16px);
+      background:rgba(6,16,29,.78);
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .nav{
+      min-height:82px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:800;
+      font-size:22px;
+      letter-spacing:-.5px;
+      white-space:nowrap;
     }
     .brand-mark{
-      width:36px;height:36px;border-radius:10px;
-      background: linear-gradient(135deg, var(--brand), #22c55e);
-      box-shadow:0 12px 40px rgba(59,130,246,.18);
-      flex:0 0 auto;
+      width:38px;height:38px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:var(--glow);
+      position:relative;
     }
-    .brand-stack{ line-height: 1.05; }
-    .brand-motto{ font-size:.78rem; color: var(--muted); }
-
-    .hero { padding-top: 110px; padding-bottom: 70px; }
-    .hero-card{
-      background:
-        radial-gradient(1000px 400px at 10% 0%, rgba(59,130,246,.25), transparent 60%),
-        radial-gradient(700px 300px at 90% 30%, rgba(34,197,94,.18), transparent 60%),
-        var(--panel);
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:34px;
+    .brand-mark::after{
+      content:"";
+      position:absolute;inset:8px;
+      border-radius:9px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(6,16,29,.36);
     }
 
-    .kpi{
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      flex-wrap:wrap;
+    }
+    .nav-links a{
+      color:#dce8f7;
+      font-size:15px;
+      opacity:.95;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+    }
+
+    .lang-switch{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:6px;
+      border-radius:999px;
       border:1px solid var(--line);
-      background: var(--panel2);
+      background:rgba(255,255,255,.04);
+    }
+    .lang-btn{
+      border:0;
+      background:transparent;
+      color:#dce8f7;
+      padding:10px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+    .lang-btn.active{
+      background:linear-gradient(135deg, rgba(124,199,255,.22), rgba(155,134,255,.24));
+      color:#fff;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:52px;
+      padding:0 22px;
       border-radius:16px;
-      padding:16px;
-      height:100%;
+      font-weight:800;
+      font-size:15px;
+      transition:.2s ease;
+      border:1px solid transparent;
+      cursor:pointer;
+    }
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{
+      color:#07111f;
+      background:linear-gradient(135deg,#92dbff,#a0a9ff);
+      box-shadow:var(--glow);
+    }
+    .btn-secondary{
+      background:rgba(255,255,255,.05);
+      border-color:var(--line);
+      color:#eef6ff;
+    }
+    .btn-full{width:100%}
+
+    .mobile-menu-toggle{
+      display:none;
+      width:46px;height:46px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      font-size:20px;
+      cursor:pointer;
+    }
+    .mobile-panel{display:none;padding-bottom:16px}
+    .mobile-panel.open{display:block}
+    .mobile-links{display:grid;gap:10px;padding-top:10px}
+    .mobile-links a{
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#eef6ff;
     }
 
-    .section{ padding: 70px 0; }
-    .cardx{
+    .hero{padding:54px 0 78px}
+    .hero-wrap{
+      display:grid;
+      grid-template-columns:1.08fr .92fr;
+      gap:34px;
+      align-items:center;
+    }
+    .hero-copy p{max-width:720px}
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin:28px 0 18px;
+    }
+    .hero-proof{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin:18px 0 20px;
+    }
+    .hero-proof span,
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
       border:1px solid var(--line);
-      background: var(--panel);
+      background:rgba(255,255,255,.04);
+      color:#e7f0ff;
+      font-size:14px;
+    }
+
+    .hero-panel{
+      background:linear-gradient(180deg, rgba(17,37,65,.92), rgba(10,22,38,.98));
+      border:1px solid rgba(160,191,255,.16);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-panel::before{
+      content:"";
+      position:absolute;
+      width:280px;height:280px;border-radius:50%;
+      right:-100px;top:-100px;
+      background:radial-gradient(circle, rgba(124,199,255,.18), transparent 68%);
+    }
+    .mock-window{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      padding:18px;
+      position:relative;
+    }
+    .mock-top{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;margin-bottom:16px;
+    }
+    .mock-dots{display:flex;gap:8px}
+    .mock-dots span{
+      width:10px;height:10px;border-radius:50%;
+      background:rgba(255,255,255,.2);
+    }
+    .mock-chip{
+      font-size:12px;font-weight:800;
+      padding:8px 12px;border-radius:999px;
+      border:1px solid rgba(132,241,194,.18);
+      background:rgba(132,241,194,.10);
+      color:#eafff3;
+    }
+    .mock-head{
+      display:flex;justify-content:space-between;gap:14px;align-items:flex-start;
+      margin-bottom:16px;
+    }
+    .mock-head strong{font-size:22px}
+    .mock-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .mini-box{
       border-radius:18px;
-      padding:22px;
-      height:100%;
+      border:1px solid rgba(255,255,255,.07);
+      background:rgba(255,255,255,.035);
+      padding:16px;
     }
-    .cardx:hover{
-      border-color: rgba(255,255,255,.18);
-      background: rgba(255,255,255,.05);
-      transform: translateY(-1px);
-      transition: .15s ease;
+    .mini-box h4{font-size:16px;margin-bottom:12px}
+    .metric{
+      display:flex;justify-content:space-between;gap:12px;
+      padding:12px 0;
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
-
-    .muted{ color: var(--muted); }
-    .badge-soft{
-      background: rgba(59,130,246,.14);
-      border: 1px solid rgba(59,130,246,.25);
-      color:#cfe1ff;
+    .metric:last-child{border-bottom:0;padding-bottom:0}
+    .metric b{font-size:18px}
+    .request-list{display:grid;gap:10px}
+    .request-item{
+      display:flex;justify-content:space-between;align-items:center;
+      gap:10px;
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.06);
+      font-size:14px;
     }
-
-    .btn-brand{
-      background: var(--brand2);
-      border:1px solid rgba(255,255,255,.14);
-      color: var(--btnText) !important;
-      font-weight: 600;
-      letter-spacing: .2px;
-      box-shadow: 0 10px 30px rgba(37,99,235,.18);
-    }
-    .btn-brand:hover{
-      background: var(--btnHover);
-      border-color: rgba(255,255,255,.18);
-      color: var(--btnText) !important;
-      transform: translateY(-1px);
-    }
-    .btn-brand:active{
-      background: var(--btnActive) !important;
-      border-color: rgba(255,255,255,.20) !important;
-      color: var(--btnText) !important;
-      transform: translateY(0);
-    }
-    .btn-brand:focus,
-    .btn-brand:focus-visible{
-      outline: none;
-      box-shadow: 0 0 0 .25rem var(--btnRing), 0 10px 30px rgba(37,99,235,.18);
+    .tag{
+      white-space:nowrap;
+      padding:6px 9px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      background:rgba(124,199,255,.12);
+      border:1px solid rgba(124,199,255,.18);
+      color:#dff1ff;
     }
 
-    .btn-ghost{
+    .icon{
+      width:48px;height:48px;border-radius:15px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(124,199,255,.18), rgba(155,134,255,.22));
+      border:1px solid rgba(255,255,255,.08);
+      margin-bottom:16px;
+      font-size:20px;
+    }
+
+    .list{
+      list-style:none;
+      padding:0;margin:16px 0 0;
+      display:grid;gap:11px;
+    }
+    .list li{
+      display:flex;gap:10px;align-items:flex-start;
+      color:#deebfb;
+    }
+    .list li::before{
+      content:"✓";
+      color:var(--success);
+      font-weight:900;
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+
+    .plan.highlight{
+      background:linear-gradient(180deg, rgba(20,47,78,.96), rgba(12,26,45,.98));
+      border-color:rgba(124,199,255,.28);
+      transform:translateY(-6px);
+    }
+    .plan-badge{
+      display:inline-flex;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      color:#fff;
+      background:linear-gradient(135deg, rgba(124,199,255,.24), rgba(155,134,255,.26));
+      border:1px solid rgba(255,255,255,.12);
+      margin-bottom:14px;
+    }
+    .plan hr{
+      border:0;
+      border-top:1px solid rgba(255,255,255,.08);
+      margin:18px 0;
+    }
+
+    .steps{
+      counter-reset:step;
+      display:grid;gap:18px;
+      margin-top:26px;
+    }
+    .step{
+      position:relative;
+      padding-left:74px;
+    }
+    .step::before{
+      counter-increment:step;
+      content:counter(step);
+      position:absolute;left:0;top:0;
+      width:48px;height:48px;border-radius:14px;
+      display:grid;place-items:center;
+      font-weight:900;
+      color:#07111f;
+      background:linear-gradient(135deg,#91d8ff,#9ca7ff);
+      box-shadow:var(--glow);
+    }
+
+    .faq{display:grid;gap:16px;margin-top:28px}
+    .faq-item{
+      background:rgba(255,255,255,.04);
       border:1px solid var(--line);
-      color: var(--text);
-      background: transparent;
+      border-radius:18px;
+      padding:20px;
     }
-    .btn-ghost:hover{ background: rgba(255,255,255,.06); }
+    .faq-item h4{font-size:18px;margin-bottom:8px}
 
-    .hrline{ border-top:1px solid var(--line); margin:0; }
-    .anchor-offset{ scroll-margin-top: 92px; }
-
-    .avatar{
-      width:180px;
-      height:180px;
-      border-radius:50%;
-      object-fit:cover;
-      object-position:center 8%;
-      display:block;
-      margin:0 auto;
-      border:3px solid rgba(255,255,255,.14);
-      box-shadow:0 20px 60px rgba(0,0,0,.35);
-      background: rgba(255,255,255,.04);
+    .cta-box{
+      padding:36px;
+      border-radius:28px;
+      border:1px solid rgba(160,191,255,.18);
+      background:
+        radial-gradient(circle at top right, rgba(155,134,255,.16), transparent 30%),
+        linear-gradient(180deg, rgba(20,47,78,.95), rgba(11,24,41,.98));
+      box-shadow:var(--shadow);
+    }
+    .cta-row{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:24px;flex-wrap:wrap;
     }
 
     .footer{
-      padding:36px 0;
-      border-top:1px solid var(--line);
-      color: var(--muted);
-      font-size:.92rem;
+      padding:26px 0 40px;
+      border-top:1px solid rgba(255,255,255,.05);
+    }
+    .footer-row{
+      display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+      color:var(--soft);font-size:14px;
+    }
+    .footer-links{
+      display:flex;gap:14px;flex-wrap:wrap;
     }
 
-    .lang-pill{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      border-radius:12px;
-      padding:7px 10px;
-    }
-    .lang-pill select{
-      background: transparent;
-      color: var(--text);
-      border:0;
-      outline:none;
-      padding-right:4px;
-    }
-    .lang-pill option{ color:#111827; }
-
-    .accordion-button{
-      background: rgba(255,255,255,.03) !important;
-      border:1px solid rgba(255,255,255,.10) !important;
-      color: var(--text) !important;
-    }
-    .accordion-button:not(.collapsed){
-      background: rgba(255,255,255,.05) !important;
-      box-shadow:none !important;
-    }
-    .accordion-body{
-      border:1px solid rgba(255,255,255,.10);
-      border-top:0;
-      border-radius:0 0 14px 14px;
-      background: rgba(255,255,255,.02);
+    @media (max-width:1080px){
+      .nav-links{display:none}
+      .mobile-menu-toggle{display:inline-grid;place-items:center}
+      .nav-actions .btn-primary{display:none}
+      .hero-wrap,.grid-2,.grid-3,.grid-4,.mock-grid{grid-template-columns:1fr}
     }
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:.5rem;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding:.45rem .7rem;
-      border-radius:999px;
-      font-size:.88rem;
-      color: var(--text);
-    }
-
-    @media (max-width: 576px){
-      .hero-card{ padding:22px; }
-      .avatar{ width:160px;height:160px; }
+    @media (max-width:720px){
+      .container{width:min(var(--max), calc(100% - 20px))}
+      .section{padding:74px 0}
+      .hero{padding:34px 0 64px}
+      .hero-actions,.cta-row{flex-direction:column;align-items:stretch}
+      .btn{width:100%}
+      .lang-switch{transform:scale(.96);transform-origin:right center}
+      h1{letter-spacing:-1.2px}
+      .card,.hero-panel,.cta-box{border-radius:20px}
     }
   </style>
 </head>
-
 <body>
-  <!-- CONFIG -->
-  <script>
-    const CONFIG = {
-      calendarUrl: "https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled",
-      linkedinUrl: "https://www.linkedin.com/in/ariel-mart%C3%ADnez-26521511/",
-      contactEmail: "arielmartinez@maginaconsulting.com",
-      photoFile: "profile.png",   // keep this in the repo root next to index.html
-      defaultLang: "en"           // en | es | pt
-    };
-  </script>
-
-  <!-- NAV -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top nav-blur">
-    <div class="container py-2">
-      <a class="navbar-brand d-flex align-items-center gap-2" href="#top">
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Magina">
         <span class="brand-mark"></span>
-        <span class="brand-stack">
-          <span class="fw-bold d-block">Magina</span>
-          <span class="brand-motto d-block" data-i18n="nav.motto">Excel-driven systems, built to scale.</span>
-        </span>
+        <span>Magina</span>
       </a>
 
-      <div class="d-flex align-items-center gap-2 order-lg-3">
-        <div class="lang-pill d-none d-md-flex align-items-center gap-2">
-          <span class="small muted" data-i18n="nav.language">Language</span>
-          <select id="langSelect" aria-label="Language">
-            <option value="en">EN</option>
-            <option value="es">ES</option>
-            <option value="pt">PT</option>
-          </select>
+      <nav class="nav-links">
+        <a href="#why" data-i18n="navWhy">Why Magina</a>
+        <a href="#included" data-i18n="navIncluded">What’s included</a>
+        <a href="#plans" data-i18n="navPlans">Plans</a>
+        <a href="#after" data-i18n="navAfter">After you start</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-switch" aria-label="Language switcher">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="es">ES</button>
+          <button class="lang-btn" data-lang="pt">PT</button>
         </div>
-
-        <a id="navBookBtn" class="btn btn-brand btn-sm" target="_blank" rel="noopener"
-           href="#" data-i18n="nav.book">Book a Call</a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu"
-                aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
-
-      <div class="collapse navbar-collapse order-lg-2" id="navMenu">
-        <ul class="navbar-nav ms-lg-4 me-auto mb-2 mb-lg-0">
-          <li class="nav-item"><a class="nav-link" href="#usecases" data-i18n="nav.usecases">Use cases</a></li>
-          <li class="nav-item"><a class="nav-link" href="#services" data-i18n="nav.services">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="#workshops" data-i18n="nav.workshops">Workshops</a></li>
-          <li class="nav-item"><a class="nav-link" href="#about" data-i18n="nav.about">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a></li>
-        </ul>
-
-        <div class="d-md-none mt-3">
-          <label class="small muted mb-1" for="langSelectMobile" data-i18n="nav.language">Language</label>
-          <select class="form-select form-select-sm" id="langSelectMobile">
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="pt">Português</option>
-          </select>
-        </div>
+        <a class="btn btn-primary" href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled" target="_blank" rel="noopener" data-i18n="bookCall">Book a call</a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">☰</button>
       </div>
     </div>
-  </nav>
 
-  <!-- HERO -->
-  <main id="top" class="hero">
-    <div class="container">
-      <div class="hero-card">
-        <div class="row g-4 align-items-center">
-          <div class="col-lg-7">
-            <span class="badge badge-soft rounded-pill mb-3 px-3 py-2" data-i18n="hero.badge">
-              Finance & Ops · Excel Systems · Microsoft 365 · Controls
-            </span>
+    <div class="container mobile-panel" id="mobilePanel">
+      <div class="mobile-links">
+        <a href="#why" data-i18n="navWhy">Why Magina</a>
+        <a href="#included" data-i18n="navIncluded">What’s included</a>
+        <a href="#plans" data-i18n="navPlans">Plans</a>
+        <a href="#after" data-i18n="navAfter">After you start</a>
+        <a href="#faq" data-i18n="navFaq">FAQ</a>
+        <a class="btn btn-primary btn-full" href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled" target="_blank" rel="noopener" data-i18n="bookCall">Book a call</a>
+      </div>
+    </div>
+  </header>
 
-            <h1 class="display-6 fw-bold mb-3" data-i18n="hero.title">
-              Fix fragile Excel operations — without breaking the business.
-            </h1>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div class="hero-copy">
+          <span class="eyebrow" data-i18n="heroEyebrow">Clearer business · stronger presence · better support for selling</span>
+          <h1 data-i18n="heroTitle">Turn your idea or messy business into something people understand, trust and buy from.</h1>
+          <p class="lead" data-i18n="heroText">
+            Magina helps entrepreneurs, professionals and small businesses look more real, feel more organized, and support growth with better presentation, better materials and better structure.
+          </p>
 
-            <p class="lead muted mb-4" data-i18n="hero.subtitle">
-              I help teams reduce errors, tighten controls, and speed up reporting by turning spreadsheet “workarounds” into governed operational systems. Excel stays when it’s the right tool — and we scale into Power Platform / M365 only when scale demands it.
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled" target="_blank" rel="noopener" data-i18n="bookCall">Book a call</a>
+            <a class="btn btn-secondary" id="waHero" href="https://wa.me/5491131156963?text=Hello%20Magina%2C%20I%20want%20to%20learn%20more." target="_blank" rel="noopener" data-i18n="whatsApp">Message on WhatsApp</a>
+          </div>
+
+          <div class="hero-proof">
+            <span data-i18n="heroProof1">For service businesses, personal brands and small companies</span>
+            <span data-i18n="heroProof2">Focused on making your business easier to trust and buy from</span>
+            <span data-i18n="heroProof3">Operated by Magina Consulting LLC</span>
+          </div>
+
+          <div class="hero-proof">
+            <div class="pill" data-i18n="pill1">Landing and offer pages</div>
+            <div class="pill" data-i18n="pill2">Digital sales materials</div>
+            <div class="pill" data-i18n="pill3">Social media content</div>
+            <div class="pill" data-i18n="pill4">Better operating structure</div>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="mock-window">
+            <div class="mock-top">
+              <div class="mock-dots"><span></span><span></span><span></span></div>
+              <div class="mock-chip" data-i18n="mockChip">Built to grow with you</div>
+            </div>
+
+            <div class="mock-head">
+              <div>
+                <strong data-i18n="mockTitle">From confusing or informal → to clearer and more professional</strong>
+                <p class="small muted" data-i18n="mockText">The goal is not just “having a page.” The goal is having a business people can understand and trust.</p>
+              </div>
+              <div class="tag" data-i18n="growthPlan">Growth</div>
+            </div>
+
+            <div class="mock-grid">
+              <div class="mini-box">
+                <h4 data-i18n="mockBox1Title">What changes</h4>
+                <div class="metric">
+                  <div>
+                    <div class="small soft" data-i18n="mockMetric1Label">Your presentation</div>
+                    <b data-i18n="mockMetric1Value">Stronger</b>
+                  </div>
+                </div>
+                <div class="metric">
+                  <div>
+                    <div class="small soft" data-i18n="mockMetric2Label">Your structure</div>
+                    <b data-i18n="mockMetric2Value">More organized</b>
+                  </div>
+                </div>
+                <div class="metric">
+                  <div>
+                    <div class="small soft" data-i18n="mockMetric3Label">Your sales support</div>
+                    <b data-i18n="mockMetric3Value">More complete</b>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mini-box">
+                <h4 data-i18n="mockBox2Title">Typical problems</h4>
+                <div class="request-list">
+                  <div class="request-item">
+                    <span data-i18n="mockReq1">People do not understand what I offer</span>
+                    <span class="tag" data-i18n="tagOffer">Offer</span>
+                  </div>
+                  <div class="request-item">
+                    <span data-i18n="mockReq2">My business looks informal</span>
+                    <span class="tag" data-i18n="tagBrand">Brand</span>
+                  </div>
+                  <div class="request-item">
+                    <span data-i18n="mockReq3">I need materials that help me sell</span>
+                    <span class="tag" data-i18n="tagSales">Sales</span>
+                  </div>
+                  <div class="request-item">
+                    <span data-i18n="mockReq4">Everything depends on scattered messages</span>
+                    <span class="tag" data-i18n="tagOps">Ops</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="container">
+        <div class="center">
+          <span class="eyebrow" data-i18n="whyEyebrow">Why Magina</span>
+          <h2 data-i18n="whyTitle">Because many businesses do not need “more ideas.” They need to look clearer, operate better and sell with less friction.</h2>
+          <p class="lead" style="margin:0 auto" data-i18n="whyText">
+            Magina helps bridge the gap between having something valuable and having a business that actually looks professional, communicates clearly and supports sales.
+          </p>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:28px">
+          <div class="card">
+            <div class="icon">✦</div>
+            <h3 data-i18n="whyCard1Title">Look more real</h3>
+            <p data-i18n="whyCard1Text">If your business still feels improvised, Magina helps turn it into something that feels more serious and easier to trust.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🧩</div>
+            <h3 data-i18n="whyCard2Title">Feel more organized</h3>
+            <p data-i18n="whyCard2Text">Better structure around assets, requests and materials reduces chaos and makes the business easier to operate.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">💸</div>
+            <h3 data-i18n="whyCard3Title">Support more sales</h3>
+            <p data-i18n="whyCard3Text">A clearer offer, stronger materials and better presentation help people move faster from interest to trust to purchase.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="included">
+      <div class="container">
+        <div class="center">
+          <span class="eyebrow" data-i18n="includedEyebrow">What can be included</span>
+          <h2 data-i18n="includedTitle">The pieces that help your business look stronger and work better.</h2>
+          <p class="lead" style="margin:0 auto" data-i18n="includedText">
+            Depending on your plan, Magina can combine client-facing assets, sales support materials and structured operating components.
+          </p>
+        </div>
+
+        <div class="grid grid-4" style="margin-top:28px">
+          <div class="card">
+            <div class="icon">🌐</div>
+            <h3 data-i18n="feature1Title">Landing and offer pages</h3>
+            <p data-i18n="feature1Text">So people understand what you do, why it matters and how to contact or buy from you.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🛍</div>
+            <h3 data-i18n="feature2Title">Catalog or service presentation</h3>
+            <p data-i18n="feature2Text">A more convincing way to present services, products or digital materials.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">📘</div>
+            <h3 data-i18n="feature3Title">Digital sales materials</h3>
+            <p data-i18n="feature3Text">Digital catalogs, brochures, guides and branded files that help explain your offer and support sales conversations.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🎬</div>
+            <h3 data-i18n="feature4Title">Social media content</h3>
+            <p data-i18n="feature4Text">Social media content that helps your business look active, professional and easier to remember across your channels.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">🧭</div>
+            <h3 data-i18n="feature5Title">Client portal</h3>
+            <p data-i18n="feature5Text">A structured place to view your plan, submit requests and keep important information organized.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">⚙</div>
+            <h3 data-i18n="feature6Title">Better operating structure</h3>
+            <p data-i18n="feature6Text">Less dependence on scattered chats and more structure around updates, requests and ongoing work.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">📧</div>
+            <h3 data-i18n="feature7Title">Professional communication setup</h3>
+            <p data-i18n="feature7Text">Optional email and booking setup when your business needs a more professional client path.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">📈</div>
+            <h3 data-i18n="feature8Title">Growth-ready foundation</h3>
+            <p data-i18n="feature8Text">Start with what matters now, then add more capacity, structure and automation over time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="plans">
+      <div class="container">
+        <div class="center">
+          <span class="eyebrow" data-i18n="plansEyebrow">Plans</span>
+          <h2 data-i18n="plansTitle">Choose the level of structure and support your business needs right now.</h2>
+          <p class="lead" style="margin:0 auto" data-i18n="plansText">
+            Some businesses need a strong first presence. Others need more support for sales and operations. The plans reflect that progression.
+          </p>
+        </div>
+
+        <div class="grid grid-3" style="margin-top:28px">
+          <div class="card plan">
+            <div class="plan-badge" data-i18n="basePlan">Base</div>
+            <h3 data-i18n="baseTitle">Start with a clearer business presence</h3>
+            <p data-i18n="baseSubtitle">For people who need a serious first version without unnecessary complexity.</p>
+            <hr />
+            <ul class="list">
+              <li data-i18n="base1">Simple landing</li>
+              <li data-i18n="base2">Magina subdomain</li>
+              <li data-i18n="base3">Basic client portal</li>
+              <li data-i18n="base4">4 social media pieces / month</li>
+              <li data-i18n="base5">1 digital sales material / month</li>
+              <li data-i18n="base6">Basic support path</li>
+            </ul>
+          </div>
+
+          <div class="card plan highlight">
+            <div class="plan-badge" data-i18n="growthPlan">Growth</div>
+            <h3 data-i18n="growthTitle">Professionalize your business and support sales better</h3>
+            <p data-i18n="growthSubtitle">The best fit if you want stronger presentation, better materials and a more complete client workflow.</p>
+            <hr />
+            <ul class="list">
+              <li data-i18n="growth1">Landing + catalog</li>
+              <li data-i18n="growth2">Own domain optional</li>
+              <li data-i18n="growth3">Full client portal</li>
+              <li data-i18n="growth4">12 social media pieces / month</li>
+              <li data-i18n="growth5">2 digital sales materials / month</li>
+              <li data-i18n="growth6">Landing updates, social media requests and digital material requests through the portal</li>
+            </ul>
+          </div>
+
+          <div class="card plan">
+            <div class="plan-badge" data-i18n="proPlan">Pro</div>
+            <h3 data-i18n="proTitle">Operate with more structure and more room to grow</h3>
+            <p data-i18n="proSubtitle">For businesses that want more support, more organization and more expansion capacity.</p>
+            <hr />
+            <ul class="list">
+              <li data-i18n="pro1">Everything in Growth</li>
+              <li data-i18n="pro2">More automation scope</li>
+              <li data-i18n="pro3">Higher support priority</li>
+              <li data-i18n="pro4">More operational structure</li>
+              <li data-i18n="pro5">Expansion-friendly setup</li>
+              <li data-i18n="pro6">Custom capacity logic</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid grid-4" style="margin-top:24px">
+          <div class="card">
+            <h3 data-i18n="addonTitle">Add-ons</h3>
+            <p data-i18n="addonText">When the business needs more than the current plan includes, more capacity can be added.</p>
+            <ul class="list">
+              <li data-i18n="addon1">Extra landing</li>
+              <li data-i18n="addon2">Extra social media content</li>
+              <li data-i18n="addon3">Extra digital sales materials</li>
+              <li data-i18n="addon4">Extra automation</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 data-i18n="sellTitle">Better support for selling</h3>
+            <p data-i18n="sellText">A clearer offer and stronger materials help people move from confusion to trust faster.</p>
+          </div>
+
+          <div class="card">
+            <h3 data-i18n="operateTitle">Better support for operating</h3>
+            <p data-i18n="operateText">A more structured workflow helps reduce chaos and makes the business feel more manageable.</p>
+          </div>
+
+          <div class="card">
+            <h3 data-i18n="growTitle">Better support for growing</h3>
+            <p data-i18n="growText">You do not need a huge system on day one. You need the right next layer for the stage you are in now.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="after">
+      <div class="container">
+        <div class="grid grid-2" style="align-items:start">
+          <div>
+            <span class="eyebrow" data-i18n="afterEyebrow">What happens after you start</span>
+            <h2 data-i18n="afterTitle">Start with what your business needs most now, then add more structure, materials and support as you grow.</h2>
+            <p class="lead" data-i18n="afterText">
+              Magina helps your business move forward with more clarity, stronger assets and a better foundation. You do not need to solve everything at once. You can start with the right next layer and improve over time.
             </p>
-
-            <div class="d-flex flex-wrap gap-2">
-              <a id="heroBookBtn" class="btn btn-brand btn-lg" target="_blank" rel="noopener"
-                 href="#" data-i18n="hero.ctaPrimary">Book a Call</a>
-              <a class="btn btn-ghost btn-lg" href="#usecases" data-i18n="hero.ctaSecondary">See common use cases</a>
-              <a class="btn btn-ghost btn-lg" target="_blank" rel="noopener"
-                 href="#" id="heroLinkedin" data-i18n="hero.ctaLinkedin">LinkedIn</a>
-            </div>
-
-            <div class="mt-3 small muted">
-              <span data-i18n="contact.label">Email</span>:
-              <a id="heroEmail" class="text-decoration-none" style="color: var(--muted);" href="#"> </a>
-            </div>
-
-            <div class="mt-4 d-flex flex-wrap gap-2">
-              <span class="pill" data-i18n="hero.pill1">Risk & controls</span>
-              <span class="pill" data-i18n="hero.pill2">Close & reporting speed</span>
-              <span class="pill" data-i18n="hero.pill3">Automation with governance</span>
-              <span class="pill" data-i18n="hero.pill4">Executive-ready outputs</span>
-            </div>
-
-            <div class="mt-3 small muted" data-i18n="hero.note">
-              Remote-first. Executive-friendly. Available in English, Spanish, and Portuguese.
-            </div>
           </div>
 
-          <div class="col-lg-5">
-            <div class="row g-3">
-              <div class="col-12">
-                <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="hero.kpi1Title">Typical outcomes</div>
-                  <div class="muted" data-i18n="hero.kpi1Text">
-                    Fewer errors, faster cycles, clear ownership, and controls that survive team changes.
-                  </div>
-                </div>
+          <div class="card">
+            <h3 data-i18n="afterBoxTitle">How the process usually works</h3>
+            <div class="steps">
+              <div class="step">
+                <h4 data-i18n="step1Title">1. We define what your business needs most</h4>
+                <p data-i18n="step1Text">That may be a clearer landing, better materials, more professional presentation, more operating structure or a combination of those.</p>
               </div>
-
-              <div class="col-md-6">
-                <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="hero.kpi2Title">Best fit</div>
-                  <div class="muted" data-i18n="hero.kpi2Text">
-                    CFO / FP&A, Finance Ops, RevOps, Shared Services, Business Systems.
-                  </div>
-                </div>
+              <div class="step">
+                <h4 data-i18n="step2Title">2. We build the core pieces</h4>
+                <p data-i18n="step2Text">Depending on the plan, Magina sets up the main assets such as landing pages, digital sales materials, social media content workflows and structured support paths.</p>
               </div>
-
-              <div class="col-md-6">
-                <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="hero.kpi3Title">First step</div>
-                  <div class="muted" data-i18n="hero.kpi3Text">
-                    A 20-minute call → pick the right sprint (diagnostic, build, or advisory).
-                  </div>
-                </div>
+              <div class="step">
+                <h4 data-i18n="step3Title">3. You request updates through a clearer system</h4>
+                <p data-i18n="step3Text">Instead of messy back-and-forth, requests become more organized through a structured path where you can ask for landing updates, social media content and digital sales materials and, when included, use your client portal to keep everything clearer.</p>
               </div>
-
-              <div class="col-12">
-                <div class="kpi">
-                  <div class="fw-semibold mb-1" data-i18n="hero.kpi4Title">AI (when useful)</div>
-                  <div class="muted" data-i18n="hero.kpi4Text">
-                    AI helps accelerate documentation, testing, anomaly checks, and automation — governance stays the core.
-                  </div>
-                </div>
+              <div class="step">
+                <h4 data-i18n="step4Title">4. We improve and expand over time</h4>
+                <p data-i18n="step4Text">As the business grows, more content, more materials, more structure and more automation can be added without pretending everything is already fully automatic.</p>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="center">
+          <span class="eyebrow" data-i18n="faqEyebrow">FAQ</span>
+          <h2 data-i18n="faqTitle">A few honest answers before you decide.</h2>
+        </div>
+
+        <div class="faq">
+          <div class="faq-item">
+            <h4 data-i18n="faq1Q">Do you help with legal or tax business setup?</h4>
+            <p data-i18n="faq1A">No. Magina does not replace legal, tax or formal registration services. The value is in helping your business look clearer, feel more professional and operate with better structure.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4 data-i18n="faq2Q">So what does Magina help create?</h4>
+            <p data-i18n="faq2A">It helps create a clearer business presence, stronger digital sales materials, better presentation, social media support and more structured ways to request landing updates and ongoing work.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4 data-i18n="faq3Q">Will this help me sell more?</h4>
+            <p data-i18n="faq3A">That is one of the main goals. Better positioning, clearer offers, stronger materials and a more professional client path reduce friction and support sales.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4 data-i18n="faq4Q">Is the portal the main thing I am buying?</h4>
+            <p data-i18n="faq4A">No. The portal is useful because it helps organize requests such as landing updates, social media content and digital material requests, but the main value is helping your business become easier to understand, trust, operate and buy from.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4 data-i18n="faq5Q">Does everything already happen automatically?</h4>
+            <p data-i18n="faq5A">Not completely. The system is being built in a structured way so it can become more automated over time, but today the promise is guided progress with structure, not an instant self-serve experience.</p>
+          </div>
+
+          <div class="faq-item">
+            <h4 data-i18n="faq6Q">Can I start simple and expand later?</h4>
+            <p data-i18n="faq6A">Yes. That is one of the strongest parts of the model. You can start with the layer your business needs now and add more later.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-row">
+            <div>
+              <span class="eyebrow" data-i18n="finalEyebrow">Build something people can trust</span>
+              <h2 style="margin-top:14px" data-i18n="finalTitle">Make your business clearer, more professional and easier to buy from.</h2>
+              <p class="lead" data-i18n="finalText">If you want your business to feel more real, more organized and more ready to grow, Magina is built for that.</p>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a class="btn btn-primary" href="https://outlook.office.com/book/MaginaConsultingCalls@maginaconsulting.com/?ismsaljsauthenabled" target="_blank" rel="noopener" data-i18n="bookCall">Book a call</a>
+              <a class="btn btn-secondary" id="waFinal" href="https://wa.me/5491131156963?text=Hello%20Magina%2C%20I%20want%20to%20learn%20more." target="_blank" rel="noopener" data-i18n="whatsApp">Message on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <hr class="hrline" />
-
-  <!-- USE CASES (tangible pains) -->
-  <section id="usecases" class="section anchor-offset">
-    <div class="container">
-      <div class="row align-items-end mb-4 g-3">
-        <div class="col-lg-8">
-          <h2 class="fw-bold mb-2" data-i18n="use.title">Common problems I fix</h2>
-          <p class="muted mb-0" data-i18n="use.subtitle">
-            Pick the pain — I’ll map it to the fastest engagement model.
-          </p>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="useCta" data-i18n="use.cta">
-            Discuss your case
-          </a>
-        </div>
-      </div>
-
-      <div class="row g-3">
-        <div class="col-md-6 col-xl-4">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="use.u1Title">Close & reporting is slow (and no one trusts the numbers)</div>
-            <div class="muted" data-i18n="use.u1Text">
-              Consolidations, manual checks, broken links, and last-minute fixes every month.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="use.u1b1">Re-architecture the model (inputs → model → outputs)</li>
-              <li data-i18n="use.u1b2">Add controls (reconciliations, tie-outs, audit trail)</li>
-              <li data-i18n="use.u1b3">Standardize refresh & handoffs (M365 / Power Automate as needed)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-4">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="use.u2Title">Critical spreadsheets depend on one person</div>
-            <div class="muted" data-i18n="use.u2Text">
-              Key-person risk: when they’re away, the business slows down.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="use.u2b1">Dependency map + quick stability fixes</li>
-              <li data-i18n="use.u2b2">Documentation that’s actually operational</li>
-              <li data-i18n="use.u2b3">Governed change process (so “small changes” don’t break everything)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-4">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="use.u3Title">Version chaos and hidden errors</div>
-            <div class="muted" data-i18n="use.u3Text">
-              Multiple files, inconsistent logic, and error hunting that wastes senior time.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="use.u3b1">Single source of truth design</li>
-              <li data-i18n="use.u3b2">Validation checks + exception reporting</li>
-              <li data-i18n="use.u3b3">Access + approvals + release notes (governance)</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-4">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="use.u4Title">Manual processes around Excel (emails, copy/paste, approvals)</div>
-            <div class="muted" data-i18n="use.u4Text">
-              People act as “integrations” between systems. That’s expensive and risky.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="use.u4b1">Automate intake & approvals (Forms/SharePoint/Power Automate)</li>
-              <li data-i18n="use.u4b2">Reduce rework with structured data capture</li>
-              <li data-i18n="use.u4b3">Keep Excel as the calculation engine when it makes sense</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-4">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="use.u5Title">Dashboards exist, but decisions still happen in spreadsheets</div>
-            <div class="muted" data-i18n="use.u5Text">
-              Data model is messy, metrics are inconsistent, and stakeholders don’t adopt.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="use.u5b1">Metric definition + governance</li>
-              <li data-i18n="use.u5b2">Power BI modeling (DAX, performance) when needed</li>
-              <li data-i18n="use.u5b3">Executive-ready reporting cadence</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-xl-4">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="use.u6Title">You want AI — but you don’t want new chaos</div>
-            <div class="muted" data-i18n="use.u6Text">
-              AI is powerful, but without structure and governance it amplifies risk.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="use.u6b1">AI-ready architecture (clean inputs, clear logic layers)</li>
-              <li data-i18n="use.u6b2">Controls for prompts, data access, and output validation</li>
-              <li data-i18n="use.u6b3">Use AI as an accelerator (not a replacement for controls)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-4 muted small" data-i18n="use.note">
-        Note: Not every problem requires migrating away from Excel. The default is: stabilize first, scale only if the math says it’s worth it.
-      </div>
-    </div>
-  </section>
-
-  <hr class="hrline" />
-
-  <!-- SERVICES (packaged + premium) -->
-  <section id="services" class="section anchor-offset">
-    <div class="container">
-      <div class="row align-items-end mb-4 g-3">
-        <div class="col-lg-8">
-          <h2 class="fw-bold mb-2" data-i18n="svc.title">Services (tangible + premium)</h2>
-          <p class="muted mb-0" data-i18n="svc.subtitle">
-            Fast entry points for urgent pain — plus a premium advisory layer when leadership wants a bigger redesign.
-          </p>
-        </div>
-        <div class="col-lg-4 text-lg-end">
-          <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="svcCta" data-i18n="svc.cta">
-            Book a scoping call
-          </a>
-        </div>
-      </div>
-
-      <div class="row g-3">
-        <!-- B: Fast -->
-        <div class="col-md-6 col-xl-3">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="svc.s1Title">Diagnostic Sprint (Fast)</div>
-            <div class="muted" data-i18n="svc.s1Text">
-              Rapid assessment of one critical spreadsheet/process: risk, controls, bottlenecks, and the fastest fix plan.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="svc.s1b1">Risk map + “where errors come from”</li>
-              <li data-i18n="svc.s1b2">Quick-win recommendations</li>
-              <li data-i18n="svc.s1b3">Decision: stabilize vs. redesign vs. automate</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- C: Build -->
-        <div class="col-md-6 col-xl-3">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="svc.s2Title">Build Sprint (Implementation)</div>
-            <div class="muted" data-i18n="svc.s2Text">
-              Build the improved system: restructure, harden controls, and automate surrounding workflows where it reduces risk.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="svc.s2b1">Model architecture (inputs/model/outputs)</li>
-              <li data-i18n="svc.s2b2">Controls + validations + exception handling</li>
-              <li data-i18n="svc.s2b3">Optional Power Automate / SharePoint / BI</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- A: Premium -->
-        <div class="col-md-6 col-xl-3">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="svc.s3Title">Operational Systems Architecture (Premium)</div>
-            <div class="muted" data-i18n="svc.s3Text">
-              Executive-level redesign across multiple processes: ownership, governance, roadmap, and scalable architecture.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="svc.s3b1">Architecture blueprint + operating model</li>
-              <li data-i18n="svc.s3b2">Governance: change control, approvals, audit trail</li>
-              <li data-i18n="svc.s3b3">Roadmap: Excel-first → Microsoft ecosystem (when required)</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Retainer -->
-        <div class="col-md-6 col-xl-3">
-          <div class="cardx">
-            <div class="fw-semibold mb-2" data-i18n="svc.s4Title">Governed Evolution Retainer</div>
-            <div class="muted" data-i18n="svc.s4Text">
-              Keep systems stable while the business changes: controlled releases, continuous improvement, and KPIs.
-            </div>
-            <ul class="mt-3 mb-0 small">
-              <li data-i18n="svc.s4b1">Monthly backlog + priority triage</li>
-              <li data-i18n="svc.s4b2">Governed releases + documentation</li>
-              <li data-i18n="svc.s4b3">Leadership updates (reliability & efficiency)</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-4 cardx">
-        <div class="row g-3 align-items-center">
-          <div class="col-lg-8">
-            <div class="fw-semibold mb-1" data-i18n="svc.delTitle">Deliverables you can show leadership</div>
-            <div class="muted" data-i18n="svc.delText">
-              Risk map, architecture blueprint, controls checklist, documentation, and a prioritized roadmap — not just “a better spreadsheet”.
-            </div>
-          </div>
-          <div class="col-lg-4 text-lg-end">
-            <a class="btn btn-ghost" href="#workshops" data-i18n="svc.delCta">Prefer a workshop first?</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-3 muted small" data-i18n="svc.note">
-        I can work inside your tenant when needed (M365 / Power Platform). For Excel-only engagements, the goal is still governance and reliability.
-      </div>
-    </div>
-  </section>
-
-  <hr class="hrline" />
-
-  <!-- WORKSHOPS (generic + topic-specific) -->
-  <section id="workshops" class="section anchor-offset">
-    <div class="container">
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-7">
-          <h2 class="fw-bold mb-2" data-i18n="wk.title">Workshops</h2>
-          <p class="muted mb-3" data-i18n="wk.subtitle">
-            A workshop is the fastest way to align multiple stakeholders, expose risk, and decide the right next step.
-          </p>
-
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="cardx">
-                <div class="fw-semibold" data-i18n="wk.w1Title">Excel Risk & Controls (2–3h)</div>
-                <div class="muted" data-i18n="wk.w1Text">
-                  Identify where errors happen, why controls fail, and what “good” looks like for critical spreadsheets.
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="cardx">
-                <div class="fw-semibold" data-i18n="wk.w2Title">Close Acceleration (Finance Ops)</div>
-                <div class="muted" data-i18n="wk.w2Text">
-                  Reduce manual steps and rework. Define a reliable close/reporting operating model.
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="cardx">
-                <div class="fw-semibold" data-i18n="wk.w3Title">Automation Without Fragility (Power Platform)</div>
-                <div class="muted" data-i18n="wk.w3Text">
-                  How to automate intake, approvals, and reporting without creating a new “automation mess”.
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="cardx">
-                <div class="fw-semibold" data-i18n="wk.w4Title">Custom Workshop (Your pain, your artifacts)</div>
-                <div class="muted" data-i18n="wk.w4Text">
-                  Tailored to your process: revenue adjustments, accruals, budgeting, forecasting, or operational reporting.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="mt-3 muted small" data-i18n="wk.note">
-            Designed for Finance/Ops leaders and the people who own the spreadsheets/processes day-to-day.
-          </div>
-        </div>
-
-        <div class="col-lg-5">
-          <div class="cardx">
-            <h5 class="fw-semibold mb-2" data-i18n="wk.outTitle">What you leave with</h5>
-            <ul class="mb-0">
-              <li data-i18n="wk.o1">Risk map + priority list</li>
-              <li data-i18n="wk.o2">Controls & governance recommendations</li>
-              <li data-i18n="wk.o3">Architecture roadmap (quick wins → scalable systems)</li>
-              <li data-i18n="wk.o4">Clear next step: Diagnostic Sprint or Build Sprint</li>
-            </ul>
-
-            <div class="mt-3 d-grid gap-2">
-              <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="wkCta" data-i18n="wk.cta">Plan a workshop</a>
-              <a class="btn btn-ghost" href="#services" data-i18n="wk.cta2">See services</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <hr class="hrline" />
-
-  <!-- ABOUT -->
-  <section id="about" class="section anchor-offset">
-    <div class="container">
-      <div class="row g-4 align-items-center">
-        <div class="col-lg-4 text-center">
-          <img id="profileImg" class="avatar" src="" alt="Ariel Martínez" />
-        </div>
-
-        <div class="col-lg-8">
-          <h2 class="fw-bold mb-2" data-i18n="about.title">About</h2>
-          <p class="muted mb-2">
-            <strong data-i18n="about.nameLine">Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC</strong>
-          </p>
-          <p class="mb-3 muted" data-i18n="about.bio">
-            17+ years leading automation, BI, and operational transformation. I specialize in turning “Excel operations” into governed systems: clearer models, stronger controls, lower key-person risk, and scalable workflows across Microsoft 365 / Power Platform when needed.
-          </p>
-
-          <div class="d-flex flex-wrap gap-2">
-            <a class="btn btn-brand" target="_blank" rel="noopener" href="#" id="aboutCta" data-i18n="about.cta">Book a Call</a>
-            <a class="btn btn-ghost" target="_blank" rel="noopener" href="#" id="aboutLinkedin" data-i18n="about.linkedin">LinkedIn</a>
-          </div>
-
-          <div class="mt-3 muted small" data-i18n="about.note">
-            My focus is outcomes: reliability, speed, and control — not “more tools”.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="hrline" />
-
-  <!-- FAQ -->
-  <section id="faq" class="section anchor-offset">
-    <div class="container">
-      <div class="row g-3 align-items-end mb-3">
-        <div class="col-lg-8">
-          <h2 class="fw-bold mb-2" data-i18n="faq.title">FAQ</h2>
-          <p class="muted mb-0" data-i18n="faq.subtitle">Short answers to common questions.</p>
-        </div>
-      </div>
-
-      <div class="accordion" id="faqAcc">
-        <div class="accordion-item bg-transparent border-0">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f1">
-              <span data-i18n="faq.q1">Is this “just Excel consulting”?</span>
-            </button>
-          </h2>
-          <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-            <div class="accordion-body muted" data-i18n="faq.a1">
-              No. Excel is often where the system lives — but the work is architecture + controls + governance. Some systems stay in Excel by design; others scale into M365 / Power Platform when it reduces risk and improves control.
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item bg-transparent border-0 mt-2">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">
-              <span data-i18n="faq.q2">What’s the fastest starting point?</span>
-            </button>
-          </h2>
-          <div id="f2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-            <div class="accordion-body muted" data-i18n="faq.a2">
-              A Diagnostic Sprint on one critical spreadsheet/process. It gives leadership a clear risk map and the right next step (quick fix, build sprint, or premium advisory).
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item bg-transparent border-0 mt-2">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3">
-              <span data-i18n="faq.q3">Do you work inside our Microsoft tenant?</span>
-            </button>
-          </h2>
-          <div id="f3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-            <div class="accordion-body muted" data-i18n="faq.a3">
-              Yes, when it’s required. Power Automate / SharePoint / Power BI can be part of the solution — but only after the operational model is stable and governed.
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item bg-transparent border-0 mt-2">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4">
-              <span data-i18n="faq.q4">Do you use AI?</span>
-            </button>
-          </h2>
-          <div id="f4" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-            <div class="accordion-body muted" data-i18n="faq.a4">
-              When it helps: documentation, testing, anomaly detection, and accelerating automation. But governance, controls, and architecture remain the foundation — AI is an accelerator, not a substitute.
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item bg-transparent border-0 mt-2">
-          <h2 class="accordion-header">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f5">
-              <span data-i18n="faq.q5">Can you do this remotely?</span>
-            </button>
-          </h2>
-          <div id="f5" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
-            <div class="accordion-body muted" data-i18n="faq.a5">
-              Yes. Workshops and sprints work well remote-first. On-site is possible by request (and usually only when multiple stakeholders are involved).
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="mt-4 text-center">
-        <a class="btn btn-brand btn-lg" target="_blank" rel="noopener" href="#" id="faqCta" data-i18n="faq.cta">Book a Call</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer class="footer">
-    <div class="container">
-      <div class="row g-2 align-items-center">
-        <div class="col-md-7">
-          <div class="fw-semibold">Magina Consulting LLC</div>
-          <div class="small">© <span id="year"></span> · <span class="muted" data-i18n="footer.tag">Operational Systems Architecture</span></div>
-        </div>
-        <div class="col-md-5 text-md-end">
-          <a class="text-decoration-none me-3" style="color: var(--muted);" target="_blank" rel="noopener" href="#" id="footerLinkedin">LinkedIn</a>
-          <a class="text-decoration-none me-3" style="color: var(--muted);" target="_blank" rel="noopener" href="#" id="footerBook" data-i18n="footer.book">Book a Call</a>
-          <a class="text-decoration-none" style="color: var(--muted);" href="#" id="footerEmail"></a>
-        </div>
+    <div class="container footer-row">
+      <div>
+        <div style="font-weight:800;color:#dce8f7">Magina</div>
+        <div class="small" data-i18n="footer1">Make your business clearer, more professional and easier to buy from.</div>
+        <div class="small" data-i18n="footer2">Operated by Magina Consulting LLC.</div>
+      </div>
+
+      <div class="footer-links">
+        <a href="mailto:hello@magina.io">hello@magina.io</a>
+        <a href="https://www.instagram.com/arielmartinez.systems?igsh=MWg5MmFtc3Y4dG1scA==" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/ariel-mart%C3%ADnez-26521511/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </footer>
 
-  <!-- i18n + init -->
   <script>
-    const I18N = {};
+    const translations = {
+      en: {
+        navWhy:"Why Magina",
+        navIncluded:"What’s included",
+        navPlans:"Plans",
+        navAfter:"After you start",
+        navFaq:"FAQ",
+        bookCall:"Book a call",
+        whatsApp:"Message on WhatsApp",
 
-    I18N.en = {
-      "contact.label":"Email",
+        heroEyebrow:"Clearer business · stronger presence · better support for selling",
+        heroTitle:"Turn your idea or messy business into something people understand, trust and buy from.",
+        heroText:"Magina helps entrepreneurs, professionals and small businesses look more real, feel more organized, and support growth with better presentation, better materials and better structure.",
+        heroProof1:"For service businesses, personal brands and small companies",
+        heroProof2:"Focused on making your business easier to trust and buy from",
+        heroProof3:"Operated by Magina Consulting LLC",
+        pill1:"Landing and offer pages",
+        pill2:"Digital sales materials",
+        pill3:"Social media content",
+        pill4:"Better operating structure",
 
-      "nav.motto":"Excel-driven systems, built to scale.",
-      "nav.language":"Language",
-      "nav.usecases":"Use cases",
-      "nav.services":"Services",
-      "nav.workshops":"Workshops",
-      "nav.about":"About",
-      "nav.faq":"FAQ",
-      "nav.book":"Book a Call",
+        mockChip:"Built to grow with you",
+        mockTitle:"From confusing or informal → to clearer and more professional",
+        mockText:"The goal is not just “having a page.” The goal is having a business people can understand and trust.",
+        growthPlan:"Growth",
+        mockBox1Title:"What changes",
+        mockMetric1Label:"Your presentation",
+        mockMetric1Value:"Stronger",
+        mockMetric2Label:"Your structure",
+        mockMetric2Value:"More organized",
+        mockMetric3Label:"Your sales support",
+        mockMetric3Value:"More complete",
+        mockBox2Title:"Typical problems",
+        mockReq1:"People do not understand what I offer",
+        mockReq2:"My business looks informal",
+        mockReq3:"I need materials that help me sell",
+        mockReq4:"Everything depends on scattered messages",
+        tagOffer:"Offer",
+        tagBrand:"Brand",
+        tagSales:"Sales",
+        tagOps:"Ops",
 
-      "hero.badge":"Finance & Ops · Excel Systems · Microsoft 365 · Controls",
-      "hero.title":"Fix fragile Excel operations — without breaking the business.",
-      "hero.subtitle":"I help teams reduce errors, tighten controls, and speed up reporting by turning spreadsheet “workarounds” into governed operational systems. Excel stays when it’s the right tool — and we scale into Power Platform / M365 only when scale demands it.",
-      "hero.ctaPrimary":"Book a Call",
-      "hero.ctaSecondary":"See common use cases",
-      "hero.ctaLinkedin":"LinkedIn",
-      "hero.pill1":"Risk & controls",
-      "hero.pill2":"Close & reporting speed",
-      "hero.pill3":"Automation with governance",
-      "hero.pill4":"Executive-ready outputs",
-      "hero.note":"Remote-first. Executive-friendly. Available in English, Spanish, and Portuguese.",
-      "hero.kpi1Title":"Typical outcomes",
-      "hero.kpi1Text":"Fewer errors, faster cycles, clear ownership, and controls that survive team changes.",
-      "hero.kpi2Title":"Best fit",
-      "hero.kpi2Text":"CFO / FP&A, Finance Ops, RevOps, Shared Services, Business Systems.",
-      "hero.kpi3Title":"First step",
-      "hero.kpi3Text":"A 20-minute call → pick the right sprint (diagnostic, build, or advisory).",
-      "hero.kpi4Title":"AI (when useful)",
-      "hero.kpi4Text":"AI helps accelerate documentation, testing, anomaly checks, and automation — governance stays the core.",
+        whyEyebrow:"Why Magina",
+        whyTitle:"Because many businesses do not need “more ideas.” They need to look clearer, operate better and sell with less friction.",
+        whyText:"Magina helps bridge the gap between having something valuable and having a business that actually looks professional, communicates clearly and supports sales.",
+        whyCard1Title:"Look more real",
+        whyCard1Text:"If your business still feels improvised, Magina helps turn it into something that feels more serious and easier to trust.",
+        whyCard2Title:"Feel more organized",
+        whyCard2Text:"Better structure around assets, requests and materials reduces chaos and makes the business easier to operate.",
+        whyCard3Title:"Support more sales",
+        whyCard3Text:"A clearer offer, stronger materials and better presentation help people move faster from interest to trust to purchase.",
 
-      "use.title":"Common problems I fix",
-      "use.subtitle":"Pick the pain — I’ll map it to the fastest engagement model.",
-      "use.cta":"Discuss your case",
-      "use.u1Title":"Close & reporting is slow (and no one trusts the numbers)",
-      "use.u1Text":"Consolidations, manual checks, broken links, and last-minute fixes every month.",
-      "use.u1b1":"Re-architecture the model (inputs → model → outputs)",
-      "use.u1b2":"Add controls (reconciliations, tie-outs, audit trail)",
-      "use.u1b3":"Standardize refresh & handoffs (M365 / Power Automate as needed)",
+        includedEyebrow:"What can be included",
+        includedTitle:"The pieces that help your business look stronger and work better.",
+        includedText:"Depending on your plan, Magina can combine client-facing assets, sales support materials and structured operating components.",
+        feature1Title:"Landing and offer pages",
+        feature1Text:"So people understand what you do, why it matters and how to contact or buy from you.",
+        feature2Title:"Catalog or service presentation",
+        feature2Text:"A more convincing way to present services, products or digital materials.",
+        feature3Title:"Digital sales materials",
+        feature3Text:"Digital catalogs, brochures, guides and branded files that help explain your offer and support sales conversations.",
+        feature4Title:"Social media content",
+        feature4Text:"Social media content that helps your business look active, professional and easier to remember across your channels.",
+        feature5Title:"Client portal",
+        feature5Text:"A structured place to view your plan, submit requests and keep important information organized.",
+        feature6Title:"Better operating structure",
+        feature6Text:"Less dependence on scattered chats and more structure around updates, requests and ongoing work.",
+        feature7Title:"Professional communication setup",
+        feature7Text:"Optional email and booking setup when your business needs a more professional client path.",
+        feature8Title:"Growth-ready foundation",
+        feature8Text:"Start with what matters now, then add more capacity, structure and automation over time.",
 
-      "use.u2Title":"Critical spreadsheets depend on one person",
-      "use.u2Text":"Key-person risk: when they’re away, the business slows down.",
-      "use.u2b1":"Dependency map + quick stability fixes",
-      "use.u2b2":"Documentation that’s actually operational",
-      "use.u2b3":"Governed change process (so “small changes” don’t break everything)",
+        plansEyebrow:"Plans",
+        plansTitle:"Choose the level of structure and support your business needs right now.",
+        plansText:"Some businesses need a strong first presence. Others need more support for sales and operations. The plans reflect that progression.",
+        basePlan:"Base",
+        baseTitle:"Start with a clearer business presence",
+        baseSubtitle:"For people who need a serious first version without unnecessary complexity.",
+        base1:"Simple landing",
+        base2:"Magina subdomain",
+        base3:"Basic client portal",
+        base4:"4 social media pieces / month",
+        base5:"1 digital sales material / month",
+        base6:"Basic support path",
+        growthTitle:"Professionalize your business and support sales better",
+        growthSubtitle:"The best fit if you want stronger presentation, better materials and a more complete client workflow.",
+        growth1:"Landing + catalog",
+        growth2:"Own domain optional",
+        growth3:"Full client portal",
+        growth4:"12 social media pieces / month",
+        growth5:"2 digital sales materials / month",
+        growth6:"Landing updates, social media requests and digital material requests through the portal",
+        proPlan:"Pro",
+        proTitle:"Operate with more structure and more room to grow",
+        proSubtitle:"For businesses that want more support, more organization and more expansion capacity.",
+        pro1:"Everything in Growth",
+        pro2:"More automation scope",
+        pro3:"Higher support priority",
+        pro4:"More operational structure",
+        pro5:"Expansion-friendly setup",
+        pro6:"Custom capacity logic",
+        addonTitle:"Add-ons",
+        addonText:"When the business needs more than the current plan includes, more capacity can be added.",
+        addon1:"Extra landing",
+        addon2:"Extra social media content",
+        addon3:"Extra digital sales materials",
+        addon4:"Extra automation",
+        sellTitle:"Better support for selling",
+        sellText:"A clearer offer and stronger materials help people move from confusion to trust faster.",
+        operateTitle:"Better support for operating",
+        operateText:"A more structured workflow helps reduce chaos and makes the business feel more manageable.",
+        growTitle:"Better support for growing",
+        growText:"You do not need a huge system on day one. You need the right next layer for the stage you are in now.",
 
-      "use.u3Title":"Version chaos and hidden errors",
-      "use.u3Text":"Multiple files, inconsistent logic, and error hunting that wastes senior time.",
-      "use.u3b1":"Single source of truth design",
-      "use.u3b2":"Validation checks + exception reporting",
-      "use.u3b3":"Access + approvals + release notes (governance)",
+        afterEyebrow:"What happens after you start",
+        afterTitle:"Start with what your business needs most now, then add more structure, materials and support as you grow.",
+        afterText:"Magina helps your business move forward with more clarity, stronger assets and a better foundation. You do not need to solve everything at once. You can start with the right next layer and improve over time.",
+        afterBoxTitle:"How the process usually works",
+        step1Title:"1. We define what your business needs most",
+        step1Text:"That may be a clearer landing, better materials, more professional presentation, more operating structure or a combination of those.",
+        step2Title:"2. We build the core pieces",
+        step2Text:"Depending on the plan, Magina sets up the main assets such as landing pages, digital sales materials, social media content workflows and structured support paths.",
+        step3Title:"3. You request updates through a clearer system",
+        step3Text:"Instead of messy back-and-forth, requests become more organized through a structured path where you can ask for landing updates, social media content and digital sales materials and, when included, use your client portal to keep everything clearer.",
+        step4Title:"4. We improve and expand over time",
+        step4Text:"As the business grows, more content, more materials, more structure and more automation can be added without pretending everything is already fully automatic.",
 
-      "use.u4Title":"Manual processes around Excel (emails, copy/paste, approvals)",
-      "use.u4Text":"People act as “integrations” between systems. That’s expensive and risky.",
-      "use.u4b1":"Automate intake & approvals (Forms/SharePoint/Power Automate)",
-      "use.u4b2":"Reduce rework with structured data capture",
-      "use.u4b3":"Keep Excel as the calculation engine when it makes sense",
+        faqEyebrow:"FAQ",
+        faqTitle:"A few honest answers before you decide.",
+        faq1Q:"Do you help with legal or tax business setup?",
+        faq1A:"No. Magina does not replace legal, tax or formal registration services. The value is in helping your business look clearer, feel more professional and operate with better structure.",
+        faq2Q:"So what does Magina help create?",
+        faq2A:"It helps create a clearer business presence, stronger digital sales materials, better presentation, social media support and more structured ways to request landing updates and ongoing work.",
+        faq3Q:"Will this help me sell more?",
+        faq3A:"That is one of the main goals. Better positioning, clearer offers, stronger materials and a more professional client path reduce friction and support sales.",
+        faq4Q:"Is the portal the main thing I am buying?",
+        faq4A:"No. The portal is useful because it helps organize requests such as landing updates, social media content and digital material requests, but the main value is helping your business become easier to understand, trust, operate and buy from.",
+        faq5Q:"Does everything already happen automatically?",
+        faq5A:"Not completely. The system is being built in a structured way so it can become more automated over time, but today the promise is guided progress with structure, not an instant self-serve experience.",
+        faq6Q:"Can I start simple and expand later?",
+        faq6A:"Yes. That is one of the strongest parts of the model. You can start with the layer your business needs now and add more later.",
 
-      "use.u5Title":"Dashboards exist, but decisions still happen in spreadsheets",
-      "use.u5Text":"Data model is messy, metrics are inconsistent, and stakeholders don’t adopt.",
-      "use.u5b1":"Metric definition + governance",
-      "use.u5b2":"Power BI modeling (DAX, performance) when needed",
-      "use.u5b3":"Executive-ready reporting cadence",
+        finalEyebrow:"Build something people can trust",
+        finalTitle:"Make your business clearer, more professional and easier to buy from.",
+        finalText:"If you want your business to feel more real, more organized and more ready to grow, Magina is built for that.",
+        footer1:"Make your business clearer, more professional and easier to buy from.",
+        footer2:"Operated by Magina Consulting LLC."
+      },
 
-      "use.u6Title":"You want AI — but you don’t want new chaos",
-      "use.u6Text":"AI is powerful, but without structure and governance it amplifies risk.",
-      "use.u6b1":"AI-ready architecture (clean inputs, clear logic layers)",
-      "use.u6b2":"Controls for prompts, data access, and output validation",
-      "use.u6b3":"Use AI as an accelerator (not a replacement for controls)",
+      es: {
+        navWhy:"Por qué Magina",
+        navIncluded:"Qué incluye",
+        navPlans:"Planes",
+        navAfter:"Después de empezar",
+        navFaq:"FAQ",
+        bookCall:"Reservar una llamada",
+        whatsApp:"Escribir por WhatsApp",
 
-      "use.note":"Note: Not every problem requires migrating away from Excel. The default is: stabilize first, scale only if the math says it’s worth it.",
+        heroEyebrow:"Negocio más claro · presencia más fuerte · mejor soporte para vender",
+        heroTitle:"Convertí tu idea o tu negocio desordenado en algo que la gente entienda, en lo que confíe y compre.",
+        heroText:"Magina ayuda a emprendedores, profesionales y pequeños negocios a verse más reales, sentirse más ordenados y apoyar el crecimiento con mejor presentación, mejores materiales y mejor estructura.",
+        heroProof1:"Para negocios de servicios, marcas personales y pequeñas empresas",
+        heroProof2:"Enfocado en hacer que tu negocio sea más fácil de confiar y comprar",
+        heroProof3:"Operado por Magina Consulting LLC",
+        pill1:"Landings y páginas de oferta",
+        pill2:"Materiales digitales de venta",
+        pill3:"Contenido para redes sociales",
+        pill4:"Mejor estructura operativa",
 
-      "svc.title":"Services (tangible + premium)",
-      "svc.subtitle":"Fast entry points for urgent pain — plus a premium advisory layer when leadership wants a bigger redesign.",
-      "svc.cta":"Book a scoping call",
+        mockChip:"Pensado para crecer con vos",
+        mockTitle:"De confuso o informal → a más claro y más profesional",
+        mockText:"El objetivo no es solo “tener una página”. El objetivo es tener un negocio que la gente entienda y en el que confíe.",
+        growthPlan:"Growth",
+        mockBox1Title:"Qué cambia",
+        mockMetric1Label:"Tu presentación",
+        mockMetric1Value:"Más fuerte",
+        mockMetric2Label:"Tu estructura",
+        mockMetric2Value:"Más ordenada",
+        mockMetric3Label:"Tu soporte comercial",
+        mockMetric3Value:"Más completo",
+        mockBox2Title:"Problemas típicos",
+        mockReq1:"La gente no entiende lo que ofrezco",
+        mockReq2:"Mi negocio se ve informal",
+        mockReq3:"Necesito materiales que me ayuden a vender",
+        mockReq4:"Todo depende de mensajes dispersos",
+        tagOffer:"Oferta",
+        tagBrand:"Marca",
+        tagSales:"Ventas",
+        tagOps:"Operación",
 
-      "svc.s1Title":"Diagnostic Sprint (Fast)",
-      "svc.s1Text":"Rapid assessment of one critical spreadsheet/process: risk, controls, bottlenecks, and the fastest fix plan.",
-      "svc.s1b1":"Risk map + “where errors come from”",
-      "svc.s1b2":"Quick-win recommendations",
-      "svc.s1b3":"Decision: stabilize vs. redesign vs. automate",
+        whyEyebrow:"Por qué Magina",
+        whyTitle:"Porque muchos negocios no necesitan “más ideas”. Necesitan verse más claros, operar mejor y vender con menos fricción.",
+        whyText:"Magina ayuda a cerrar la brecha entre tener algo valioso y tener un negocio que realmente se vea profesional, comunique con claridad y apoye ventas.",
+        whyCard1Title:"Verse más real",
+        whyCard1Text:"Si tu negocio todavía se siente improvisado, Magina ayuda a convertirlo en algo que se sienta más serio y más fácil de confiar.",
+        whyCard2Title:"Sentirse más ordenado",
+        whyCard2Text:"Más estructura alrededor de activos, pedidos y materiales reduce el caos y hace el negocio más fácil de operar.",
+        whyCard3Title:"Apoyar más ventas",
+        whyCard3Text:"Una oferta más clara, materiales más fuertes y mejor presentación ayudan a que la gente pase más rápido de interés a confianza y compra.",
 
-      "svc.s2Title":"Build Sprint (Implementation)",
-      "svc.s2Text":"Build the improved system: restructure, harden controls, and automate surrounding workflows where it reduces risk.",
-      "svc.s2b1":"Model architecture (inputs/model/outputs)",
-      "svc.s2b2":"Controls + validations + exception handling",
-      "svc.s2b3":"Optional Power Automate / SharePoint / BI",
+        includedEyebrow:"Qué puede incluirse",
+        includedTitle:"Las piezas que ayudan a que tu negocio se vea mejor y funcione mejor.",
+        includedText:"Según tu plan, Magina puede combinar activos de cara al cliente, materiales de apoyo comercial y componentes operativos estructurados.",
+        feature1Title:"Landings y páginas de oferta",
+        feature1Text:"Para que la gente entienda qué hacés, por qué importa y cómo contactarte o comprarte.",
+        feature2Title:"Catálogo o presentación de servicios",
+        feature2Text:"Una forma más convincente de presentar servicios, productos o materiales digitales.",
+        feature3Title:"Materiales digitales de venta",
+        feature3Text:"Catálogos digitales, brochures, guías y archivos de marca que ayudan a explicar tu oferta y apoyar conversaciones comerciales.",
+        feature4Title:"Contenido para redes sociales",
+        feature4Text:"Contenido para redes sociales que ayuda a que tu negocio se vea activo, profesional y más fácil de recordar en tus canales.",
+        feature5Title:"Portal cliente",
+        feature5Text:"Un lugar estructurado para ver tu plan, enviar pedidos y mantener organizada la información importante.",
+        feature6Title:"Mejor estructura operativa",
+        feature6Text:"Menos dependencia de chats dispersos y más estructura alrededor de cambios, pedidos y trabajo continuo.",
+        feature7Title:"Configuración de comunicación profesional",
+        feature7Text:"Email y bookings opcionales cuando tu negocio necesita un camino más profesional para el cliente.",
+        feature8Title:"Base lista para crecer",
+        feature8Text:"Empezá con lo que importa ahora y después sumá más capacidad, estructura y automatización con el tiempo.",
 
-      "svc.s3Title":"Operational Systems Architecture (Premium)",
-      "svc.s3Text":"Executive-level redesign across multiple processes: ownership, governance, roadmap, and scalable architecture.",
-      "svc.s3b1":"Architecture blueprint + operating model",
-      "svc.s3b2":"Governance: change control, approvals, audit trail",
-      "svc.s3b3":"Roadmap: Excel-first → Microsoft ecosystem (when required)",
+        plansEyebrow:"Planes",
+        plansTitle:"Elegí el nivel de estructura y soporte que tu negocio necesita ahora.",
+        plansText:"Algunos negocios necesitan una primera presencia fuerte. Otros necesitan más apoyo para ventas y operación. Los planes reflejan esa progresión.",
+        basePlan:"Base",
+        baseTitle:"Empezá con una presencia de negocio más clara",
+        baseSubtitle:"Para personas que necesitan una primera versión seria sin complejidad innecesaria.",
+        base1:"Landing simple",
+        base2:"Subdominio de Magina",
+        base3:"Portal cliente básico",
+        base4:"4 piezas para redes sociales / mes",
+        base5:"1 material digital de venta / mes",
+        base6:"Canal de soporte básico",
+        growthTitle:"Profesionalizá tu negocio y apoyá mejor tus ventas",
+        growthSubtitle:"La mejor opción si querés una presentación más fuerte, mejores materiales y un flujo de cliente más completo.",
+        growth1:"Landing + catálogo",
+        growth2:"Dominio propio opcional",
+        growth3:"Portal cliente completo",
+        growth4:"12 piezas para redes sociales / mes",
+        growth5:"2 materiales digitales de venta / mes",
+        growth6:"Pedidos de actualización de landing, contenido para redes y materiales digitales a través del portal",
+        proPlan:"Pro",
+        proTitle:"Operá con más estructura y más espacio para crecer",
+        proSubtitle:"Para negocios que quieren más soporte, más organización y más capacidad de expansión.",
+        pro1:"Todo lo de Growth",
+        pro2:"Más alcance de automatización",
+        pro3:"Mayor prioridad de soporte",
+        pro4:"Más estructura operativa",
+        pro5:"Base preparada para expandirse",
+        pro6:"Lógica de capacidad personalizada",
+        addonTitle:"Add-ons",
+        addonText:"Cuando el negocio necesita más de lo que incluye el plan actual, se puede sumar más capacidad.",
+        addon1:"Landing extra",
+        addon2:"Contenido extra para redes sociales",
+        addon3:"Materiales digitales de venta extra",
+        addon4:"Automatización extra",
+        sellTitle:"Mejor apoyo para vender",
+        sellText:"Una oferta más clara y materiales más fuertes ayudan a que la gente pase de confusión a confianza más rápido.",
+        operateTitle:"Mejor apoyo para operar",
+        operateText:"Un flujo más estructurado ayuda a reducir caos y hace que el negocio se sienta más manejable.",
+        growTitle:"Mejor apoyo para crecer",
+        growText:"No necesitás un sistema gigante el primer día. Necesitás la siguiente capa correcta para la etapa en la que estás hoy.",
 
-      "svc.s4Title":"Governed Evolution Retainer",
-      "svc.s4Text":"Keep systems stable while the business changes: controlled releases, continuous improvement, and KPIs.",
-      "svc.s4b1":"Monthly backlog + priority triage",
-      "svc.s4b2":"Governed releases + documentation",
-      "svc.s4b3":"Leadership updates (reliability & efficiency)",
+        afterEyebrow:"Qué pasa después de empezar",
+        afterTitle:"Empezá con lo que tu negocio más necesita ahora, y después sumá más estructura, materiales y soporte a medida que crece.",
+        afterText:"Magina ayuda a que tu negocio avance con más claridad, mejores activos y una mejor base. No necesitás resolver todo de una vez. Podés empezar con la siguiente capa correcta e ir mejorando con el tiempo.",
+        afterBoxTitle:"Cómo suele funcionar el proceso",
+        step1Title:"1. Definimos qué necesita más tu negocio",
+        step1Text:"Puede ser una landing más clara, mejores materiales, una presentación más profesional, más estructura operativa o una combinación de todo eso.",
+        step2Title:"2. Construimos las piezas centrales",
+        step2Text:"Según el plan, Magina arma los activos principales como landing pages, materiales digitales de venta, flujos de contenido para redes sociales y caminos de soporte estructurados.",
+        step3Title:"3. Pedís cambios a través de un sistema más claro",
+        step3Text:"En vez de idas y vueltas desordenadas, los pedidos pasan a organizarse mejor a través de un camino estructurado donde podés pedir actualizaciones de landing, contenido para redes sociales y materiales digitales de venta y, cuando está incluido, usar tu portal cliente para mantener todo más claro.",
+        step4Title:"4. Mejoramos y expandimos con el tiempo",
+        step4Text:"A medida que el negocio crece, se puede sumar más contenido, más materiales, más estructura y más automatización sin fingir que hoy ya todo es completamente automático.",
 
-      "svc.delTitle":"Deliverables you can show leadership",
-      "svc.delText":"Risk map, architecture blueprint, controls checklist, documentation, and a prioritized roadmap — not just “a better spreadsheet”.",
-      "svc.delCta":"Prefer a workshop first?",
-      "svc.note":"I can work inside your tenant when needed (M365 / Power Platform). For Excel-only engagements, the goal is still governance and reliability.",
+        faqEyebrow:"FAQ",
+        faqTitle:"Algunas respuestas honestas antes de decidir.",
+        faq1Q:"¿Ayudás con la parte legal o impositiva de crear una empresa?",
+        faq1A:"No. Magina no reemplaza servicios legales, impositivos ni de registración formal. El valor está en ayudar a que tu negocio se vea más claro, se sienta más profesional y opere con mejor estructura.",
+        faq2Q:"Entonces, ¿qué ayuda a crear Magina?",
+        faq2A:"Ayuda a crear una presencia de negocio más clara, materiales digitales de venta más fuertes, mejor presentación, soporte para redes sociales y formas más estructuradas de pedir actualizaciones de landing y trabajo continuo.",
+        faq3Q:"¿Esto me va a ayudar a vender más?",
+        faq3A:"Ese es uno de los objetivos principales. Mejor posicionamiento, ofertas más claras, materiales más fuertes y un camino más profesional para el cliente reducen fricción y apoyan ventas.",
+        faq4Q:"¿El portal es lo principal que estoy comprando?",
+        faq4A:"No. El portal es útil porque ayuda a organizar pedidos como actualizaciones de landing, contenido para redes sociales y pedidos de materiales digitales, pero el valor principal es ayudar a que tu negocio sea más fácil de entender, confiar, operar y comprar.",
+        faq5Q:"¿Ya pasa todo automáticamente?",
+        faq5A:"No del todo. El sistema se está construyendo de forma estructurada para volverse más automatizado con el tiempo, pero hoy la promesa es progreso guiado con estructura, no una experiencia instantánea de autoservicio.",
+        faq6Q:"¿Puedo empezar simple y expandir después?",
+        faq6A:"Sí. Esa es una de las partes más fuertes del modelo. Podés empezar con la capa que tu negocio necesita hoy y sumar más después.",
 
-      "wk.title":"Workshops",
-      "wk.subtitle":"A workshop is the fastest way to align multiple stakeholders, expose risk, and decide the right next step.",
-      "wk.w1Title":"Excel Risk & Controls (2–3h)",
-      "wk.w1Text":"Identify where errors happen, why controls fail, and what “good” looks like for critical spreadsheets.",
-      "wk.w2Title":"Close Acceleration (Finance Ops)",
-      "wk.w2Text":"Reduce manual steps and rework. Define a reliable close/reporting operating model.",
-      "wk.w3Title":"Automation Without Fragility (Power Platform)",
-      "wk.w3Text":"How to automate intake, approvals, and reporting without creating a new “automation mess”.",
-      "wk.w4Title":"Custom Workshop (Your pain, your artifacts)",
-      "wk.w4Text":"Tailored to your process: revenue adjustments, accruals, budgeting, forecasting, or operational reporting.",
-      "wk.note":"Designed for Finance/Ops leaders and the people who own the spreadsheets/processes day-to-day.",
-      "wk.outTitle":"What you leave with",
-      "wk.o1":"Risk map + priority list",
-      "wk.o2":"Controls & governance recommendations",
-      "wk.o3":"Architecture roadmap (quick wins → scalable systems)",
-      "wk.o4":"Clear next step: Diagnostic Sprint or Build Sprint",
-      "wk.cta":"Plan a workshop",
-      "wk.cta2":"See services",
+        finalEyebrow:"Construí algo en lo que la gente pueda confiar",
+        finalTitle:"Hacé que tu negocio sea más claro, más profesional y más fácil de comprar.",
+        finalText:"Si querés que tu negocio se sienta más real, más ordenado y más listo para crecer, Magina está construido para eso.",
+        footer1:"Hacé que tu negocio sea más claro, más profesional y más fácil de comprar.",
+        footer2:"Operado por Magina Consulting LLC."
+      },
 
-      "about.title":"About",
-      "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
-      "about.bio":"17+ years leading automation, BI, and operational transformation. I specialize in turning “Excel operations” into governed systems: clearer models, stronger controls, lower key-person risk, and scalable workflows across Microsoft 365 / Power Platform when needed.",
-      "about.cta":"Book a Call",
-      "about.linkedin":"LinkedIn",
-      "about.note":"My focus is outcomes: reliability, speed, and control — not “more tools”.",
+      pt: {
+        navWhy:"Por que Magina",
+        navIncluded:"O que inclui",
+        navPlans:"Planos",
+        navAfter:"Depois de começar",
+        navFaq:"FAQ",
+        bookCall:"Agendar uma chamada",
+        whatsApp:"Chamar no WhatsApp",
 
-      "faq.title":"FAQ",
-      "faq.subtitle":"Short answers to common questions.",
-      "faq.q1":"Is this “just Excel consulting”?",
-      "faq.a1":"No. Excel is often where the system lives — but the work is architecture + controls + governance. Some systems stay in Excel by design; others scale into M365 / Power Platform when it reduces risk and improves control.",
-      "faq.q2":"What’s the fastest starting point?",
-      "faq.a2":"A Diagnostic Sprint on one critical spreadsheet/process. It gives leadership a clear risk map and the right next step (quick fix, build sprint, or premium advisory).",
-      "faq.q3":"Do you work inside our Microsoft tenant?",
-      "faq.a3":"Yes, when it’s required. Power Automate / SharePoint / Power BI can be part of the solution — but only after the operational model is stable and governed.",
-      "faq.q4":"Do you use AI?",
-      "faq.a4":"When it helps: documentation, testing, anomaly detection, and accelerating automation. But governance, controls, and architecture remain the foundation — AI is an accelerator, not a substitute.",
-      "faq.q5":"Can you do this remotely?",
-      "faq.a5":"Yes. Workshops and sprints work well remote-first. On-site is possible by request (and usually only when multiple stakeholders are involved).",
-      "faq.cta":"Book a Call",
+        heroEyebrow:"Negócio mais claro · presença mais forte · melhor apoio para vender",
+        heroTitle:"Transforme sua ideia ou seu negócio bagunçado em algo que as pessoas entendam, confiem e comprem.",
+        heroText:"A Magina ajuda empreendedores, profissionais e pequenos negócios a parecerem mais reais, mais organizados e a apoiar crescimento com melhor apresentação, melhores materiais e melhor estrutura.",
+        heroProof1:"Para negócios de serviços, marcas pessoais e pequenas empresas",
+        heroProof2:"Focado em tornar seu negócio mais fácil de confiar e comprar",
+        heroProof3:"Operado por Magina Consulting LLC",
+        pill1:"Landings e páginas de oferta",
+        pill2:"Materiais digitais de venda",
+        pill3:"Conteúdo para redes sociais",
+        pill4:"Melhor estrutura operacional",
 
-      "footer.tag":"Operational Systems Architecture",
-      "footer.book":"Book a Call"
+        mockChip:"Feito para crescer com você",
+        mockTitle:"De confuso ou informal → para mais claro e mais profissional",
+        mockText:"O objetivo não é apenas “ter uma página”. O objetivo é ter um negócio que as pessoas consigam entender e confiar.",
+        growthPlan:"Growth",
+        mockBox1Title:"O que muda",
+        mockMetric1Label:"Sua apresentação",
+        mockMetric1Value:"Mais forte",
+        mockMetric2Label:"Sua estrutura",
+        mockMetric2Value:"Mais organizada",
+        mockMetric3Label:"Seu apoio comercial",
+        mockMetric3Value:"Mais completo",
+        mockBox2Title:"Problemas típicos",
+        mockReq1:"As pessoas não entendem o que eu ofereço",
+        mockReq2:"Meu negócio parece informal",
+        mockReq3:"Preciso de materiais que ajudem a vender",
+        mockReq4:"Tudo depende de mensagens espalhadas",
+        tagOffer:"Oferta",
+        tagBrand:"Marca",
+        tagSales:"Vendas",
+        tagOps:"Ops",
+
+        whyEyebrow:"Por que Magina",
+        whyTitle:"Porque muitos negócios não precisam de “mais ideias”. Precisam parecer mais claros, operar melhor e vender com menos fricção.",
+        whyText:"A Magina ajuda a fechar a distância entre ter algo valioso e ter um negócio que realmente pareça profissional, comunique com clareza e apoie vendas.",
+        whyCard1Title:"Parecer mais real",
+        whyCard1Text:"Se o seu negócio ainda parece improvisado, a Magina ajuda a transformá-lo em algo mais sério e mais fácil de confiar.",
+        whyCard2Title:"Sentir-se mais organizado",
+        whyCard2Text:"Mais estrutura em torno de ativos, pedidos e materiais reduz o caos e torna o negócio mais fácil de operar.",
+        whyCard3Title:"Apoiar mais vendas",
+        whyCard3Text:"Uma oferta mais clara, materiais mais fortes e melhor apresentação ajudam as pessoas a irem mais rápido de interesse para confiança e compra.",
+
+        includedEyebrow:"O que pode ser incluído",
+        includedTitle:"As peças que ajudam seu negócio a parecer mais forte e funcionar melhor.",
+        includedText:"Dependendo do seu plano, a Magina pode combinar ativos voltados ao cliente, materiais de apoio comercial e componentes operacionais estruturados.",
+        feature1Title:"Landings e páginas de oferta",
+        feature1Text:"Para que as pessoas entendam o que você faz, por que isso importa e como entrar em contato ou comprar de você.",
+        feature2Title:"Catálogo ou apresentação de serviços",
+        feature2Text:"Uma forma mais convincente de apresentar serviços, produtos ou materiais digitais.",
+        feature3Title:"Materiais digitais de venda",
+        feature3Text:"Catálogos digitais, brochuras, guias e arquivos de marca que ajudam a explicar sua oferta e apoiar conversas comerciais.",
+        feature4Title:"Conteúdo para redes sociais",
+        feature4Text:"Conteúdo para redes sociais que ajuda seu negócio a parecer ativo, profissional e mais fácil de lembrar em seus canais.",
+        feature5Title:"Portal do cliente",
+        feature5Text:"Um lugar estruturado para ver seu plano, enviar pedidos e manter informações importantes organizadas.",
+        feature6Title:"Melhor estrutura operacional",
+        feature6Text:"Menos dependência de chats espalhados e mais estrutura em torno de atualizações, pedidos e trabalho contínuo.",
+        feature7Title:"Configuração profissional de comunicação",
+        feature7Text:"Email e agendamento opcionais quando seu negócio precisa de um caminho mais profissional para o cliente.",
+        feature8Title:"Base pronta para crescer",
+        feature8Text:"Comece com o que importa agora e depois adicione mais capacidade, estrutura e automação com o tempo.",
+
+        plansEyebrow:"Planos",
+        plansTitle:"Escolha o nível de estrutura e apoio que seu negócio precisa agora.",
+        plansText:"Alguns negócios precisam de uma primeira presença forte. Outros precisam de mais apoio para vendas e operação. Os planos refletem essa progressão.",
+        basePlan:"Base",
+        baseTitle:"Comece com uma presença de negócio mais clara",
+        baseSubtitle:"Para quem precisa de uma primeira versão séria sem complexidade desnecessária.",
+        base1:"Landing simples",
+        base2:"Subdomínio da Magina",
+        base3:"Portal do cliente básico",
+        base4:"4 peças para redes sociais / mês",
+        base5:"1 material digital de venda / mês",
+        base6:"Caminho básico de suporte",
+        growthTitle:"Profissionalize seu negócio e apoie melhor suas vendas",
+        growthSubtitle:"A melhor opção se você quer apresentação mais forte, melhores materiais e um fluxo de cliente mais completo.",
+        growth1:"Landing + catálogo",
+        growth2:"Domínio próprio opcional",
+        growth3:"Portal do cliente completo",
+        growth4:"12 peças para redes sociais / mês",
+        growth5:"2 materiais digitais de venda / mês",
+        growth6:"Pedidos de atualização de landing, conteúdo para redes sociais e materiais digitais pelo portal",
+        proPlan:"Pro",
+        proTitle:"Opere com mais estrutura e mais espaço para crescer",
+        proSubtitle:"Para negócios que querem mais apoio, mais organização e mais capacidade de expansão.",
+        pro1:"Tudo do Growth",
+        pro2:"Mais escopo de automação",
+        pro3:"Maior prioridade de suporte",
+        pro4:"Mais estrutura operacional",
+        pro5:"Base pronta para expansão",
+        pro6:"Lógica de capacidade personalizada",
+        addonTitle:"Add-ons",
+        addonText:"Quando o negócio precisa de mais do que o plano atual inclui, mais capacidade pode ser adicionada.",
+        addon1:"Landing extra",
+        addon2:"Conteúdo extra para redes sociais",
+        addon3:"Materiais digitais de venda extras",
+        addon4:"Automação extra",
+        sellTitle:"Melhor apoio para vender",
+        sellText:"Uma oferta mais clara e materiais mais fortes ajudam as pessoas a sair da confusão para a confiança mais rápido.",
+        operateTitle:"Melhor apoio para operar",
+        operateText:"Um fluxo mais estruturado ajuda a reduzir o caos e faz o negócio parecer mais gerenciável.",
+        growTitle:"Melhor apoio para crescer",
+        growText:"Você não precisa de um sistema gigante no primeiro dia. Precisa da camada certa para a etapa em que está agora.",
+
+        afterEyebrow:"O que acontece depois de começar",
+        afterTitle:"Comece com o que seu negócio mais precisa agora e depois adicione mais estrutura, materiais e apoio à medida que cresce.",
+        afterText:"A Magina ajuda seu negócio a avançar com mais clareza, ativos mais fortes e uma base melhor. Você não precisa resolver tudo de uma vez. Pode começar com a próxima camada certa e melhorar com o tempo.",
+        afterBoxTitle:"Como o processo normalmente funciona",
+        step1Title:"1. Definimos o que seu negócio mais precisa",
+        step1Text:"Isso pode ser uma landing mais clara, melhores materiais, uma apresentação mais profissional, mais estrutura operacional ou uma combinação disso.",
+        step2Title:"2. Construímos as peças principais",
+        step2Text:"Dependendo do plano, a Magina monta os ativos principais como landing pages, materiais digitais de venda, fluxos de conteúdo para redes sociais e caminhos estruturados de suporte.",
+        step3Title:"3. Você pede mudanças por um sistema mais claro",
+        step3Text:"Em vez de idas e vindas bagunçadas, os pedidos passam a ser mais organizados por um caminho estruturado onde você pode solicitar atualizações de landing, conteúdo para redes sociais e materiais digitais de venda e, quando incluído, usar seu portal do cliente para manter tudo mais claro.",
+        step4Title:"4. Melhoramos e expandimos com o tempo",
+        step4Text:"À medida que o negócio cresce, mais conteúdo, mais materiais, mais estrutura e mais automação podem ser adicionados sem fingir que hoje tudo já é totalmente automático.",
+
+        faqEyebrow:"FAQ",
+        faqTitle:"Algumas respostas honestas antes de decidir.",
+        faq1Q:"Você ajuda com a parte legal ou fiscal para criar uma empresa?",
+        faq1A:"Não. A Magina não substitui serviços legais, fiscais ou de registro formal. O valor está em ajudar seu negócio a parecer mais claro, mais profissional e operar com melhor estrutura.",
+        faq2Q:"Então o que a Magina ajuda a criar?",
+        faq2A:"Ajuda a criar uma presença de negócio mais clara, materiais digitais de venda mais fortes, melhor apresentação, suporte para redes sociais e formas mais estruturadas de solicitar atualizações de landing e trabalho contínuo.",
+        faq3Q:"Isso vai me ajudar a vender mais?",
+        faq3A:"Esse é um dos principais objetivos. Melhor posicionamento, ofertas mais claras, materiais mais fortes e um caminho mais profissional para o cliente reduzem fricção e apoiam vendas.",
+        faq4Q:"O portal é a principal coisa que estou comprando?",
+        faq4A:"Não. O portal é útil porque ajuda a organizar pedidos como atualizações de landing, conteúdo para redes sociais e pedidos de materiais digitais, mas o valor principal é ajudar seu negócio a ficar mais fácil de entender, confiar, operar e comprar.",
+        faq5Q:"Tudo já acontece automaticamente?",
+        faq5A:"Ainda não. O sistema está sendo construído de forma estruturada para se tornar mais automatizado com o tempo, mas hoje a promessa é progresso guiado com estrutura, não uma experiência instantânea de autosserviço.",
+        faq6Q:"Posso começar simples e expandir depois?",
+        faq6A:"Sim. Essa é uma das partes mais fortes do modelo. Você pode começar com a camada que seu negócio precisa agora e adicionar mais depois.",
+
+        finalEyebrow:"Construa algo em que as pessoas possam confiar",
+        finalTitle:"Torne seu negócio mais claro, mais profissional e mais fácil de comprar.",
+        finalText:"Se você quer que seu negócio pareça mais real, mais organizado e mais pronto para crescer, a Magina foi construída para isso.",
+        footer1:"Torne seu negócio mais claro, mais profissional e mais fácil de comprar.",
+        footer2:"Operado por Magina Consulting LLC."
+      }
     };
 
-    I18N.es = {
-      "contact.label":"Email",
-
-      "nav.motto":"Sistemas basados en Excel, listos para escalar.",
-      "nav.language":"Idioma",
-      "nav.usecases":"Casos comunes",
-      "nav.services":"Servicios",
-      "nav.workshops":"Workshops",
-      "nav.about":"About",
-      "nav.faq":"FAQ",
-      "nav.book":"Agendar llamada",
-
-      "hero.badge":"Finanzas y Ops · Sistemas en Excel · Microsoft 365 · Controles",
-      "hero.title":"Arreglá operaciones frágiles en Excel — sin romper el negocio.",
-      "hero.subtitle":"Ayudo a reducir errores, reforzar controles y acelerar reporting transformando “workarounds” en sistemas operativos gobernados. Excel se queda cuando es la herramienta correcta — y escalamos a Power Platform / M365 solo cuando la escala lo exige.",
-      "hero.ctaPrimary":"Agendar llamada",
-      "hero.ctaSecondary":"Ver casos comunes",
-      "hero.ctaLinkedin":"LinkedIn",
-      "hero.pill1":"Riesgo y controles",
-      "hero.pill2":"Cierre y velocidad de reporting",
-      "hero.pill3":"Automatización con gobernanza",
-      "hero.pill4":"Outputs para ejecutivos",
-      "hero.note":"Remoto. Enfoque ejecutivo. Disponible en inglés, español y portugués.",
-      "hero.kpi1Title":"Resultados típicos",
-      "hero.kpi1Text":"Menos errores, ciclos más rápidos, ownership claro y controles que sobreviven cambios de equipo.",
-      "hero.kpi2Title":"Ideal para",
-      "hero.kpi2Text":"CFO / FP&A, Finance Ops, RevOps, Servicios Compartidos, Business Systems.",
-      "hero.kpi3Title":"Primer paso",
-      "hero.kpi3Text":"Llamada de 20 min → elegimos el sprint correcto (diagnóstico, build o advisory).",
-      "hero.kpi4Title":"AI (cuando suma)",
-      "hero.kpi4Text":"AI acelera documentación, testing, chequeos de anomalías y automatización — la base sigue siendo gobernanza.",
-
-      "use.title":"Problemas comunes que resuelvo",
-      "use.subtitle":"Elegí el dolor — y lo mapeamos al modelo de engagement más rápido.",
-      "use.cta":"Conversar tu caso",
-
-      "use.u1Title":"El cierre/reporting es lento (y nadie confía en los números)",
-      "use.u1Text":"Consolidaciones, chequeos manuales, links rotos y arreglos de último minuto todos los meses.",
-      "use.u1b1":"Re-arquitectura del modelo (inputs → modelo → outputs)",
-      "use.u1b2":"Controles (reconciliaciones, tie-outs, audit trail)",
-      "use.u1b3":"Refresh y handoffs estandarizados (M365 / Power Automate según necesidad)",
-
-      "use.u2Title":"Planillas críticas dependen de una sola persona",
-      "use.u2Text":"Riesgo de dependencia: si esa persona no está, el negocio se frena.",
-      "use.u2b1":"Mapa de dependencia + fixes de estabilidad",
-      "use.u2b2":"Documentación realmente operable",
-      "use.u2b3":"Control de cambios (para que “pequeños cambios” no rompan todo)",
-
-      "use.u3Title":"Caos de versiones y errores ocultos",
-      "use.u3Text":"Múltiples archivos, lógica inconsistente y “cazar errores” consume tiempo senior.",
-      "use.u3b1":"Diseño de single source of truth",
-      "use.u3b2":"Validaciones + reporte de excepciones",
-      "use.u3b3":"Accesos + aprobaciones + release notes (gobernanza)",
-
-      "use.u4Title":"Procesos manuales alrededor de Excel (emails, copy/paste, approvals)",
-      "use.u4Text":"Las personas funcionan como “integraciones” entre sistemas. Es caro y riesgoso.",
-      "use.u4b1":"Automatizar intake y aprobaciones (Forms/SharePoint/Power Automate)",
-      "use.u4b2":"Reducir retrabajo con captura estructurada",
-      "use.u4b3":"Mantener Excel como motor de cálculo cuando corresponde",
-
-      "use.u5Title":"Hay dashboards, pero las decisiones siguen en planillas",
-      "use.u5Text":"Modelo confuso, métricas inconsistentes y baja adopción.",
-      "use.u5b1":"Definición de métricas + gobernanza",
-      "use.u5b2":"Modelado Power BI (DAX, performance) cuando haga falta",
-      "use.u5b3":"Cadencia de reporting ejecutiva",
-
-      "use.u6Title":"Querés AI — pero no querés nuevo caos",
-      "use.u6Text":"AI es potente, pero sin estructura y gobernanza amplifica el riesgo.",
-      "use.u6b1":"Arquitectura lista para AI (inputs limpios, capas claras)",
-      "use.u6b2":"Controles de prompts, acceso a datos y validación de outputs",
-      "use.u6b3":"AI como acelerador (no reemplazo de controles)",
-
-      "use.note":"Nota: no todo requiere migrar fuera de Excel. El default: estabilizar primero, escalar solo si el ROI lo justifica.",
-
-      "svc.title":"Servicios (tangible + premium)",
-      "svc.subtitle":"Entradas rápidas para urgencias — y una capa premium cuando liderazgo quiere rediseño más amplio.",
-      "svc.cta":"Agendar llamada",
-
-      "svc.s1Title":"Sprint de Diagnóstico (Rápido)",
-      "svc.s1Text":"Assessment de 1 planilla/proceso crítico: riesgo, controles, cuellos de botella y plan de arreglo más rápido.",
-      "svc.s1b1":"Mapa de riesgo + “de dónde salen los errores”",
-      "svc.s1b2":"Recomendaciones quick wins",
-      "svc.s1b3":"Decisión: estabilizar vs. rediseñar vs. automatizar",
-
-      "svc.s2Title":"Sprint de Build (Implementación)",
-      "svc.s2Text":"Construcción del sistema mejorado: reestructura, controles fuertes y automatización alrededor cuando reduzca riesgo.",
-      "svc.s2b1":"Arquitectura del modelo (inputs/model/outputs)",
-      "svc.s2b2":"Controles + validaciones + manejo de excepciones",
-      "svc.s2b3":"Opcional Power Automate / SharePoint / BI",
-
-      "svc.s3Title":"Operational Systems Architecture (Premium)",
-      "svc.s3Text":"Rediseño ejecutivo multi-proceso: ownership, gobernanza, roadmap y arquitectura escalable.",
-      "svc.s3b1":"Blueprint + operating model",
-      "svc.s3b2":"Gobernanza: control de cambios, aprobaciones, audit trail",
-      "svc.s3b3":"Roadmap: Excel-first → ecosistema Microsoft (cuando corresponda)",
-
-      "svc.s4Title":"Retainer de Evolución Gobernada",
-      "svc.s4Text":"Mantener estabilidad mientras cambia el negocio: releases controlados, mejora continua y KPIs.",
-      "svc.s4b1":"Backlog mensual + triage",
-      "svc.s4b2":"Releases gobernados + documentación",
-      "svc.s4b3":"Updates ejecutivos (confiabilidad y eficiencia)",
-
-      "svc.delTitle":"Entregables para mostrar a liderazgo",
-      "svc.delText":"Mapa de riesgo, blueprint, checklist de controles, documentación y roadmap priorizado — no solo “una planilla mejor”.",
-      "svc.delCta":"¿Preferís empezar con workshop?",
-      "svc.note":"Puedo trabajar dentro de tu tenant cuando haga falta (M365 / Power Platform). En Excel-only el objetivo sigue siendo gobernanza y confiabilidad.",
-
-      "wk.title":"Workshops",
-      "wk.subtitle":"La forma más rápida de alinear stakeholders, exponer riesgo y decidir el próximo paso.",
-      "wk.w1Title":"Riesgo y Controles en Excel (2–3h)",
-      "wk.w1Text":"Detectar dónde ocurren errores, por qué fallan controles y qué es “buena práctica” en planillas críticas.",
-      "wk.w2Title":"Aceleración de Cierre (Finance Ops)",
-      "wk.w2Text":"Reducir pasos manuales y retrabajo. Definir un modelo confiable de cierre/reporting.",
-      "wk.w3Title":"Automatización sin Fragilidad (Power Platform)",
-      "wk.w3Text":"Automatizar intake, aprobaciones y reporting sin crear un nuevo “desorden de automatizaciones”.",
-      "wk.w4Title":"Workshop a medida (tu dolor, tus artefactos)",
-      "wk.w4Text":"Adaptado a tu proceso: revenue adjustments, accruals, budgeting, forecasting o reporting operativo.",
-      "wk.note":"Diseñado para líderes y dueños reales del proceso/planillas.",
-      "wk.outTitle":"Qué se llevan",
-      "wk.o1":"Mapa de riesgo + prioridades",
-      "wk.o2":"Recomendaciones de controles y gobernanza",
-      "wk.o3":"Roadmap de arquitectura (quick wins → escalabilidad)",
-      "wk.o4":"Siguiente paso claro: Sprint de Diagnóstico o Build",
-      "wk.cta":"Planear workshop",
-      "wk.cta2":"Ver servicios",
-
-      "about.title":"About",
-      "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
-      "about.bio":"17+ años liderando automatización, BI y transformación operativa. Me especializo en convertir “operaciones en Excel” en sistemas gobernados: modelos más claros, controles más fuertes, menor dependencia y flujos escalables en Microsoft 365 / Power Platform cuando corresponde.",
-      "about.cta":"Agendar llamada",
-      "about.linkedin":"LinkedIn",
-      "about.note":"Enfoque en outcomes: confiabilidad, velocidad y control — no “más herramientas”.",
-
-      "faq.title":"FAQ",
-      "faq.subtitle":"Respuestas cortas a preguntas comunes.",
-      "faq.q1":"¿Esto es “solo consultoría de Excel”?",
-      "faq.a1":"No. Excel suele ser donde vive el sistema — pero el trabajo es arquitectura + controles + gobernanza. Algunos sistemas quedan en Excel por diseño; otros escalan a M365 / Power Platform cuando reduce riesgo y mejora control.",
-      "faq.q2":"¿Cuál es el punto de arranque más rápido?",
-      "faq.a2":"Un Sprint de Diagnóstico sobre 1 planilla/proceso crítico. Le da a liderazgo un mapa de riesgo y el próximo paso correcto (quick fix, build o advisory premium).",
-      "faq.q3":"¿Trabajás dentro del tenant Microsoft?",
-      "faq.a3":"Sí, cuando corresponde. Power Automate / SharePoint / Power BI pueden ser parte — pero solo con modelo estable y gobernado.",
-      "faq.q4":"¿Usás AI?",
-      "faq.a4":"Cuando suma: documentación, testing, detección de anomalías y acelerar automatizaciones. Pero gobernanza, controles y arquitectura siguen siendo la base.",
-      "faq.q5":"¿Se puede hacer remoto?",
-      "faq.a5":"Sí. Workshops y sprints funcionan muy bien remoto. Presencial es posible a pedido (sobre todo con varios stakeholders).",
-      "faq.cta":"Agendar llamada",
-
-      "footer.tag":"Arquitectura de Sistemas Operativos",
-      "footer.book":"Agendar llamada"
+    const whatsappMessages = {
+      en: "Hello Magina, I want to learn more.",
+      es: "Hola Magina, quiero saber más.",
+      pt: "Olá Magina, quero saber mais."
     };
 
-    I18N.pt = {
-      "contact.label":"Email",
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const i18nNodes = document.querySelectorAll('[data-i18n]');
+    const waLinks = [document.getElementById('waHero'), document.getElementById('waFinal')];
 
-      "nav.motto":"Sistemas em Excel, prontos para escalar.",
-      "nav.language":"Idioma",
-      "nav.usecases":"Casos",
-      "nav.services":"Serviços",
-      "nav.workshops":"Workshops",
-      "nav.about":"About",
-      "nav.faq":"FAQ",
-      "nav.book":"Agendar call",
+    function setLanguage(lang){
+      document.documentElement.lang = lang;
 
-      "hero.badge":"Finanças e Ops · Sistemas em Excel · Microsoft 365 · Controles",
-      "hero.title":"Conserte operações frágeis em Excel — sem quebrar o negócio.",
-      "hero.subtitle":"Eu ajudo a reduzir erros, reforçar controles e acelerar relatórios transformando “workarounds” em sistemas operacionais governados. Excel fica quando é a ferramenta certa — e escalamos para Power Platform / M365 apenas quando a escala exige.",
-      "hero.ctaPrimary":"Agendar call",
-      "hero.ctaSecondary":"Ver casos",
-      "hero.ctaLinkedin":"LinkedIn",
-      "hero.pill1":"Risco e controles",
-      "hero.pill2":"Fechamento e velocidade de reporting",
-      "hero.pill3":"Automação com governança",
-      "hero.pill4":"Outputs executivos",
-      "hero.note":"Remoto. Foco executivo. Disponível em inglês, espanhol e português.",
-      "hero.kpi1Title":"Resultados típicos",
-      "hero.kpi1Text":"Menos erros, ciclos mais rápidos, ownership claro e controles que resistem a mudanças de time.",
-      "hero.kpi2Title":"Bom para",
-      "hero.kpi2Text":"CFO / FP&A, Finance Ops, RevOps, Serviços Compartilhados, Business Systems.",
-      "hero.kpi3Title":"Primeiro passo",
-      "hero.kpi3Text":"Call de 20 min → escolher o sprint certo (diagnóstico, build ou advisory).",
-      "hero.kpi4Title":"AI (quando ajuda)",
-      "hero.kpi4Text":"AI acelera documentação, testes, checagens de anomalias e automação — governança é a base.",
-
-      "use.title":"Problemas comuns que eu resolvo",
-      "use.subtitle":"Escolha a dor — e eu mapeio para o modelo mais rápido.",
-      "use.cta":"Conversar sobre seu caso",
-
-      "use.u1Title":"Fechamento/reporting lento (ninguém confia nos números)",
-      "use.u1Text":"Consolidações, checagens manuais, links quebrados e correções de última hora todo mês.",
-      "use.u1b1":"Re-arquitetura do modelo (inputs → modelo → outputs)",
-      "use.u1b2":"Controles (reconciliações, tie-outs, trilha de auditoria)",
-      "use.u1b3":"Padronizar refresh e handoffs (M365 / Power Automate conforme necessário)",
-
-      "use.u2Title":"Planilhas críticas dependem de uma pessoa",
-      "use.u2Text":"Risco de dependência: quando ela não está, o negócio trava.",
-      "use.u2b1":"Mapa de dependência + correções rápidas",
-      "use.u2b2":"Documentação realmente operável",
-      "use.u2b3":"Controle de mudanças (para evitar quebrar tudo)",
-
-      "use.u3Title":"Caos de versões e erros ocultos",
-      "use.u3Text":"Vários arquivos, lógica inconsistente e caça a erros consome tempo senior.",
-      "use.u3b1":"Single source of truth",
-      "use.u3b2":"Validações + relatório de exceções",
-      "use.u3b3":"Acessos + aprovações + release notes (governança)",
-
-      "use.u4Title":"Processos manuais ao redor do Excel (emails, copiar/colar, aprovações)",
-      "use.u4Text":"Pessoas viram “integrações” entre sistemas. É caro e arriscado.",
-      "use.u4b1":"Automatizar intake e aprovações (Forms/SharePoint/Power Automate)",
-      "use.u4b2":"Reduzir retrabalho com captura estruturada",
-      "use.u4b3":"Manter Excel como motor de cálculo quando fizer sentido",
-
-      "use.u5Title":"Dashboards existem, mas decisões ainda são em planilhas",
-      "use.u5Text":"Modelo confuso, métricas inconsistentes e baixa adoção.",
-      "use.u5b1":"Definição de métricas + governança",
-      "use.u5b2":"Modelagem Power BI (DAX, performance) quando necessário",
-      "use.u5b3":"Cadência executiva de reporting",
-
-      "use.u6Title":"Você quer AI — mas não quer novo caos",
-      "use.u6Text":"AI é poderosa, mas sem estrutura e governança aumenta risco.",
-      "use.u6b1":"Arquitetura pronta para AI (inputs limpos, camadas claras)",
-      "use.u6b2":"Controles de prompts, acesso e validação",
-      "use.u6b3":"AI como acelerador (não substituto de controles)",
-
-      "use.note":"Nota: nem tudo exige sair do Excel. Padrão: estabilizar primeiro, escalar só se o ROI justificar.",
-
-      "svc.title":"Serviços (tangível + premium)",
-      "svc.subtitle":"Entradas rápidas para urgências — e camada premium quando liderança quer redesenho amplo.",
-      "svc.cta":"Agendar call",
-
-      "svc.s1Title":"Sprint de Diagnóstico (Rápido)",
-      "svc.s1Text":"Assessment de 1 planilha/processo crítico: risco, controles, gargalos e plano mais rápido.",
-      "svc.s1b1":"Mapa de risco + origem dos erros",
-      "svc.s1b2":"Quick wins",
-      "svc.s1b3":"Decisão: estabilizar vs redesenhar vs automatizar",
-
-      "svc.s2Title":"Sprint de Build (Implementação)",
-      "svc.s2Text":"Construir o sistema melhorado: reestrutura, controles e automação ao redor quando reduzir risco.",
-      "svc.s2b1":"Arquitetura (inputs/model/outputs)",
-      "svc.s2b2":"Controles + validações + exceções",
-      "svc.s2b3":"Opcional Power Automate / SharePoint / BI",
-
-      "svc.s3Title":"Operational Systems Architecture (Premium)",
-      "svc.s3Text":"Redesenho executivo multi-processo: ownership, governança, roadmap e arquitetura escalável.",
-      "svc.s3b1":"Blueprint + operating model",
-      "svc.s3b2":"Governança: controle de mudanças, aprovações, trilha",
-      "svc.s3b3":"Roadmap: Excel-first → ecossistema Microsoft (quando necessário)",
-
-      "svc.s4Title":"Retainer de Evolução Governada",
-      "svc.s4Text":"Manter estabilidade enquanto o negócio muda: releases controlados, melhoria contínua e KPIs.",
-      "svc.s4b1":"Backlog mensal + triagem",
-      "svc.s4b2":"Releases governados + documentação",
-      "svc.s4b3":"Updates executivos",
-
-      "svc.delTitle":"Entregáveis para liderança",
-      "svc.delText":"Mapa de risco, blueprint, checklist de controles, documentação e roadmap priorizado — não só “uma planilha melhor”.",
-      "svc.delCta":"Quer começar com workshop?",
-      "svc.note":"Posso trabalhar no seu tenant (M365 / Power Platform). Em Excel-only o objetivo continua sendo governança e confiabilidade.",
-
-      "wk.title":"Workshops",
-      "wk.subtitle":"A forma mais rápida de alinhar stakeholders, expor risco e decidir o próximo passo.",
-      "wk.w1Title":"Risco e Controles em Excel (2–3h)",
-      "wk.w1Text":"Identificar onde erros acontecem, por que controles falham e como é “boa prática” em planilhas críticas.",
-      "wk.w2Title":"Aceleração de Fechamento (Finance Ops)",
-      "wk.w2Text":"Reduzir passos manuais e retrabalho. Definir um modelo confiável de fechamento/reporting.",
-      "wk.w3Title":"Automação sem Fragilidade (Power Platform)",
-      "wk.w3Text":"Automatizar intake, aprovações e reporting sem criar novo caos.",
-      "wk.w4Title":"Workshop sob medida",
-      "wk.w4Text":"Adaptado ao seu processo: ajustes de receita, accruals, orçamento, forecast ou reporting operacional.",
-      "wk.note":"Para líderes e donos reais do processo/planilhas.",
-      "wk.outTitle":"O que você leva",
-      "wk.o1":"Mapa de risco + prioridades",
-      "wk.o2":"Recomendações de controles e governança",
-      "wk.o3":"Roadmap (quick wins → escalabilidade)",
-      "wk.o4":"Próximo passo claro: Diagnóstico ou Build",
-      "wk.cta":"Planejar workshop",
-      "wk.cta2":"Ver serviços",
-
-      "about.title":"About",
-      "about.nameLine":"Ariel Martínez, MBA, PMP® — Founder, Magina Consulting LLC",
-      "about.bio":"17+ anos liderando automação, BI e transformação operacional. Eu transformo “operações em Excel” em sistemas governados: modelos mais claros, controles mais fortes, menor dependência e fluxos escaláveis em Microsoft 365 / Power Platform quando necessário.",
-      "about.cta":"Agendar call",
-      "about.linkedin":"LinkedIn",
-      "about.note":"Foco em outcomes: confiabilidade, velocidade e controle — não “mais ferramentas”.",
-
-      "faq.title":"FAQ",
-      "faq.subtitle":"Respostas curtas.",
-      "faq.q1":"Isso é “apenas consultoria de Excel”?",
-      "faq.a1":"Não. Excel costuma ser onde o sistema vive — o trabalho é arquitetura + controles + governança. Alguns sistemas ficam em Excel por design; outros escalam para M365 / Power Platform quando reduz risco e melhora controle.",
-      "faq.q2":"Qual o início mais rápido?",
-      "faq.a2":"Um Sprint de Diagnóstico em uma planilha/processo crítico. Entrega mapa de risco e o próximo passo correto.",
-      "faq.q3":"Você trabalha no tenant Microsoft?",
-      "faq.a3":"Sim, quando necessário. Power Automate / SharePoint / Power BI entram depois de estabilizar e governar.",
-      "faq.q4":"Você usa AI?",
-      "faq.a4":"Quando ajuda: documentação, testes, anomalias e acelerar automação. Governança e controles continuam sendo a base.",
-      "faq.q5":"Dá para fazer remoto?",
-      "faq.a5":"Sim. Remoto funciona muito bem. Presencial é possível por demanda.",
-      "faq.cta":"Agendar call",
-
-      "footer.tag":"Arquitetura de Sistemas Operacionais",
-      "footer.book":"Agendar call"
-    };
-
-    function applyLang(lang){
-      const dict = I18N[lang] || I18N.en;
-      document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const key = el.getAttribute("data-i18n");
-        if (dict[key]) el.innerHTML = dict[key];
-      });
-      localStorage.setItem("magina_lang", lang);
-
-      const s1 = document.getElementById("langSelect");
-      const s2 = document.getElementById("langSelectMobile");
-      if (s1) s1.value = lang;
-      if (s2) s2.value = lang;
-
-      document.documentElement.lang = (lang === "en") ? "en" : (lang === "es" ? "es" : "pt");
-    }
-
-    function init(){
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      // set links from CONFIG
-      const bookLinks = ["navBookBtn","heroBookBtn","useCta","svcCta","wkCta","aboutCta","faqCta","footerBook"];
-      bookLinks.forEach(id=>{
-        const el = document.getElementById(id);
-        if (el) el.href = CONFIG.calendarUrl;
-      });
-
-      const linkedinLinks = ["heroLinkedin","aboutLinkedin","footerLinkedin"];
-      linkedinLinks.forEach(id=>{
-        const el = document.getElementById(id);
-        if (el) el.href = CONFIG.linkedinUrl;
-      });
-
-      // email links from CONFIG
-      const emailLinks = ["heroEmail","footerEmail"];
-      emailLinks.forEach(id=>{
-        const el = document.getElementById(id);
-        if (el){
-          el.href = "mailto:" + CONFIG.contactEmail;
-          el.textContent = CONFIG.contactEmail;
+      i18nNodes.forEach(node => {
+        const key = node.getAttribute('data-i18n');
+        if(translations[lang] && translations[lang][key]){
+          node.textContent = translations[lang][key];
         }
       });
 
-      const img = document.getElementById("profileImg");
-      if (img){
-        img.src = CONFIG.photoFile;
-        img.onerror = () => {
-          img.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Crect width='100%25' height='100%25' rx='120' ry='120' fill='%231f2937'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-family='Arial' font-size='14'%3Eprofile.png%3C/text%3E%3C/svg%3E";
-        };
-      }
+      const msg = encodeURIComponent(whatsappMessages[lang] || whatsappMessages.en);
+      const href = `https://wa.me/5491131156963?text=${msg}`;
+      waLinks.forEach(link => link.setAttribute('href', href));
 
-      const stored = localStorage.getItem("magina_lang");
-      const lang = stored || CONFIG.defaultLang || "en";
-      applyLang(lang);
-
-      const sel = document.getElementById("langSelect");
-      const selM = document.getElementById("langSelectMobile");
-      if (sel) sel.addEventListener("change", e => applyLang(e.target.value));
-      if (selM) selM.addEventListener("change", e => applyLang(e.target.value));
+      langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
     }
 
-    document.addEventListener("DOMContentLoaded", init);
-  </script>
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+    });
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    setLanguage('en');
+
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    mobileMenuToggle.addEventListener('click', () => {
+      mobilePanel.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.mobile-links a').forEach(link => {
+      link.addEventListener('click', () => mobilePanel.classList.remove('open'));
+    });
+  </script>
 </body>
 </html>
