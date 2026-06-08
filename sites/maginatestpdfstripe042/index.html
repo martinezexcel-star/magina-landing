@@ -5,27 +5,48 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MAGINA TEST PDF STRIPE 042 Knowledge Catalog</title>
   <style>
-    body { margin:0; font-family: Arial, sans-serif; background:#0f0f10; color:#f3f3f1; }
-    .container { width:min(92%, 1180px); margin:0 auto; }
-    header { padding:42px 0; border-bottom:1px solid rgba(255,255,255,.1); }
+    :root {
+      --bg: #0f0f10;
+      --card: rgba(255,255,255,.04);
+      --text: #f3f3f1;
+      --muted: #b8b8b4;
+      --line: rgba(255,255,255,.1);
+      --accent: #eeeeea;
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--text); }
+    .container { width:min(92%,1180px); margin:0 auto; }
+    header { padding:42px 0; border-bottom:1px solid var(--line); }
     h1 { font-size:44px; margin:0 0 12px; }
-    p { color:#b8b8b4; }
+    p { color:var(--muted); }
+    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
     .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; padding:36px 0; }
-    .card { padding:22px; border:1px solid rgba(255,255,255,.1); border-radius:22px; background:rgba(255,255,255,.04); }
-    .tag-row { display:flex; gap:8px; margin-bottom:12px; }
-    .tag { font-size:12px; padding:7px 10px; border:1px solid rgba(255,255,255,.1); border-radius:999px; }
+    .card { padding:22px; border:1px solid var(--line); border-radius:22px; background:var(--card); }
+    .tag-row { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
+    .tag { font-size:12px; padding:7px 10px; border:1px solid var(--line); border-radius:999px; }
     .product-title { font-size:24px; margin:0 0 10px; }
-    .btn { display:inline-flex; padding:12px 18px; border-radius:999px; background:#eeeeea; color:#111; text-decoration:none; font-weight:700; }
-    footer { padding:28px 0; border-top:1px solid rgba(255,255,255,.1); color:#b8b8b4; }
+    .product-desc { min-height:54px; }
+    .price { font-size:22px; font-weight:700; margin:14px 0; }
+    .card-actions { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:999px; border:1px solid var(--line); cursor:pointer; text-decoration:none; font-weight:700; }
+    .btn-primary { background:var(--accent); color:#111; }
+    .btn-secondary { background:transparent; color:var(--text); }
+    .cart { position:fixed; right:20px; bottom:20px; max-width:360px; width:calc(100% - 40px); background:#17181a; border:1px solid var(--line); border-radius:22px; padding:18px; box-shadow:0 18px 48px rgba(0,0,0,.35); }
+    .cart-items { color:var(--muted); font-size:14px; margin:10px 0; white-space:pre-wrap; }
+    footer { padding:28px 0; border-top:1px solid var(--line); color:var(--muted); }
   </style>
 </head>
 <body>
   <header>
-    <div class="container">
-      <h1>MAGINA TEST PDF STRIPE 042 Knowledge Catalog</h1>
-      <p>Practical PDFs, guides and resources.</p>
+    <div class="container topbar">
+      <div>
+        <h1>MAGINA TEST PDF STRIPE 042 Knowledge Catalog</h1>
+        <p>Practical PDFs, guides and resources.</p>
+      </div>
+      <button class="btn btn-primary" onclick="sendCart()">Send cart by WhatsApp</button>
     </div>
   </header>
+
   <main class="container">
     <section class="grid">
       <article class="card">
@@ -35,8 +56,10 @@
   </div>
   <h3 class="product-title">Explanation of Air conditiong Dry mode</h3>
   <p class="product-desc"></p>
+  <div class="price"></div>
   <div class="card-actions">
-    <a class="btn btn-primary" href="https://maginaconsulting.sharepoint.com/sites/maginatestpdfstripe042/Documentos%20compartidos/Magina/Content%20Engine/PDFs/product_PDF_Explanation-of-Air-conditiong-Dry-mode_EN_PDF-ExplanationOfAirconditiongDrymode-202406-REQ11.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+    <button class="btn btn-primary" onclick="addToCart('Explanation of Air conditiong Dry mode', 'Explanation of Air conditiong Dry mode', '')">Add to cart</button>
+    <a class="btn btn-secondary" href="https://wa.me/549XXXXXXXXXX?text=Hello%2C%20I%20want%20to%20buy%20this%20PDF%3A%20Explanation%20of%20Air%20conditiong%20Dry%20mode" target="_blank" rel="noopener noreferrer">Buy now</a>
   </div>
 </article><article class="card">
   <div class="tag-row">
@@ -45,8 +68,10 @@
   </div>
   <h3 class="product-title">PBI DAX formulas explanations</h3>
   <p class="product-desc"></p>
+  <div class="price"></div>
   <div class="card-actions">
-    <a class="btn btn-primary" href="https://maginaconsulting.sharepoint.com/sites/maginatestpdfstripe042/Documentos%20compartidos/Magina/Content%20Engine/PDFs/product_PDF_PBI-DAX-formulas-explanations_EN_PDF-PBIDAXFORMULAS-202406-REQ10.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+    <button class="btn btn-primary" onclick="addToCart('PBI DAX formulas explanations', 'PBI DAX formulas explanations', '')">Add to cart</button>
+    <a class="btn btn-secondary" href="https://wa.me/549XXXXXXXXXX?text=Hello%2C%20I%20want%20to%20buy%20this%20PDF%3A%20PBI%20DAX%20formulas%20explanations" target="_blank" rel="noopener noreferrer">Buy now</a>
   </div>
 </article><article class="card">
   <div class="tag-row">
@@ -55,8 +80,10 @@
   </div>
   <h3 class="product-title"></h3>
   <p class="product-desc"></p>
+  <div class="price"></div>
   <div class="card-actions">
-    <a class="btn btn-primary" href="https://maginaconsulting.sharepoint.com/sites/maginatestpdfstripe042/Documentos%20compartidos/Magina/Content%20Engine/PDFs/product_PDF_HLOOKUP-excel-formula---how-to-build-it_EN_PDF-HLOOKUPexcelformulahowtobuildit-202406-REQ9.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+    <button class="btn btn-primary" onclick="addToCart('', '', '')">Add to cart</button>
+    <a class="btn btn-secondary" href="https://wa.me/549XXXXXXXXXX?text=Hello%2C%20I%20want%20to%20buy%20this%20PDF%3A%20" target="_blank" rel="noopener noreferrer">Buy now</a>
   </div>
 </article><article class="card">
   <div class="tag-row">
@@ -65,8 +92,10 @@
   </div>
   <h3 class="product-title">Guide to keep your home clean daily</h3>
   <p class="product-desc"></p>
+  <div class="price"></div>
   <div class="card-actions">
-    <a class="btn btn-primary" href="https://maginaconsulting.sharepoint.com/sites/maginatestpdfstripe042/Shared%20Documents/Magina/Content%20Engine/PDFs/product_PDF_Guide-to-keep-your-home-clean-daily_EN_PDF-Guidetokeepyourhomecleandaily-202406-REQ7.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+    <button class="btn btn-primary" onclick="addToCart('Guide to keep your home clean daily', 'Guide to keep your home clean daily', '')">Add to cart</button>
+    <a class="btn btn-secondary" href="https://wa.me/549XXXXXXXXXX?text=Hello%2C%20I%20want%20to%20buy%20this%20PDF%3A%20Guide%20to%20keep%20your%20home%20clean%20daily" target="_blank" rel="noopener noreferrer">Buy now</a>
   </div>
 </article><article class="card">
   <div class="tag-row">
@@ -75,16 +104,61 @@
   </div>
   <h3 class="product-title">PMO Best practices for new project managers</h3>
   <p class="product-desc"></p>
+  <div class="price"></div>
   <div class="card-actions">
-    <a class="btn btn-primary" href="https://maginaconsulting.sharepoint.com/sites/maginatestpdfstripe042/Shared Documents//Shared%20Documents/Magina/Content%20Engine/PDFs/product_PDF_PMO-Best-practices-for-new-project-managers_EN_PDF-PMOBestpracticesfornewprojectmanagers-202406-REQ1.pdf" target="_blank" rel="noopener noreferrer">View PDF</a>
+    <button class="btn btn-primary" onclick="addToCart('PMO Best practices for new project managers', 'PMO Best practices for new project managers', '')">Add to cart</button>
+    <a class="btn btn-secondary" href="https://wa.me/549XXXXXXXXXX?text=Hello%2C%20I%20want%20to%20buy%20this%20PDF%3A%20PMO%20Best%20practices%20for%20new%20project%20managers" target="_blank" rel="noopener noreferrer">Buy now</a>
   </div>
 </article>
     </section>
   </main>
+
+  <div class="cart">
+    <strong>Cart</strong>
+    <div id="cartItems" class="cart-items">No items selected yet.</div>
+    <button class="btn btn-primary" onclick="sendCart()">Send cart by WhatsApp</button>
+    <button class="btn btn-secondary" onclick="clearCart()">Clear</button>
+  </div>
+
   <footer>
     <div class="container">
       MAGINA TEST PDF STRIPE 042 · Powered by Magina
     </div>
   </footer>
+
+  <script>
+    const whatsappNumber = '549XXXXXXXXXX';
+    let cart = [];
+
+    function addToCart(id, title, price) {
+      cart.push({ id, title, price });
+      renderCart();
+    }
+
+    function renderCart() {
+      const el = document.getElementById('cartItems');
+      if (!cart.length) {
+        el.textContent = 'No items selected yet.';
+        return;
+      }
+      el.textContent = cart.map((item, index) => `${index + 1}. ${item.title}${item.price ? ' - ' + item.price : ''}`).join('\n');
+    }
+
+    function clearCart() {
+      cart = [];
+      renderCart();
+    }
+
+    function sendCart() {
+      if (!cart.length) {
+        alert('Your cart is empty.');
+        return;
+      }
+
+      const lines = cart.map((item, index) => `${index + 1}. ${item.title}${item.price ? ' - ' + item.price : ''}`).join('\n');
+      const message = `Hello, I want to buy these PDFs:\n\n${lines}\n\nPlease tell me how to continue.`;
+      window.open('https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message), '_blank');
+    }
+  </script>
 </body>
 </html>
