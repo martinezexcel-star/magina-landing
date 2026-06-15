@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PRUEBAAAA 222 !!! MAGINA TEST PDF STRIPE 042 Knowledge Catalog</title>
+  <title>PRUEBAAAA 333 !!! MAGINA TEST PDF STRIPE 042 Knowledge Catalog</title>
   <style>
     :root {
       --bg: #0f0f10;
@@ -12,35 +12,132 @@
       --muted: #b8b8b4;
       --line: rgba(255,255,255,.1);
       --accent: #b3c6f2;
+      --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
+      --accent-line: color-mix(in srgb, var(--accent) 45%, var(--line));
     }
+
     * { box-sizing: border-box; }
-    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--text); }
+
+    body {
+      margin:0;
+      font-family: Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
     .container { width:min(92%,1180px); margin:0 auto; }
-    header { padding:42px 0; border-bottom:1px solid var(--line); }
+
+    header {
+      padding:42px 0;
+      border-bottom:1px solid var(--accent-line);
+      background:linear-gradient(135deg, var(--accent-soft), transparent 45%);
+    }
+
     h1 { font-size:44px; margin:0 0 12px; }
+
     p { color:var(--muted); }
-    .topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; padding:36px 0; }
-    .card { padding:22px; border:1px solid var(--line); border-radius:22px; background:var(--card); }
+
+    .topbar {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+      padding:36px 0;
+    }
+
+    .card {
+      padding:22px;
+      border:1px solid var(--accent-line);
+      border-radius:22px;
+      background:var(--card);
+      box-shadow:0 0 0 1px rgba(255,255,255,.02), 0 18px 48px rgba(0,0,0,.18);
+    }
+
     .tag-row { display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap; }
-    .tag { font-size:12px; padding:7px 10px; border:1px solid var(--line); border-radius:999px; }
-    .product-title { font-size:24px; margin:0 0 10px; }
+
+    .tag {
+      font-size:12px;
+      padding:7px 10px;
+      border:1px solid var(--accent-line);
+      border-radius:999px;
+      color:var(--accent);
+    }
+
+    .product-title {
+      font-size:24px;
+      margin:0 0 10px;
+      color:var(--text);
+    }
+
     .product-desc { min-height:54px; }
-    .price { font-size:22px; font-weight:700; margin:14px 0; }
+
+    .price {
+      font-size:22px;
+      font-weight:700;
+      margin:14px 0;
+      color:var(--accent);
+    }
+
     .card-actions { display:flex; gap:10px; flex-wrap:wrap; }
-    .btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 18px; border-radius:999px; border:1px solid var(--line); cursor:pointer; text-decoration:none; font-weight:700; }
+
+    .btn {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      border:1px solid var(--accent-line);
+      cursor:pointer;
+      text-decoration:none;
+      font-weight:700;
+    }
+
     .btn-primary { background:var(--accent); color:#111; }
-    .btn-secondary { background:transparent; color:var(--text); }
-    .cart { position:fixed; right:20px; bottom:20px; max-width:360px; width:calc(100% - 40px); background:#17181a; border:1px solid var(--line); border-radius:22px; padding:18px; box-shadow:0 18px 48px rgba(0,0,0,.35); }
-    .cart-items { color:var(--muted); font-size:14px; margin:10px 0; white-space:pre-wrap; }
-    footer { padding:28px 0; border-top:1px solid var(--line); color:var(--muted); }
+
+    .btn-secondary {
+      background:transparent;
+      color:var(--text);
+    }
+
+    .cart {
+      position:fixed;
+      right:20px;
+      bottom:20px;
+      max-width:360px;
+      width:calc(100% - 40px);
+      background:#17181a;
+      border:1px solid var(--accent-line);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 18px 48px rgba(0,0,0,.35);
+    }
+
+    .cart-items {
+      color:var(--muted);
+      font-size:14px;
+      margin:10px 0;
+      white-space:pre-wrap;
+    }
+
+    footer {
+      padding:28px 0;
+      border-top:1px solid var(--accent-line);
+      color:var(--muted);
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="container topbar">
       <div>
-        <h1>PRUEBAAAA 222 !!! MAGINA TEST PDF STRIPE 042 Knowledge Catalog</h1>
+        <h1>PRUEBAAAA 333 !!! MAGINA TEST PDF STRIPE 042 Knowledge Catalog</h1>
         <p>PRUEBAAAA!!! Practical PDFs, guides and resources.</p>
       </div>
       <button class="btn btn-primary" onclick="sendCart()">Send cart by WhatsApp</button>
@@ -161,4 +258,4 @@ Contact for price
     }
   </script>
 </body>
-</html><!-- Published by Magina at 2026-06-15T14:59:57.4267167Z -->
+</html><!-- Published by Magina at 2026-06-15T17:14:37.6995839Z -->
